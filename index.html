@@ -130,10 +130,10 @@
       </div>
     </a>
     <nav id="main-nav">
-      <a href="#clients" data-i18n="nav_clients">Clientes</a>
       <a href="#about" data-i18n="nav_about">Sobre</a>
       <a href="#services" data-i18n="nav_services">Serviços</a>
       <a href="#differentials" data-i18n="nav_differentials">Diferenciais</a>
+      <a href="#clients" data-i18n="nav_clients">Clientes</a>
       <a href="#contact" data-i18n="nav_contact">Contato</a>
     </nav>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -144,6 +144,8 @@
 
 <section id="hero">
   <div class="hero-bg">
+    <div class="hero-photo"></div>
+    <div class="hero-photo-overlay"></div>
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
   </div>
@@ -171,86 +173,6 @@
     </div>
   </div>
 
-</section>
-
-<section id="clients" class="reveal-section">
-  <div class="container">
-    <div class="section-tag" data-i18n="clients_tag">Quem confia em nós</div>
-    <h2 class="section-title" data-i18n="clients_title">Nossos Clientes</h2>
-    <p class="section-sub" data-i18n="clients_sub">Empresas líderes da indústria de energia e serviços que confiam na EZO Oilfield Solutions.</p>
-    <div class="clients-grid">
-
-      <div class="client-card">
-        <img src="clientes/ALVOPETRO.png" alt="Alvopetro" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">ALVOPETRO</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/SLB.png" alt="SLB" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">SLB</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/PETROSYNERGY.png" alt="PetroSynergy" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">PETROSYNERGY</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/GREAT ENERGY.png" alt="Great Energy" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">GREAT ENERGY</span>
-      </div>
-
-      <div class="client-card highlight">
-        <div class="client-logo-wrap">
-          <img src="clientes/PETROBRAS.png" alt="Petrobras" class="client-logo"
-               onerror="this.style.display='none'">
-        </div>
-        <span class="client-name">PETROBRAS</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/PETROBORN.png" alt="Petroborn" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">PETROBORN</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/ENAUTA.png" alt="Enauta" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">ENAUTA</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/IWS BRASIL.png" alt="IWS Brasil" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">IWS BRASIL</span>
-      </div>
-
-      <div class="client-card">
-        <img src="clientes/BANCO SAFRA.png" alt="Banco Safra" class="client-logo"
-             onerror="this.style.display='none'">
-        <span class="client-name">BANCO SAFRA</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="partners" class="reveal-section">
-  <div class="container">
-    <div class="section-tag" data-i18n="partners_tag">Quem nos apoia</div>
-    <h2 class="section-title" data-i18n="partners_title">Nossos Parceiros</h2>
-    <p class="section-sub" data-i18n="partners_sub">Parcerias estratégicas que ampliam nossa capacidade de entrega e abrangência no setor.</p>
-    <div class="partners-grid" id="partners-grid">
-      <!-- Partners will be loaded dynamically from /parceiros/ folder -->
-      <!-- Add EMPRESA.png files to the parceiros/ folder -->
-      <!-- Example structure (replace with actual partner logos): -->
-    </div>
-  </div>
 </section>
 
 <section id="about" class="reveal-section">
@@ -539,6 +461,83 @@
         <h3 data-i18n="diff4_title">Soluções Integradas</h3>
         <p data-i18n="diff4_desc">Do subsolo ao mercado: cobrimos toda a cadeia de valor do setor de petróleo e gás com uma abordagem única.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="clients" class="reveal-section">
+  <div class="container">
+    <div class="section-tag" data-i18n="clients_tag">Quem confia em nós</div>
+    <h2 class="section-title" data-i18n="clients_title">Nossos Clientes</h2>
+    <p class="section-sub" data-i18n="clients_sub">Empresas líderes da indústria de energia e serviços que confiam na EZO Oilfield Solutions.</p>
+    <div class="clients-grid">
+
+      <div class="client-card">
+        <img src="clientes/ALVOPETRO.png" alt="Alvopetro" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">ALVOPETRO</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/SLB.png" alt="SLB" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">SLB</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/PETROSYNERGY.png" alt="PetroSynergy" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">PETROSYNERGY</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/GREAT ENERGY.png" alt="Great Energy" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">GREAT ENERGY</span>
+      </div>
+
+      <div class="client-card highlight">
+        <div class="client-logo-wrap">
+          <img src="clientes/PETROBRAS.png" alt="Petrobras" class="client-logo"
+               onerror="this.style.display='none'">
+        </div>
+        <span class="client-name">PETROBRAS</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/PETROBORN.png" alt="Petroborn" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">PETROBORN</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/ENAUTA.png" alt="Enauta" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">ENAUTA</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/IWS BRASIL.png" alt="IWS Brasil" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">IWS BRASIL</span>
+      </div>
+
+      <div class="client-card">
+        <img src="clientes/BANCO SAFRA.png" alt="Banco Safra" class="client-logo"
+             onerror="this.style.display='none'">
+        <span class="client-name">BANCO SAFRA</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="partners" class="reveal-section">
+  <div class="container">
+    <div class="section-tag" data-i18n="partners_tag">Quem nos apoia</div>
+    <h2 class="section-title" data-i18n="partners_title">Nossos Parceiros</h2>
+    <p class="section-sub" data-i18n="partners_sub">Parcerias estratégicas que ampliam nossa capacidade de entrega e abrangência no setor.</p>
+    <div class="partners-grid" id="partners-grid">
     </div>
   </div>
 </section>
