@@ -2,6 +2,7 @@ const translations = {
   pt: {
     lang_label: "Idioma:",
     nav_about: "Sobre",
+    nav_differentials: "Diferenciais",
     nav_services: "Serviços",
     nav_clients: "Clientes",
     nav_contact: "Contato",
@@ -23,6 +24,17 @@ const translations = {
     stat2: "Clientes Ativos",
     stat3: "Áreas de Serviço",
     stat4: "Comprometimento",
+    diff_tag: "Por que a EZO",
+    diff_title: "Nossos Diferenciais",
+    diff_sub: "A única consultoria que integra Engenharia, Geologia, Trading e Comex sob um mesmo teto.",
+    diff1_title: "35+ Anos de Mercado",
+    diff1_desc: "Décadas de experiência prática na indústria brasileira e internacional de óleo e gás.",
+    diff2_title: "Equipe Multidisciplinar",
+    diff2_desc: "Engenheiros, geólogos, especialistas em comércio exterior e desenvolvimento de negócios em uma só parceria.",
+    diff3_title: "Atuação Global",
+    diff3_desc: "Rede de agentes e parceiros estratégicos em mercados internacionais para operações de trading e comex.",
+    diff4_title: "Soluções Integradas",
+    diff4_desc: "Do subsolo ao mercado: cobrimos toda a cadeia de valor do setor de petróleo e gás com uma abordagem única.",
     services_tag: "O que fazemos",
     services_title: "Serviços Especializados",
     services_sub: "Soluções completas para os desafios mais complexos da indústria.",
@@ -92,8 +104,6 @@ const translations = {
     contact_whatsapp: "WhatsApp / Telefone",
     contact_email_ceo: "E-mail CEO",
     contact_email_sales: "E-mail Comercial",
-    contact_website: "Website",
-    contact_open: "Abrir",
     form_title: "Envie uma Mensagem",
     form_name: "Nome",
     form_company: "Empresa",
@@ -102,7 +112,7 @@ const translations = {
     form_select: "Selecione um serviço...",
     form_message: "Mensagem",
     form_send: "Enviar Mensagem",
-    form_success: "Mensagem enviada! Abrindo seu cliente de e-mail...",
+    form_success: "Abrindo seu cliente de e-mail...",
     footer_tagline: "Tecnologia e Inovação na Indústria de Petróleo & Gás",
     footer_services: "Serviços",
     footer_contact: "Contato",
@@ -112,6 +122,7 @@ const translations = {
   en: {
     lang_label: "Language:",
     nav_about: "About",
+    nav_differentials: "Why EZO",
     nav_services: "Services",
     nav_clients: "Clients",
     nav_contact: "Contact",
@@ -133,6 +144,17 @@ const translations = {
     stat2: "Active Clients",
     stat3: "Service Areas",
     stat4: "Commitment",
+    diff_tag: "Why EZO",
+    diff_title: "Our Differentials",
+    diff_sub: "The only consultancy integrating Engineering, Geology, Trading and Comex under one roof.",
+    diff1_title: "35+ Years in the Market",
+    diff1_desc: "Decades of hands-on experience in the Brazilian and international oil and gas industry.",
+    diff2_title: "Multidisciplinary Team",
+    diff2_desc: "Engineers, geologists, foreign trade and business development specialists in a single partnership.",
+    diff3_title: "Global Reach",
+    diff3_desc: "Network of agents and strategic partners in international markets for trading and comex operations.",
+    diff4_title: "Integrated Solutions",
+    diff4_desc: "From subsurface to market: we cover the entire oil and gas value chain with a unique approach.",
     services_tag: "What We Do",
     services_title: "Specialized Services",
     services_sub: "Comprehensive solutions for the most complex industry challenges.",
@@ -202,8 +224,6 @@ const translations = {
     contact_whatsapp: "WhatsApp / Phone",
     contact_email_ceo: "CEO Email",
     contact_email_sales: "Sales Email",
-    contact_website: "Website",
-    contact_open: "Open",
     form_title: "Send a Message",
     form_name: "Name",
     form_company: "Company",
@@ -212,7 +232,7 @@ const translations = {
     form_select: "Select a service...",
     form_message: "Message",
     form_send: "Send Message",
-    form_success: "Message sent! Opening your email client...",
+    form_success: "Opening your email client...",
     footer_tagline: "Technology and Innovation in the Oil & Gas Industry",
     footer_services: "Services",
     footer_contact: "Contact",
@@ -222,6 +242,7 @@ const translations = {
   es: {
     lang_label: "Idioma:",
     nav_about: "Sobre",
+    nav_differentials: "Por qué EZO",
     nav_services: "Servicios",
     nav_clients: "Clientes",
     nav_contact: "Contacto",
@@ -243,6 +264,17 @@ const translations = {
     stat2: "Clientes Activos",
     stat3: "Áreas de Servicio",
     stat4: "Compromiso",
+    diff_tag: "Por qué EZO",
+    diff_title: "Nuestros Diferenciales",
+    diff_sub: "La única consultoría que integra Ingeniería, Geología, Trading y Comex bajo un mismo techo.",
+    diff1_title: "35+ Años en el Mercado",
+    diff1_desc: "Décadas de experiencia práctica en la industria de petróleo y gas nacional e internacional.",
+    diff2_title: "Equipo Multidisciplinario",
+    diff2_desc: "Ingenieros, geólogos, especialistas en comercio exterior y desarrollo de negocios en una sola alianza.",
+    diff3_title: "Alcance Global",
+    diff3_desc: "Red de agentes y socios estratégicos en mercados internacionales para operaciones de trading y comex.",
+    diff4_title: "Soluciones Integradas",
+    diff4_desc: "Del subsuelo al mercado: cubrimos toda la cadena de valor del sector de petróleo y gas con un enfoque único.",
     services_tag: "Lo que hacemos",
     services_title: "Servicios Especializados",
     services_sub: "Soluciones completas para los desafíos más complejos de la industria.",
@@ -312,8 +344,6 @@ const translations = {
     contact_whatsapp: "WhatsApp / Teléfono",
     contact_email_ceo: "Email CEO",
     contact_email_sales: "Email Comercial",
-    contact_website: "Sitio Web",
-    contact_open: "Abrir",
     form_title: "Envíe un Mensaje",
     form_name: "Nombre",
     form_company: "Empresa",
@@ -322,7 +352,7 @@ const translations = {
     form_select: "Seleccione un servicio...",
     form_message: "Mensaje",
     form_send: "Enviar Mensaje",
-    form_success: "¡Mensaje enviado! Abriendo su cliente de correo...",
+    form_success: "¡Abriendo su cliente de correo!",
     footer_tagline: "Tecnología e Innovación en la Industria del Petróleo y Gas",
     footer_services: "Servicios",
     footer_contact: "Contacto",
@@ -332,6 +362,7 @@ const translations = {
   fr: {
     lang_label: "Langue :",
     nav_about: "À propos",
+    nav_differentials: "Pourquoi EZO",
     nav_services: "Services",
     nav_clients: "Clients",
     nav_contact: "Contact",
@@ -353,6 +384,17 @@ const translations = {
     stat2: "Clients Actifs",
     stat3: "Domaines de Service",
     stat4: "Engagement",
+    diff_tag: "Pourquoi EZO",
+    diff_title: "Nos Différentiels",
+    diff_sub: "Le seul cabinet intégrant Ingénierie, Géologie, Trading et Comex sous un même toit.",
+    diff1_title: "35+ Ans de Marché",
+    diff1_desc: "Des décennies d'expérience pratique dans l'industrie pétrolière et gazière nationale et internationale.",
+    diff2_title: "Équipe Multidisciplinaire",
+    diff2_desc: "Ingénieurs, géologues, spécialistes en commerce international et développement commercial réunis.",
+    diff3_title: "Portée Mondiale",
+    diff3_desc: "Réseau d'agents et de partenaires stratégiques sur les marchés internationaux pour le trading et le comex.",
+    diff4_title: "Solutions Intégrées",
+    diff4_desc: "Du sous-sol au marché : nous couvrons toute la chaîne de valeur du secteur pétrolier et gazier.",
     services_tag: "Ce que nous faisons",
     services_title: "Services Spécialisés",
     services_sub: "Des solutions complètes pour les défis les plus complexes de l'industrie.",
@@ -406,9 +448,9 @@ const translations = {
     comex_title: "Services Comex",
     comex_intro: "Logistique internationale complète — aérien, maritime et routier — avec dédouanement efficace.",
     comex_air_title: "Aérien",
-    comex_air_desc: "Des agents dans le monde entier consolidant et expédiant vos marchandises avec rapidité et sécurité.",
+    comex_air_desc: "Des agents dans le monde entier consolidant et expédiant vos marchandises rapidement.",
     comex_sea_title: "Maritime",
-    comex_sea_desc: "Contrats avec les principaux armateurs dans tous les ports du monde, facilitant votre fret maritime.",
+    comex_sea_desc: "Contrats avec les principaux armateurs dans tous les ports du monde.",
     comex_road_title: "Routier",
     comex_road_desc: "Solutions de transport domestique pour tout type de fret : express, dédié, consolidé ou projet.",
     comex_customs_title: "Dédouanement",
@@ -422,8 +464,6 @@ const translations = {
     contact_whatsapp: "WhatsApp / Téléphone",
     contact_email_ceo: "Email PDG",
     contact_email_sales: "Email Commercial",
-    contact_website: "Site Web",
-    contact_open: "Ouvrir",
     form_title: "Envoyez un Message",
     form_name: "Nom",
     form_company: "Entreprise",
@@ -432,7 +472,7 @@ const translations = {
     form_select: "Sélectionnez un service...",
     form_message: "Message",
     form_send: "Envoyer",
-    form_success: "Message envoyé ! Ouverture de votre client de messagerie...",
+    form_success: "Ouverture de votre client de messagerie...",
     footer_tagline: "Technologie et Innovation dans l'Industrie Pétrolière et Gazière",
     footer_services: "Services",
     footer_contact: "Contact",
@@ -442,6 +482,7 @@ const translations = {
   zh: {
     lang_label: "语言：",
     nav_about: "关于我们",
+    nav_differentials: "为何选择EZO",
     nav_services: "服务",
     nav_clients: "客户",
     nav_contact: "联系我们",
@@ -463,6 +504,17 @@ const translations = {
     stat2: "活跃客户",
     stat3: "服务领域",
     stat4: "承诺",
+    diff_tag: "为何选择EZO",
+    diff_title: "我们的优势",
+    diff_sub: "唯一整合工程、地质、贸易和外贸服务的咨询公司。",
+    diff1_title: "35年以上市场经验",
+    diff1_desc: "数十年国内外石油天然气行业实践经验。",
+    diff2_title: "多学科团队",
+    diff2_desc: "工程师、地质学家、外贸及业务发展专家汇聚一堂。",
+    diff3_title: "全球布局",
+    diff3_desc: "遍布国际市场的代理商和战略合作伙伴网络。",
+    diff4_title: "一体化解决方案",
+    diff4_desc: "从地下到市场：以独特方式覆盖油气行业整个价值链。",
     services_tag: "我们的工作",
     services_title: "专业服务",
     services_sub: "为行业最复杂的挑战提供全面解决方案。",
@@ -532,8 +584,6 @@ const translations = {
     contact_whatsapp: "WhatsApp / 电话",
     contact_email_ceo: "CEO邮箱",
     contact_email_sales: "商务邮箱",
-    contact_website: "官网",
-    contact_open: "打开",
     form_title: "发送消息",
     form_name: "姓名",
     form_company: "公司",
@@ -542,7 +592,7 @@ const translations = {
     form_select: "选择服务...",
     form_message: "消息",
     form_send: "发送消息",
-    form_success: "消息已发送！正在打开您的邮件客户端...",
+    form_success: "正在打开您的邮件客户端...",
     footer_tagline: "石油与天然气行业的技术与创新",
     footer_services: "服务",
     footer_contact: "联系方式",
@@ -552,6 +602,7 @@ const translations = {
   ar: {
     lang_label: "اللغة:",
     nav_about: "حول",
+    nav_differentials: "لماذا EZO",
     nav_services: "الخدمات",
     nav_clients: "العملاء",
     nav_contact: "اتصل بنا",
@@ -573,6 +624,17 @@ const translations = {
     stat2: "عملاء نشطون",
     stat3: "مجالات الخدمة",
     stat4: "الالتزام",
+    diff_tag: "لماذا EZO",
+    diff_title: "مميزاتنا",
+    diff_sub: "الشركة الاستشارية الوحيدة التي تدمج الهندسة والجيولوجيا والتجارة والاستيراد تحت سقف واحد.",
+    diff1_title: "35+ عامًا في السوق",
+    diff1_desc: "عقود من الخبرة العملية في صناعة النفط والغاز الوطنية والدولية.",
+    diff2_title: "فريق متعدد التخصصات",
+    diff2_desc: "مهندسون وجيولوجيون ومتخصصون في التجارة الخارجية وتطوير الأعمال.",
+    diff3_title: "انتشار عالمي",
+    diff3_desc: "شبكة من الوكلاء والشركاء الاستراتيجيين في الأسواق الدولية.",
+    diff4_title: "حلول متكاملة",
+    diff4_desc: "من الباطن إلى السوق: نغطي سلسلة القيمة الكاملة لقطاع النفط والغاز.",
     services_tag: "ما نقوم به",
     services_title: "خدمات متخصصة",
     services_sub: "حلول شاملة لأكثر التحديات تعقيدًا في الصناعة.",
@@ -582,7 +644,7 @@ const translations = {
     tab_trade: "خدمات التداول",
     tab_comex: "خدمات التجارة الخارجية",
     eng_title: "الهندسة والاستشارات",
-    eng_intro: "بالشراكة الاستراتيجية مع Catu Consultoria، نقدم خبرة وطنية ودولية تمتد لأكثر من 35 عامًا في الصناعة.",
+    eng_intro: "بالشراكة الاستراتيجية مع Catu Consultoria، نقدم خبرة وطنية ودولية تمتد لأكثر من 35 عامًا.",
     eng_1: "منحنيات الإنتاج وتقديرات الموارد المحتملة",
     eng_2: "التقدير الحتمي والاحتمالي لأحجام الهيدروكربونات",
     eng_3: "خطط تطوير الخزانات والحقول",
@@ -604,17 +666,17 @@ const translations = {
     geo_4: "تحليل السمات الزلزالية",
     geo_5: "تحليل الأحواض الرسوبية",
     geo_6: "رسم الخرائط الإقليمية",
-    geo_7: "تحديد وتقييم المناطق الواعدة والاحتمالات والأهداف",
+    geo_7: "تحديد وتقييم المناطق الواعدة",
     geo_8: "التحليل الحتمي والاحتمالي للمعاملات البتروفيزيائية",
-    geo_9: "نماذج جيولوجية ثنائية وثلاثية الأبعاد لخزانات النفط والغاز",
+    geo_9: "نماذج جيولوجية ثنائية وثلاثية الأبعاد",
     biz_title: "تطوير الأعمال",
     biz_intro: "استراتيجيات لتوسيع حضورك في السوق وبناء شراكات متينة وتحديد فرص نمو جديدة.",
-    biz_1: "التنقيب عن العملاء والعملاء المحتملين الجدد",
+    biz_1: "التنقيب عن العملاء والعملاء المحتملين",
     biz_2: "شراكات استراتيجية للمنفعة المتبادلة",
     biz_3: "تحليل السوق: الاتجاهات والمنافسة والفرص",
     biz_4: "نمذجة الأعمال: منتجات وقنوات ومصادر إيرادات جديدة",
     trade_title: "خدمات التداول",
-    trade_intro: "حلول تجارة دولية شاملة، من المصادر إلى التوزيع النهائي للمنتجات.",
+    trade_intro: "حلول تجارة دولية شاملة، من المصادر إلى التوزيع النهائي.",
     trade_1: "مصادر المنتجات والموردين",
     trade_2: "فحوصات الجودة في منابع المصدرين",
     trade_3: "الاستيراد بالطلب",
@@ -630,9 +692,9 @@ const translations = {
     comex_sea_title: "بحري",
     comex_sea_desc: "عقود مع كبار الملاك البحريين في جميع موانئ العالم.",
     comex_road_title: "بري",
-    comex_road_desc: "حلول نقل محلية لأي نوع من البضائع: سريع أو مخصص أو موحد أو مشاريع.",
+    comex_road_desc: "حلول نقل محلية لأي نوع من البضائع.",
     comex_customs_title: "التخليص الجمركي",
-    comex_customs_desc: "تحليل شامل للعملية اللوجستية والتعريفات الجمركية والقوانين لتخليص فعّال.",
+    comex_customs_desc: "تحليل شامل للعملية اللوجستية والتعريفات الجمركية والقوانين.",
     clients_tag: "من يثق بنا",
     clients_title: "عملاؤنا",
     clients_sub: "شركات رائدة في صناعة الطاقة تثق في EZO Oilfield Solutions.",
@@ -642,8 +704,6 @@ const translations = {
     contact_whatsapp: "واتساب / هاتف",
     contact_email_ceo: "بريد الرئيس التنفيذي",
     contact_email_sales: "البريد التجاري",
-    contact_website: "الموقع الإلكتروني",
-    contact_open: "فتح",
     form_title: "أرسل رسالة",
     form_name: "الاسم",
     form_company: "الشركة",
@@ -652,7 +712,7 @@ const translations = {
     form_select: "اختر خدمة...",
     form_message: "الرسالة",
     form_send: "إرسال",
-    form_success: "تم إرسال الرسالة! جارٍ فتح عميل البريد الإلكتروني...",
+    form_success: "جارٍ فتح عميل البريد الإلكتروني...",
     footer_tagline: "التكنولوجيا والابتكار في صناعة النفط والغاز",
     footer_services: "الخدمات",
     footer_contact: "التواصل",
@@ -661,6 +721,9 @@ const translations = {
   }
 };
 
+/* ─────────────────────────────────
+   IDIOMA
+───────────────────────────────── */
 function detectLang() {
   const nav = navigator.language || navigator.userLanguage || 'pt';
   const code = nav.toLowerCase().split('-')[0];
@@ -673,6 +736,8 @@ let currentLang = detectLang();
 function setLang(lang) {
   currentLang = lang;
   const t = translations[lang] || translations.pt;
+
+  // Textos
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) {
@@ -683,9 +748,21 @@ function setLang(lang) {
       }
     }
   });
+
+  // Placeholders via data-i18n-ph
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key]) el.placeholder = t[key];
+  });
+
+  // Botão ativo
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`)?.classList.add('active');
+
+  // lang no <html> (melhoria #13)
   document.documentElement.setAttribute('lang', lang);
+
+  // RTL para árabe
   if (lang === 'ar') {
     document.body.setAttribute('dir', 'rtl');
   } else {
@@ -693,6 +770,9 @@ function setLang(lang) {
   }
 }
 
+/* ─────────────────────────────────
+   ABAS DE SERVIÇOS
+───────────────────────────────── */
 function showTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -703,24 +783,43 @@ function showTab(tabId) {
   if (btns[idx]) btns[idx].classList.add('active');
 }
 
+/* ─────────────────────────────────
+   MENU MOBILE
+───────────────────────────────── */
 function toggleMenu() {
-  const nav = document.getElementById('main-nav');
-  nav.classList.toggle('open');
+  document.getElementById('main-nav').classList.toggle('open');
 }
 
-function copyPhone(e) {
+/* ─────────────────────────────────
+   FORMULÁRIO (mailto)
+───────────────────────────────── */
+function submitForm(e) {
   e.preventDefault();
-  const phone = '+5521999424216';
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(phone).then(() => {
-      showToast(translations[currentLang]?.toast_copied || 'Número copiado!');
-    });
+  const name    = document.getElementById('form-name').value.trim();
+  const company = document.getElementById('form-company').value.trim();
+  const email   = document.getElementById('form-email').value.trim();
+  const subject = document.getElementById('form-subject').value;
+  const message = document.getElementById('form-message').value.trim();
+
+  if (!name || !email || !message) {
+    showToast('Preencha nome, e-mail e mensagem.');
+    return;
   }
-  setTimeout(() => {
-    window.open('https://wa.me/5521999424216', '_blank');
-  }, 600);
+
+  const mailSubject = encodeURIComponent((subject || 'Contato') + (company ? ' — ' + company : ''));
+  const mailBody    = encodeURIComponent(
+    `Nome: ${name}\nEmpresa: ${company}\nE-mail: ${email}\n\n${message}`
+  );
+  const mailto = `mailto:vendas@ezosolutions.com.br?subject=${mailSubject}&body=${mailBody}`;
+
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display  = 'block';
+  setTimeout(() => { window.location.href = mailto; }, 500);
 }
 
+/* ─────────────────────────────────
+   TOAST
+───────────────────────────────── */
 function showToast(msg) {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
@@ -728,55 +827,76 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-function submitForm(e) {
-  e.preventDefault();
-  const name = document.getElementById('form-name').value;
-  const company = document.getElementById('form-company').value;
-  const email = document.getElementById('form-email').value;
-  const subject = document.getElementById('form-subject').value;
-  const message = document.getElementById('form-message').value;
-  const mailSubject = encodeURIComponent((subject || 'Contato') + (company ? ' — ' + company : ''));
-  const mailBody = encodeURIComponent(
-    `Nome: ${name}\nEmpresa: ${company}\nE-mail: ${email}\n\n${message}`
-  );
-  const mailto = `mailto:vendas@ezosolutions.com.br?subject=${mailSubject}&body=${mailBody}`;
-  document.getElementById('contact-form').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
-  setTimeout(() => { window.location.href = mailto; }, 400);
-}
+/* ─────────────────────────────────
+   HEADER SCROLL + SCROLL-SPY (#7)
+───────────────────────────────── */
+const sections = ['about','differentials','services','clients','contact'];
 
 window.addEventListener('scroll', () => {
+  // scrolled class
   const header = document.getElementById('header');
-  if (window.scrollY > 60) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
+  header.classList.toggle('scrolled', window.scrollY > 60);
+
+  // scroll-spy: destaca item ativo no nav
+  const scrollMid = window.scrollY + window.innerHeight / 3;
+  let active = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollMid) active = id;
+  });
+  document.querySelectorAll('#main-nav a').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href === '#' + active) {
+      a.classList.add('active');
+    } else {
+      a.classList.remove('active');
+    }
+  });
 });
 
+/* ─────────────────────────────────
+   FECHAR MENU AO CLICAR EM LINK
+───────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
     document.getElementById('main-nav')?.classList.remove('open');
   });
 });
 
-// Aplica idioma detectado automaticamente na carga da página
-document.addEventListener('DOMContentLoaded', () => {
-  setLang(currentLang);
-});
-
-const observer = new IntersectionObserver((entries) => {
+/* ─────────────────────────────────
+   INTERSECTION OBSERVER: REVEALS (#15)
+   Cobre seções inteiras + cards individuais
+───────────────────────────────── */
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+      entry.target.classList.add('visible');
     }
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  observer.observe(el);
+// Seções completas (fade-up)
+document.querySelectorAll('.reveal-section').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// Cards individuais com delay escalonado
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem, .diff-card').forEach((el, i) => {
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  cardObserver.observe(el);
+});
+
+/* ─────────────────────────────────
+   INIT
+───────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  setLang(currentLang);
 });
