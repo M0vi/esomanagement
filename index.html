@@ -20,13 +20,17 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div id="lang-bar">
   <div class="lang-inner">
-    <span data-i18n="lang_label">Idioma:</span>
+    <div class="lang-left">
+      <span class="lang-divider-line"></span>
+      <span data-i18n="lang_label" class="lang-label-text">IDIOMA</span>
+      <span class="lang-divider-line"></span>
+    </div>
     <div class="lang-flags">
 
       <button onclick="setLang('pt')" class="lang-btn active" title="Português">
@@ -141,12 +145,9 @@
 <header id="header">
   <div class="header-inner">
     <a href="#hero" class="logo-link">
-      <img src="logo.png" alt="EZO Oilfield Solutions" class="logo-img" width="160" height="48"
-           loading="lazy"
-           onerror="this.style.display='none'; document.getElementById('logo-text').style.display='flex'">
-      <div class="logo-text" id="logo-text" style="display:none">
-        <span class="logo-eos">EOS</span>
-        <span class="logo-sub">EZO OILFIELD SOLUTIONS</span>
+      <div class="logo-text" id="logo-text" style="display:flex">
+        <span class="logo-eos">EZO</span>
+        <span class="logo-sub">OILFIELD SOLUTIONS</span>
       </div>
     </a>
     <nav id="main-nav">
@@ -574,10 +575,6 @@
             <strong>Sérgio André Pessoa</strong>
             <span class="contact-person-role">CEO &amp; Fundador</span>
             <span>EZO Oilfield Solutions</span>
-          </div>
-          <div class="contact-company-logo-wrap">
-            <img src="logo.png" alt="EZO Oilfield Solutions" class="contact-company-logo"
-                 onerror="this.style.display='none'">
           </div>
         </div>
         <div class="contact-methods">

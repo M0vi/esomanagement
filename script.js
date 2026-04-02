@@ -1,3 +1,46 @@
+// Copy protection
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && ['c','a','u','s','p'].includes(e.key.toLowerCase())) e.preventDefault();
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))) e.preventDefault();
+});
+
+// Animated number counter
+function animateCounter(el, target, suffix = '') {
+  const duration = 1800;
+  const start = performance.now();
+  const isFloat = target % 1 !== 0;
+  const update = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target + suffix;
+  };
+  requestAnimationFrame(update);
+}
+
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = '1';
+      const el = entry.target.querySelector('.stat-num');
+      if (!el) return;
+      const text = el.textContent.trim();
+      const match = text.match(/^(\d+)(\+|%)?$/);
+      if (match) {
+        const num = parseInt(match[1]);
+        const suf = match[2] || '';
+        animateCounter(el, num, suf);
+      }
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.stat-card').forEach(el => statObserver.observe(el));
+
 const translations = {
   pt: {
     lang_label: "Idioma:",
