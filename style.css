@@ -847,9 +847,15 @@ img { max-width: 100%; height: auto; }
 
 .client-card.highlight {
   background: #fff;
-  border-color: rgba(0,0,0,0.08);
-  border-width: 1px;
-  box-shadow: none;
+  border-color: var(--accent);
+  border-width: 2px;
+  box-shadow: 0 4px 20px rgba(176,141,87,0.18);
+}
+
+.client-card.highlight:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 28px rgba(176,141,87,0.28);
+  transform: translateY(-4px);
 }
 
 .client-card.highlight .client-logo-wrap {
@@ -953,8 +959,22 @@ img { max-width: 100%; height: auto; }
   flex-shrink: 0;
 }
 
+.contact-company-logo-wrap {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+}
+
 .contact-company-logo {
-  max-width: 100px;
+  max-width: 90px;
+  max-height: 56px;
+  width: auto;
   height: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
