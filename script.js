@@ -661,7 +661,14 @@ const translations = {
   }
 };
 
-let currentLang = 'pt';
+function detectLang() {
+  const nav = navigator.language || navigator.userLanguage || 'pt';
+  const code = nav.toLowerCase().split('-')[0];
+  const supported = ['pt', 'en', 'es', 'fr', 'zh', 'ar'];
+  return supported.includes(code) ? code : 'en';
+}
+
+let currentLang = detectLang();
 
 function setLang(lang) {
   currentLang = lang;
@@ -751,6 +758,11 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
     document.getElementById('main-nav')?.classList.remove('open');
   });
+});
+
+// Aplica idioma detectado automaticamente na carga da página
+document.addEventListener('DOMContentLoaded', () => {
+  setLang(currentLang);
 });
 
 const observer = new IntersectionObserver((entries) => {
