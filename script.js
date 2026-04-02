@@ -721,9 +721,6 @@ const translations = {
   }
 };
 
-/* ─────────────────────────────────
-   IDIOMA
-───────────────────────────────── */
 function detectLang() {
   const nav = navigator.language || navigator.userLanguage || 'pt';
   const code = nav.toLowerCase().split('-')[0];
@@ -737,7 +734,6 @@ function setLang(lang) {
   currentLang = lang;
   const t = translations[lang] || translations.pt;
 
-  // Textos
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) {
@@ -749,20 +745,16 @@ function setLang(lang) {
     }
   });
 
-  // Placeholders via data-i18n-ph
   document.querySelectorAll('[data-i18n-ph]').forEach(el => {
     const key = el.getAttribute('data-i18n-ph');
     if (t[key]) el.placeholder = t[key];
   });
 
-  // Botão ativo
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`)?.classList.add('active');
 
-  // lang no <html> (melhoria #13)
   document.documentElement.setAttribute('lang', lang);
 
-  // RTL para árabe
   if (lang === 'ar') {
     document.body.setAttribute('dir', 'rtl');
   } else {
@@ -770,9 +762,6 @@ function setLang(lang) {
   }
 }
 
-/* ─────────────────────────────────
-   ABAS DE SERVIÇOS
-───────────────────────────────── */
 function showTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -783,16 +772,10 @@ function showTab(tabId) {
   if (btns[idx]) btns[idx].classList.add('active');
 }
 
-/* ─────────────────────────────────
-   MENU MOBILE
-───────────────────────────────── */
 function toggleMenu() {
   document.getElementById('main-nav').classList.toggle('open');
 }
 
-/* ─────────────────────────────────
-   FORMULÁRIO (mailto)
-───────────────────────────────── */
 function submitForm(e) {
   e.preventDefault();
   const name    = document.getElementById('form-name').value.trim();
@@ -817,9 +800,6 @@ function submitForm(e) {
   setTimeout(() => { window.location.href = mailto; }, 500);
 }
 
-/* ─────────────────────────────────
-   TOAST
-───────────────────────────────── */
 function showToast(msg) {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
@@ -827,17 +807,12 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-/* ─────────────────────────────────
-   HEADER SCROLL + SCROLL-SPY (#7)
-───────────────────────────────── */
 const sections = ['about','differentials','services','clients','contact'];
 
 window.addEventListener('scroll', () => {
-  // scrolled class
   const header = document.getElementById('header');
   header.classList.toggle('scrolled', window.scrollY > 60);
 
-  // scroll-spy: destaca item ativo no nav
   const scrollMid = window.scrollY + window.innerHeight / 3;
   let active = '';
   sections.forEach(id => {
@@ -854,49 +829,56 @@ window.addEventListener('scroll', () => {
   });
 });
 
-/* ─────────────────────────────────
-   FECHAR MENU AO CLICAR EM LINK
-───────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
     document.getElementById('main-nav')?.classList.remove('open');
   });
 });
 
-/* ─────────────────────────────────
-   INTERSECTION OBSERVER: REVEALS (#15)
-   Cobre seções inteiras + cards individuais
-───────────────────────────────── */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 
-// Seções completas (fade-up)
 document.querySelectorAll('.reveal-section').forEach(el => {
   revealObserver.observe(el);
 });
 
-// Cards individuais com delay escalonado
 const cardObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
       setTimeout(() => entry.target.classList.add('visible'), i * 80);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem, .diff-card').forEach((el, i) => {
+document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem, .diff-card').forEach((el) => {
   el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
   cardObserver.observe(el);
 });
 
-/* ─────────────────────────────────
-   INIT
-───────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang);
+
+  const checkVisible = () => {
+    document.querySelectorAll('.reveal-section').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      }
+    });
+    document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem, .diff-card').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  checkVisible();
+  setTimeout(checkVisible, 100);
+  setTimeout(checkVisible, 400);
 });

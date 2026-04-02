@@ -5,26 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="EZO Oilfield Solutions: Consultoria especializada em Petróleo & Gás com 35+ anos. Engenharia, Geologia, Trading, Comex.">
   <meta name="keywords" content="petróleo gás óleo reservatórios geologia trading comex consultoria">
-
-  <!-- Open Graph (único set, sem duplicatas) -->
   <meta property="og:title" content="EZO Oilfield Solutions">
   <meta property="og:description" content="Consultoria Especializada para a Indústria de Petróleo e Gás. 35+ anos de experiência.">
   <meta property="og:image" content="./logo.png">
   <meta property="og:url" content="https://ezosolutions.com.br">
   <meta property="og:type" content="website">
-
-  <!-- Twitter Card (único set) -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="EZO Oilfield Solutions">
   <meta name="twitter:description" content="Consultoria Petróleo & Gás — 35+ anos de experiência">
   <meta name="twitter:image" content="./logo.png">
-
-  <!-- Favicon corrigido (.png) -->
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="shortcut icon" href="favicon.png">
-
   <title>EZO Oilfield Solutions — Consultoria Especializada em Petróleo & Gás</title>
-
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,12 +28,12 @@
   <div class="lang-inner">
     <span data-i18n="lang_label">Idioma:</span>
     <div class="lang-flags">
-      <button onclick="setLang('pt')" class="lang-btn active" title="Português">🇧🇷 PT</button>
-      <button onclick="setLang('en')" class="lang-btn" title="English">🇺🇸 EN</button>
-      <button onclick="setLang('es')" class="lang-btn" title="Español">🇪🇸 ES</button>
-      <button onclick="setLang('fr')" class="lang-btn" title="Français">🇫🇷 FR</button>
-      <button onclick="setLang('zh')" class="lang-btn" title="中文">🇨🇳 ZH</button>
-      <button onclick="setLang('ar')" class="lang-btn" title="العربية">🇸🇦 AR</button>
+      <button onclick="setLang('pt')" class="lang-btn active" title="Português"><span class="flag">🇧🇷</span> PT</button>
+      <button onclick="setLang('en')" class="lang-btn" title="English"><span class="flag">🇺🇸</span> EN</button>
+      <button onclick="setLang('es')" class="lang-btn" title="Español"><span class="flag">🇪🇸</span> ES</button>
+      <button onclick="setLang('fr')" class="lang-btn" title="Français"><span class="flag">🇫🇷</span> FR</button>
+      <button onclick="setLang('zh')" class="lang-btn" title="中文"><span class="flag">🇨🇳</span> ZH</button>
+      <button onclick="setLang('ar')" class="lang-btn" title="العربية"><span class="flag">🇸🇦</span> AR</button>
     </div>
   </div>
 </div>
@@ -70,7 +62,6 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
     <div class="hero-grid"></div>
@@ -95,7 +86,6 @@
   </div>
 </section>
 
-<!-- SOBRE -->
 <section id="about" class="reveal-section">
   <div class="container">
     <div class="section-tag" data-i18n="about_tag">Quem Somos</div>
@@ -155,7 +145,6 @@
   </div>
 </section>
 
-<!-- DIFERENCIAIS (nova seção) -->
 <section id="differentials" class="reveal-section">
   <div class="container">
     <div class="section-tag" data-i18n="diff_tag">Por que a EZO</div>
@@ -204,7 +193,6 @@
   </div>
 </section>
 
-<!-- SERVIÇOS -->
 <section id="services" class="reveal-section">
   <div class="container">
     <div class="section-tag" data-i18n="services_tag">O que fazemos</div>
@@ -219,7 +207,6 @@
       <button class="tab-btn" onclick="showTab('comex')" data-i18n="tab_comex">Comex Services</button>
     </div>
 
-    <!-- Engenharia (todos os itens) -->
     <div class="tab-content active" id="tab-engineering">
       <div class="service-panel">
         <div class="service-panel-header">
@@ -252,7 +239,6 @@
       </div>
     </div>
 
-    <!-- Geologia (todos os itens) -->
     <div class="tab-content" id="tab-geology">
       <div class="service-panel">
         <div class="service-panel-header">
@@ -280,7 +266,6 @@
       </div>
     </div>
 
-    <!-- Bizdev (todos os itens) -->
     <div class="tab-content" id="tab-bizdev">
       <div class="service-panel">
         <div class="service-panel-header">
@@ -304,7 +289,6 @@
       </div>
     </div>
 
-    <!-- Trading (todos os itens) -->
     <div class="tab-content" id="tab-trading">
       <div class="service-panel">
         <div class="service-panel-header">
@@ -332,7 +316,6 @@
       </div>
     </div>
 
-    <!-- Comex -->
     <div class="tab-content" id="tab-comex">
       <div class="service-panel">
         <div class="service-panel-header">
@@ -393,7 +376,6 @@
   </div>
 </section>
 
-<!-- CLIENTES -->
 <section id="clients" class="reveal-section">
   <div class="container">
     <div class="section-tag" data-i18n="clients_tag">Quem confia em nós</div>
@@ -401,74 +383,64 @@
     <p class="section-sub" data-i18n="clients_sub">Empresas líderes da indústria de energia e serviços que confiam na EZO Oilfield Solutions.</p>
     <div class="clients-grid">
 
-      <!-- ALVOPETRO -->
       <div class="client-card">
         <img src="clientes/ALVOPETRO.png" alt="Alvopetro" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">ALVOPETRO</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">ALVOPETRO</span>
       </div>
 
-      <!-- SLB -->
       <div class="client-card">
         <img src="clientes/SLB.png" alt="SLB" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">SLB</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">SLB</span>
       </div>
 
-      <!-- PETROSYNERGY -->
       <div class="client-card">
         <img src="clientes/PETROSYNERGY.png" alt="PetroSynergy" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">PETROSYNERGY</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">PETROSYNERGY</span>
       </div>
 
-      <!-- GREAT ENERGY -->
       <div class="client-card">
         <img src="clientes/GREAT ENERGY.png" alt="Great Energy" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">GREAT ENERGY</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">GREAT ENERGY</span>
       </div>
 
-      <!-- PETROBRAS -->
       <div class="client-card highlight">
         <img src="clientes/PETROBRAS.png" alt="Petrobras" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">PETROBRAS</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">PETROBRAS</span>
       </div>
 
-      <!-- PETROBORN -->
       <div class="client-card">
         <img src="clientes/PETROBORN.png" alt="Petroborn" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">PETROBORN</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">PETROBORN</span>
       </div>
 
-      <!-- ENAUTA -->
       <div class="client-card">
         <img src="clientes/ENAUTA.png" alt="Enauta" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">ENAUTA</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">ENAUTA</span>
       </div>
 
-      <!-- IWS BRASIL -->
       <div class="client-card">
         <img src="clientes/IWS BRASIL.png" alt="IWS Brasil" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">IWS BRASIL</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">IWS BRASIL</span>
       </div>
 
-      <!-- BANCO SAFRA -->
       <div class="client-card">
         <img src="clientes/BANCO SAFRA.png" alt="Banco Safra" class="client-logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <span class="client-name client-name-fallback" style="display:none">BANCO SAFRA</span>
+             onerror="this.style.display='none'">
+        <span class="client-name">BANCO SAFRA</span>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- CONTATO -->
 <section id="contact" class="reveal-section">
   <div class="contact-bg"><div class="contact-glow"></div></div>
   <div class="container">
@@ -496,9 +468,13 @@
             </div>
           </a>
 
-          <a href="mailto:sabp@ezosolutions.com.br" class="contact-item email">
+          <a href="mailto:sabp@ezosolutions.com.br" class="contact-item email-ceo">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+                <line x1="12" y1="13" x2="12" y2="20"/>
+              </svg>
             </div>
             <div class="contact-item-text">
               <span class="contact-item-label" data-i18n="contact_email_ceo">E-mail CEO</span>
@@ -506,9 +482,13 @@
             </div>
           </a>
 
-          <a href="mailto:vendas@ezosolutions.com.br" class="contact-item email">
+          <a href="mailto:vendas@ezosolutions.com.br" class="contact-item email-sales">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+                <path d="M9 17l2 2 4-4"/>
+              </svg>
             </div>
             <div class="contact-item-text">
               <span class="contact-item-label" data-i18n="contact_email_sales">E-mail Comercial</span>
