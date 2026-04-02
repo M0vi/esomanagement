@@ -26,119 +26,98 @@
 
 <div id="lang-bar">
   <div class="lang-inner">
-    <div class="lang-left">
-      <span class="lang-divider-line"></span>
-      <span data-i18n="lang_label" class="lang-label-text">IDIOMA</span>
-      <span class="lang-divider-line"></span>
-    </div>
-    <div class="lang-flags">
-
-      <button onclick="setLang('pt')" class="lang-btn active" title="Português">
-        <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+    <div class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
+      <button class="lang-dropdown-toggle" id="lang-dropdown-toggle" onclick="toggleLangDropdown()" aria-label="Selecionar idioma">
+        <!-- Translate icon (Google Translate style) -->
+        <svg class="lang-translate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 8l6 6"/>
+          <path d="M4 14l6-6 2-3"/>
+          <path d="M2 5h12"/>
+          <path d="M7 2h1"/>
+          <path d="M22 22l-5-10-5 10"/>
+          <path d="M14 18h6"/>
+        </svg>
+        <svg id="lang-current-flag-svg" class="lang-current-flag" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
           <rect width="20" height="14" fill="#009C3B"/>
           <polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/>
           <circle cx="10" cy="7" r="3" fill="#002776"/>
           <path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/>
         </svg>
-        <span>PT</span>
-      </button>
-
-      <button onclick="setLang('en')" class="lang-btn" title="English">
-        <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-          <!-- USA flag -->
-          <rect width="20" height="14" fill="#B22234"/>
-          <rect y="1.08" width="20" height="1.08" fill="#fff"/>
-          <rect y="3.23" width="20" height="1.08" fill="#fff"/>
-          <rect y="5.38" width="20" height="1.08" fill="#fff"/>
-          <rect y="7.54" width="20" height="1.08" fill="#fff"/>
-          <rect y="9.69" width="20" height="1.08" fill="#fff"/>
-          <rect y="11.85" width="20" height="1.08" fill="#fff"/>
-          <rect width="8" height="7.54" fill="#3C3B6E"/>
-          <!-- Stars simplified as small dots -->
-          <circle cx="1" cy="1" r="0.4" fill="#fff"/>
-          <circle cx="2.6" cy="1" r="0.4" fill="#fff"/>
-          <circle cx="4.2" cy="1" r="0.4" fill="#fff"/>
-          <circle cx="5.8" cy="1" r="0.4" fill="#fff"/>
-          <circle cx="7.4" cy="1" r="0.4" fill="#fff"/>
-          <circle cx="1.8" cy="2.2" r="0.4" fill="#fff"/>
-          <circle cx="3.4" cy="2.2" r="0.4" fill="#fff"/>
-          <circle cx="5" cy="2.2" r="0.4" fill="#fff"/>
-          <circle cx="6.6" cy="2.2" r="0.4" fill="#fff"/>
-          <circle cx="1" cy="3.4" r="0.4" fill="#fff"/>
-          <circle cx="2.6" cy="3.4" r="0.4" fill="#fff"/>
-          <circle cx="4.2" cy="3.4" r="0.4" fill="#fff"/>
-          <circle cx="5.8" cy="3.4" r="0.4" fill="#fff"/>
-          <circle cx="7.4" cy="3.4" r="0.4" fill="#fff"/>
-          <circle cx="1.8" cy="4.6" r="0.4" fill="#fff"/>
-          <circle cx="3.4" cy="4.6" r="0.4" fill="#fff"/>
-          <circle cx="5" cy="4.6" r="0.4" fill="#fff"/>
-          <circle cx="6.6" cy="4.6" r="0.4" fill="#fff"/>
-          <circle cx="1" cy="5.8" r="0.4" fill="#fff"/>
-          <circle cx="2.6" cy="5.8" r="0.4" fill="#fff"/>
-          <circle cx="4.2" cy="5.8" r="0.4" fill="#fff"/>
-          <circle cx="5.8" cy="5.8" r="0.4" fill="#fff"/>
-          <circle cx="7.4" cy="5.8" r="0.4" fill="#fff"/>
-          <circle cx="1.8" cy="7" r="0.4" fill="#fff"/>
-          <circle cx="3.4" cy="7" r="0.4" fill="#fff"/>
-          <circle cx="5" cy="7" r="0.4" fill="#fff"/>
-          <circle cx="6.6" cy="7" r="0.4" fill="#fff"/>
+        <span class="lang-current-code" id="lang-current-code">PT</span>
+        <svg class="lang-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="2,3 5,7 8,3"/>
         </svg>
-        <span>EN</span>
       </button>
+      <div class="lang-dropdown-menu" id="lang-dropdown-menu">
 
-      <button onclick="setLang('es')" class="lang-btn" title="Español">
-        <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-          <!-- Spain: red-yellow-red horizontal stripes -->
-          <rect width="20" height="14" fill="#c60b1e"/>
-          <rect y="3.5" width="20" height="7" fill="#ffc400"/>
-          <!-- coat of arms simplified -->
-          <rect x="6" y="4.5" width="1" height="5" fill="#c60b1e"/>
-          <rect x="6" y="4.5" width="3" height="0.8" fill="#c60b1e"/>
-          <rect x="6" y="8.7" width="3" height="0.8" fill="#c60b1e"/>
-          <rect x="8" y="4.5" width="1" height="5" fill="#c60b1e"/>
-        </svg>
-        <span>ES</span>
-      </button>
+        <button onclick="setLang('pt'); closeLangDropdown();" class="lang-dropdown-item active" id="lang-item-pt" title="Português">
+          <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#009C3B"/>
+            <polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/>
+            <circle cx="10" cy="7" r="3" fill="#002776"/>
+            <path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/>
+          </svg>
+          <span>Português</span>
+        </button>
 
-      <button onclick="setLang('fr')" class="lang-btn" title="Français">
-        <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-          <rect width="20" height="14" fill="#ED2939"/>
-          <rect width="13.3" height="14" fill="#fff"/>
-          <rect width="6.6" height="14" fill="#002395"/>
-        </svg>
-        <span>FR</span>
-      </button>
+        <button onclick="setLang('en'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-en" title="English">
+          <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#B22234"/>
+            <rect y="1.08" width="20" height="1.08" fill="#fff"/>
+            <rect y="3.23" width="20" height="1.08" fill="#fff"/>
+            <rect y="5.38" width="20" height="1.08" fill="#fff"/>
+            <rect y="7.54" width="20" height="1.08" fill="#fff"/>
+            <rect y="9.69" width="20" height="1.08" fill="#fff"/>
+            <rect y="11.85" width="20" height="1.08" fill="#fff"/>
+            <rect width="8" height="7.54" fill="#3C3B6E"/>
+            <circle cx="1" cy="1" r="0.4" fill="#fff"/><circle cx="2.6" cy="1" r="0.4" fill="#fff"/><circle cx="4.2" cy="1" r="0.4" fill="#fff"/><circle cx="5.8" cy="1" r="0.4" fill="#fff"/><circle cx="7.4" cy="1" r="0.4" fill="#fff"/>
+            <circle cx="1.8" cy="2.2" r="0.4" fill="#fff"/><circle cx="3.4" cy="2.2" r="0.4" fill="#fff"/><circle cx="5" cy="2.2" r="0.4" fill="#fff"/><circle cx="6.6" cy="2.2" r="0.4" fill="#fff"/>
+          </svg>
+          <span>English</span>
+        </button>
 
-      <button onclick="setLang('zh')" class="lang-btn" title="中文">
-        <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-          <!-- China: red background, large star + 4 small stars -->
-          <rect width="20" height="14" fill="#DE2910"/>
-          <!-- Large star -->
-          <polygon points="4,1.5 4.7,3.8 2.5,2.3 5.5,2.3 3.3,3.8" fill="#FFDE00"/>
-          <!-- 4 small stars -->
-          <polygon points="7.5,0.8 7.9,2 6.9,1.3 8.1,1.3 7.1,2" fill="#FFDE00"/>
-          <polygon points="9,2.5 9.4,3.7 8.4,3 9.6,3 8.6,3.7" fill="#FFDE00"/>
-          <polygon points="9,5 9.4,6.2 8.4,5.5 9.6,5.5 8.6,6.2" fill="#FFDE00"/>
-          <polygon points="7.5,6.8 7.9,8 6.9,7.3 8.1,7.3 7.1,8" fill="#FFDE00"/>
-        </svg>
-        <span>ZH</span>
-      </button>
+        <button onclick="setLang('es'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-es" title="Español">
+          <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#c60b1e"/>
+            <rect y="3.5" width="20" height="7" fill="#ffc400"/>
+          </svg>
+          <span>Español</span>
+        </button>
 
-      <button onclick="setLang('ar')" class="lang-btn" title="العربية">
-        <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-          <!-- Saudi Arabia: green with shahada text simplified -->
-          <rect width="20" height="14" fill="#006C35"/>
-          <!-- Simplified sword -->
-          <line x1="4" y1="10" x2="16" y2="10" stroke="#fff" stroke-width="0.8"/>
-          <line x1="15" y1="10" x2="16" y2="11.5" stroke="#fff" stroke-width="0.8"/>
-          <!-- Simplified text block (stylized) -->
-          <rect x="4" y="4" width="12" height="0.7" rx="0.3" fill="#fff"/>
-          <rect x="5" y="5.5" width="10" height="0.7" rx="0.3" fill="#fff"/>
-          <rect x="6" y="7" width="8" height="0.7" rx="0.3" fill="#fff"/>
-        </svg>
-        <span>AR</span>
-      </button>
+        <button onclick="setLang('fr'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-fr" title="Français">
+          <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#ED2939"/>
+            <rect width="13.3" height="14" fill="#fff"/>
+            <rect width="6.6" height="14" fill="#002395"/>
+          </svg>
+          <span>Français</span>
+        </button>
 
+        <button onclick="setLang('zh'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-zh" title="中文">
+          <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#DE2910"/>
+            <polygon points="4,1.5 4.7,3.8 2.5,2.3 5.5,2.3 3.3,3.8" fill="#FFDE00"/>
+            <polygon points="7.5,0.8 7.9,2 6.9,1.3 8.1,1.3 7.1,2" fill="#FFDE00"/>
+            <polygon points="9,2.5 9.4,3.7 8.4,3 9.6,3 8.6,3.7" fill="#FFDE00"/>
+            <polygon points="9,5 9.4,6.2 8.4,5.5 9.6,5.5 8.6,6.2" fill="#FFDE00"/>
+            <polygon points="7.5,6.8 7.9,8 6.9,7.3 8.1,7.3 7.1,8" fill="#FFDE00"/>
+          </svg>
+          <span>中文</span>
+        </button>
+
+        <button onclick="setLang('ar'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-ar" title="العربية">
+          <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="14" fill="#006C35"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="#fff" stroke-width="0.8"/>
+            <line x1="15" y1="10" x2="16" y2="11.5" stroke="#fff" stroke-width="0.8"/>
+            <rect x="4" y="4" width="12" height="0.7" rx="0.3" fill="#fff"/>
+            <rect x="5" y="5.5" width="10" height="0.7" rx="0.3" fill="#fff"/>
+            <rect x="6" y="7" width="8" height="0.7" rx="0.3" fill="#fff"/>
+          </svg>
+          <span>العربية</span>
+        </button>
+
+      </div>
     </div>
   </div>
 </div>
@@ -257,6 +236,19 @@
         <span class="client-name">BANCO SAFRA</span>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section id="partners" class="reveal-section">
+  <div class="container">
+    <div class="section-tag" data-i18n="partners_tag">Quem nos apoia</div>
+    <h2 class="section-title" data-i18n="partners_title">Nossos Parceiros</h2>
+    <p class="section-sub" data-i18n="partners_sub">Parcerias estratégicas que ampliam nossa capacidade de entrega e abrangência no setor.</p>
+    <div class="partners-grid" id="partners-grid">
+      <!-- Partners will be loaded dynamically from /parceiros/ folder -->
+      <!-- Add EMPRESA.png files to the parceiros/ folder -->
+      <!-- Example structure (replace with actual partner logos): -->
     </div>
   </div>
 </section>

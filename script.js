@@ -141,6 +141,9 @@ const translations = {
     clients_tag: "Quem confia em nós",
     clients_title: "Nossos Clientes",
     clients_sub: "Empresas líderes da indústria de energia que confiam na EZO Oilfield Solutions.",
+    partners_tag: "Quem nos apoia",
+    partners_title: "Nossos Parceiros",
+    partners_sub: "Parcerias estratégicas que ampliam nossa capacidade de entrega e abrangência no setor.",
     contact_tag: "Entre em Contato",
     contact_title: "Vamos Trabalhar Juntos",
     contact_sub: "Fale diretamente com nosso CEO para saber como a EZO pode gerar valor para o seu negócio.",
@@ -261,6 +264,9 @@ const translations = {
     clients_tag: "Who Trusts Us",
     clients_title: "Our Clients",
     clients_sub: "Leading energy industry companies that trust EZO Oilfield Solutions.",
+    partners_tag: "Who Supports Us",
+    partners_title: "Our Partners",
+    partners_sub: "Strategic partnerships that expand our delivery capacity and sector reach.",
     contact_tag: "Get In Touch",
     contact_title: "Let's Work Together",
     contact_sub: "Speak directly with our CEO to learn how EZO can generate value for your business.",
@@ -381,6 +387,9 @@ const translations = {
     clients_tag: "Quiénes confían en nosotros",
     clients_title: "Nuestros Clientes",
     clients_sub: "Empresas líderes de la industria energética que confían en EZO Oilfield Solutions.",
+    partners_tag: "Quiénes nos apoyan",
+    partners_title: "Nuestros Socios",
+    partners_sub: "Alianzas estratégicas que amplían nuestra capacidad de entrega y alcance en el sector.",
     contact_tag: "Póngase en Contacto",
     contact_title: "Trabajemos Juntos",
     contact_sub: "Hable directamente con nuestro CEO para saber cómo EZO puede generar valor para su negocio.",
@@ -501,6 +510,9 @@ const translations = {
     clients_tag: "Qui nous fait confiance",
     clients_title: "Nos Clients",
     clients_sub: "Des entreprises leaders de l'industrie énergétique qui font confiance à EZO Oilfield Solutions.",
+    partners_tag: "Qui nous soutient",
+    partners_title: "Nos Partenaires",
+    partners_sub: "Des partenariats stratégiques qui élargissent notre capacité de livraison et notre portée sectorielle.",
     contact_tag: "Prenez Contact",
     contact_title: "Travaillons Ensemble",
     contact_sub: "Parlez directement avec notre PDG pour savoir comment EZO peut générer de la valeur pour votre activité.",
@@ -621,6 +633,9 @@ const translations = {
     clients_tag: "信任我们的客户",
     clients_title: "我们的客户",
     clients_sub: "信任EZO Oilfield Solutions的能源行业领先企业。",
+    partners_tag: "支持我们的伙伴",
+    partners_title: "我们的合作伙伴",
+    partners_sub: "战略合作伙伴关系，扩大我们的交付能力和行业覆盖范围。",
     contact_tag: "联系我们",
     contact_title: "让我们合作",
     contact_sub: "直接与我们的CEO交流，了解EZO如何为您的业务创造价值。",
@@ -741,6 +756,9 @@ const translations = {
     clients_tag: "من يثق بنا",
     clients_title: "عملاؤنا",
     clients_sub: "شركات رائدة في صناعة الطاقة تثق في EZO Oilfield Solutions.",
+    partners_tag: "من يدعمنا",
+    partners_title: "شركاؤنا",
+    partners_sub: "شراكات استراتيجية تعزز قدرتنا على التسليم ونطاق عملنا في القطاع.",
     contact_tag: "تواصل معنا",
     contact_title: "لنعمل معًا",
     contact_sub: "تحدث مباشرة مع الرئيس التنفيذي لمعرفة كيف يمكن لـ EZO تحقيق قيمة لعملك.",
@@ -793,8 +811,25 @@ function setLang(lang) {
     if (t[key]) el.placeholder = t[key];
   });
 
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`)?.classList.add('active');
+  // Update dropdown active state
+  document.querySelectorAll('.lang-dropdown-item').forEach(btn => btn.classList.remove('active'));
+  const activeItem = document.getElementById('lang-item-' + lang);
+  if (activeItem) activeItem.classList.add('active');
+
+  // Update dropdown toggle to show current language flag and code
+  const flagSvgMap = {
+    pt: `<rect width="20" height="14" fill="#009C3B"/><polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/><circle cx="10" cy="7" r="3" fill="#002776"/><path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/>`,
+    en: `<rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/>`,
+    es: `<rect width="20" height="14" fill="#c60b1e"/><rect y="3.5" width="20" height="7" fill="#ffc400"/>`,
+    fr: `<rect width="20" height="14" fill="#ED2939"/><rect width="13.3" height="14" fill="#fff"/><rect width="6.6" height="14" fill="#002395"/>`,
+    zh: `<rect width="20" height="14" fill="#DE2910"/><polygon points="4,1.5 4.7,3.8 2.5,2.3 5.5,2.3 3.3,3.8" fill="#FFDE00"/>`,
+    ar: `<rect width="20" height="14" fill="#006C35"/><rect x="4" y="4" width="12" height="0.7" rx="0.3" fill="#fff"/><rect x="5" y="5.5" width="10" height="0.7" rx="0.3" fill="#fff"/><rect x="6" y="7" width="8" height="0.7" rx="0.3" fill="#fff"/>`,
+  };
+  const codeMap = { pt: 'PT', en: 'EN', es: 'ES', fr: 'FR', zh: '中文', ar: 'AR' };
+  const flagEl = document.getElementById('lang-current-flag-svg');
+  const codeEl = document.getElementById('lang-current-code');
+  if (flagEl && flagSvgMap[lang]) flagEl.innerHTML = flagSvgMap[lang];
+  if (codeEl) codeEl.textContent = codeMap[lang] || lang.toUpperCase();
 
   document.documentElement.setAttribute('lang', lang);
 
@@ -898,13 +933,70 @@ const cardObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem, .diff-card').forEach((el) => {
+document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach((el) => {
   el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
   cardObserver.observe(el);
 });
 
+// Language dropdown functions
+function toggleLangDropdown() {
+  const wrapper = document.getElementById('lang-dropdown-wrapper');
+  wrapper.classList.toggle('open');
+}
+
+function closeLangDropdown() {
+  const wrapper = document.getElementById('lang-dropdown-wrapper');
+  wrapper.classList.remove('open');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  const wrapper = document.getElementById('lang-dropdown-wrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    wrapper.classList.remove('open');
+  }
+});
+
+// Load partners dynamically from /parceiros/ folder
+function loadPartners() {
+  const grid = document.getElementById('partners-grid');
+  if (!grid) return;
+
+  // Attempt to fetch the directory listing of /parceiros/
+  fetch('./parceiros/')
+    .then(res => res.text())
+    .then(html => {
+      const matches = [...html.matchAll(/href="([^"]+\.png)"/gi)];
+      const files = matches.map(m => m[1]).filter(f => !f.startsWith('/')).map(f => f.replace(/^.*\//, ''));
+
+      if (files.length === 0) {
+        grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;">Adicione logos à pasta <code>/parceiros/</code> para exibir aqui.</p>';
+        return;
+      }
+
+      grid.innerHTML = '';
+      files.forEach((file, i) => {
+        const name = file.replace(/\.png$/i, '');
+        const card = document.createElement('div');
+        card.className = 'partner-card';
+        card.style.transitionDelay = (i * 80) + 'ms';
+        card.innerHTML = `
+          <img src="parceiros/${file}" alt="${name}" class="partner-logo" onerror="this.style.display='none'">
+          <span class="partner-name">${name}</span>
+        `;
+        grid.appendChild(card);
+        cardObserver.observe(card);
+      });
+    })
+    .catch(() => {
+      // Folder not yet created — show placeholder message
+      grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;padding:20px 0;">Crie a pasta <code>/parceiros/</code> e adicione logos <code>EMPRESA.png</code>.</p>';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang);
+  loadPartners();
 
   const checkVisible = () => {
     document.querySelectorAll('.reveal-section').forEach(el => {
@@ -913,7 +1005,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('visible');
       }
     });
-    document.querySelectorAll('.stat-card, .value-item, .client-card, .comex-card, .sitem, .diff-card').forEach(el => {
+    document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach(el => {
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight && rect.bottom > 0) {
         el.classList.add('visible');
