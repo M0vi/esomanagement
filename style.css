@@ -51,7 +51,7 @@ img { max-width: 100%; height: auto; }
 #lang-bar {
   background: #0d0d0d;
   border-bottom: 1px solid rgba(176, 141, 87, 0.25);
-  padding: 10px 0;
+  padding: 8px 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -77,29 +77,38 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
 }
 
-.lang-flags { display: flex; gap: 6px; align-items: center; }
+.lang-flags { display: flex; gap: 4px; align-items: center; }
 
 .lang-btn {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
   color: var(--gray-300);
-  padding: 5px 12px;
-  border-radius: 4px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 6px;
   cursor: pointer;
   font-family: var(--font-cond);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 1px;
   transition: var(--transition);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
   line-height: 1;
 }
 
-.lang-btn .flag {
-  font-size: 16px;
-  line-height: 1;
+.lang-btn .flag-svg {
+  width: 22px;
+  height: 15px;
+  border-radius: 2px;
+  display: block;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.12);
+  flex-shrink: 0;
+}
+
+.lang-btn span {
+  font-size: 11px;
+  letter-spacing: 1px;
 }
 
 .lang-btn:hover {
@@ -109,9 +118,9 @@ img { max-width: 100%; height: auto; }
 }
 
 .lang-btn.active {
-  background: var(--accent);
+  background: rgba(176, 141, 87, 0.18);
   border-color: var(--accent);
-  color: var(--navy);
+  color: var(--accent);
 }
 
 #header {
@@ -837,22 +846,23 @@ img { max-width: 100%; height: auto; }
 }
 
 .client-card.highlight {
-  background: #1a1a1a;
+  background: #fff;
   border-color: var(--accent);
   border-width: 2px;
+  box-shadow: 0 4px 20px rgba(176, 141, 87, 0.18);
 }
 
 .client-card.highlight .client-logo-wrap {
-  background: #fff;
+  background: transparent;
   border-radius: 6px;
-  padding: 10px 14px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .client-card.highlight .client-name {
-  color: var(--silver-light);
+  color: #111;
 }
 
 .client-logo-wrap {
