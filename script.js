@@ -146,7 +146,7 @@ const translations = {
     partners_sub: "Parcerias estratégicas que ampliam nossa capacidade de entrega e alcance no setor.",
     contact_tag: "Entre em contato",
     contact_title: "Contate-nos",
-    contact_sub: "Fale diretamente com nosso CEO",
+    contact_sub: "Fale diretamente com nosso CEO e saiba como a EZO pode gerar valor para o seu negócio.",
     contact_whatsapp: "WhatsApp / Telefone",
     contact_email_ceo: "E-mail do CEO",
     contact_email_sales: "E-mail comercial",
@@ -269,7 +269,7 @@ const translations = {
     partners_sub: "Strategic partnerships that expand our delivery capacity and sector reach.",
     contact_tag: "Get in touch",
     contact_title: "Contact us",
-    contact_sub: "Speak directly with our CEO",
+    contact_sub: "Speak directly with our CEO and find out how EZO can generate value for your business.",
     contact_whatsapp: "WhatsApp / Phone",
     contact_email_ceo: "CEO's email",
     contact_email_sales: "Sales email",
@@ -392,7 +392,7 @@ const translations = {
     partners_sub: "Alianzas estratégicas que amplían nuestra capacidad de entrega y alcance en el sector.",
     contact_tag: "Contáctenos",
     contact_title: "Hable con nosotros",
-    contact_sub: "Hable directamente con nuestro CEO",
+    contact_sub: "Hable directamente con nuestro CEO y descubra cómo EZO puede generar valor para su negocio.",
     contact_whatsapp: "WhatsApp / Teléfono",
     contact_email_ceo: "Email del CEO",
     contact_email_sales: "Email comercial",
@@ -1034,8 +1034,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(checkVisible, 400);
 });
 // ===== FONT SIZE CONTROLS =====
-const FONT_LEVELS = [1, 2, 3, 4, 5];
-const FONT_PCT_MAP = { 1: '80%', 2: '90%', 3: '100%', 4: '113%', 5: '125%' };
+const FONT_LEVELS = [1, 2, 3, 4, 5, 6, 7, 8];
+const FONT_PCT_MAP = { 1: '70%', 2: '85%', 3: '100%', 4: '120%', 5: '145%', 6: '175%', 7: '210%', 8: '250%' };
 let currentFontLevel = 3;
 
 function applyFontLevel(level) {
@@ -1049,7 +1049,7 @@ function applyFontLevel(level) {
   const pctEl    = document.getElementById('font-size-pct');
 
   if (decrease) decrease.disabled = (level === 1);
-  if (increase) increase.disabled = (level === 5);
+  if (increase) increase.disabled = (level === 8);
 
   if (pctEl) {
     pctEl.textContent = FONT_PCT_MAP[level] || '100%';
@@ -1062,7 +1062,7 @@ function applyFontLevel(level) {
 }
 
 function changeFontSize(delta) {
-  const next = Math.min(5, Math.max(1, currentFontLevel + delta));
+  const next = Math.min(8, Math.max(1, currentFontLevel + delta));
   applyFontLevel(next);
 }
 
@@ -1078,7 +1078,7 @@ document.addEventListener('DOMContentLoaded', () => {
 (function() {
   try {
     const saved = parseInt(localStorage.getItem('ezo_font_level'));
-    if (saved >= 1 && saved <= 5) {
+    if (saved >= 1 && saved <= 8) {
       document.addEventListener('DOMContentLoaded', () => applyFontLevel(saved));
       return;
     }
