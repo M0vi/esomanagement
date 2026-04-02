@@ -1145,7 +1145,9 @@ img { max-width: 100%; height: auto; }
 
 /* Partners Section */
 #partners {
-  background: #f7f7f7;
+  background: var(--section-bg);
+  color: #111111;
+  padding: 100px 0;
 }
 
 #partners .section-title { color: #111111; }
