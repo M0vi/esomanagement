@@ -842,22 +842,33 @@ img { max-width: 100%; height: auto; }
   border-width: 2px;
 }
 
-.client-card.highlight .client-logo {
-  filter: brightness(0) invert(1);
+.client-card.highlight .client-logo-wrap {
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .client-card.highlight .client-name {
   color: var(--silver-light);
 }
 
+.client-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .client-logo {
-  max-width: 130px;
-  max-height: 52px;
+  max-width: 120px;
+  max-height: 48px;
   width: auto;
   height: auto;
   object-fit: contain;
   display: block;
-  flex-shrink: 0;
 }
 
 .client-name {
@@ -911,33 +922,88 @@ img { max-width: 100%; height: auto; }
 .contact-person {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   margin-bottom: 36px;
+  padding: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+}
+
+.contact-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
 }
 
 .contact-avatar {
-  width: 56px;
-  height: 56px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #8a6d3b 100%);
   color: var(--navy);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-cond);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 1px;
   flex-shrink: 0;
+  border: 3px solid var(--accent);
+  overflow: hidden;
+}
+
+.contact-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.contact-avatar-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  background: #25D366;
+  border-radius: 50%;
+  border: 2px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-avatar-badge svg {
+  width: 10px;
+  height: 10px;
+  color: #fff;
+}
+
+.contact-person-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .contact-person strong {
   display: block;
   font-family: var(--font-cond);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--white);
   letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.contact-person-role {
+  font-family: var(--font-cond);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .contact-person span {
