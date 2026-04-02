@@ -850,7 +850,7 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-const sections = ['about','differentials','services','clients','contact'];
+const sections = ['clients','about','services','differentials','contact'];
 
 window.addEventListener('scroll', () => {
   const header = document.getElementById('header');

@@ -15,7 +15,7 @@
   --gray-500: #666666;
   --gray-700: #333333;
   --section-bg: #ececec;
-  --font-display: 'Cormorant Garamond', serif;
+  --font-display: 'Montserrat', sans-serif;
   --font-body: 'Barlow', sans-serif;
   --font-cond: 'Barlow Condensed', sans-serif;
   --radius: 4px;
@@ -55,12 +55,13 @@ img { max-width: 100%; height: auto; }
 #lang-bar {
   background: linear-gradient(90deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%);
   border-bottom: 1px solid rgba(176, 141, 87, 0.2);
-  padding: 7px 0;
+  padding: 8px 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  height: 40px;
 }
 
 .lang-inner {
@@ -143,7 +144,7 @@ img { max-width: 100%; height: auto; }
 
 #header {
   position: fixed;
-  top: 41px;
+  top: 40px;
   left: 0;
   right: 0;
   z-index: 999;
@@ -255,7 +256,7 @@ img { max-width: 100%; height: auto; }
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: 113px;
+  padding-top: 112px;
 }
 
 .hero-bg {
@@ -320,29 +321,28 @@ img { max-width: 100%; height: auto; }
 
 .hero-line1 {
   font-size: clamp(72px, 13vw, 160px);
-  font-weight: 700;
-  letter-spacing: 12px;
+  font-weight: 900;
+  letter-spacing: 10px;
   color: var(--white);
   line-height: 0.95;
   animation: fadeUp 0.8s ease 0.4s forwards;
 }
 
 .hero-line2 {
-  font-size: clamp(52px, 9vw, 112px);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 6px;
+  font-size: clamp(48px, 8.5vw, 106px);
+  font-weight: 300;
+  letter-spacing: 14px;
   color: var(--silver);
-  line-height: 1;
+  line-height: 1.05;
   animation: fadeUp 0.8s ease 0.55s forwards;
 }
 
 .hero-line3 {
-  font-size: clamp(24px, 4vw, 50px);
+  font-size: clamp(16px, 3vw, 36px);
   font-weight: 600;
-  letter-spacing: 8px;
+  letter-spacing: 10px;
   color: var(--accent);
-  line-height: 1.2;
+  line-height: 1.4;
   animation: fadeUp 0.8s ease 0.7s forwards;
 }
 
@@ -528,8 +528,8 @@ img { max-width: 100%; height: auto; }
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(36px, 5.5vw, 64px);
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   line-height: 1.05;
   margin-bottom: 16px;
   color: var(--navy);
@@ -562,9 +562,9 @@ img { max-width: 100%; height: auto; }
 
 .about-text h2 {
   font-family: var(--font-display);
-  font-size: 50px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   color: var(--navy);
   margin-bottom: 20px;
   line-height: 1.1;
