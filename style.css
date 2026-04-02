@@ -244,6 +244,16 @@ img { max-width: 100%; height: auto; }
   align-items: center;
   justify-content: space-between;
   height: 72px;
+  position: relative;
+}
+
+#main-nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logo-link { display: flex; align-items: center; gap: 12px; }
@@ -273,12 +283,6 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
   margin-top: 3px;
   font-weight: 600;
-}
-
-#main-nav {
-  display: flex;
-  gap: 32px;
-  align-items: center;
 }
 
 #main-nav a {
@@ -446,29 +450,29 @@ img { max-width: 100%; height: auto; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 60px;
   width: 100%;
 }
 
 .hero-text-col {
   flex: 1;
   min-width: 0;
+  z-index: 2;
 }
 
 .hero-logo-col {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   opacity: 0;
   animation: fadeUp 0.8s ease 1.1s forwards;
-  margin-right: -120px;
-  padding-left: 20px;
+  width: 340px;
 }
 
 .hero-logo-ring {
-  width: 760px;
-  height: 760px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   border: none;
   display: flex;
@@ -485,8 +489,8 @@ img { max-width: 100%; height: auto; }
 }
 
 .hero-logo-img {
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
   object-fit: contain;
 }
 
@@ -1749,13 +1753,15 @@ img { max-width: 100%; height: auto; }
   .clients-grid { grid-template-columns: 1fr 1fr; }
   .partners-grid { grid-template-columns: 1fr 1fr; }
   .hero-layout { flex-direction: column; gap: 24px; }
-  .hero-logo-ring { width: 280px; height: 280px; }
-  .hero-logo-img { width: 220px; height: 220px; }
+  .hero-logo-col { width: 100%; justify-content: center; }
+  .hero-logo-ring { width: 200px; height: 200px; }
+  .hero-logo-img { width: 180px; height: 180px; }
   .contact-item::after { display: none; }
 }
 
 @media (max-width: 900px) {
   .hero-layout { flex-direction: column-reverse; gap: 32px; }
-  .hero-logo-ring { width: 400px; height: 400px; }
-  .hero-logo-img { width: 320px; height: 320px; }
+  .hero-logo-col { width: 100%; justify-content: center; }
+  .hero-logo-ring { width: 240px; height: 240px; }
+  .hero-logo-img { width: 220px; height: 220px; }
 }

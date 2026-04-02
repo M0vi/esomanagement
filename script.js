@@ -957,41 +957,62 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Load partners dynamically from /parceiros/ folder
+// Load partners from /parceiros/ folder
+// Since static servers don't list directories, we use a manifest file approach.
+// The user should create parceiros/index.json with: ["EMPRESA1.png","EMPRESA2.png",...]
+// OR we probe common image names. Fallback: show instructions.
 function loadPartners() {
   const grid = document.getElementById('partners-grid');
   if (!grid) return;
 
-  // Attempt to fetch the directory listing of /parceiros/
-  fetch('./parceiros/')
-    .then(res => res.text())
-    .then(html => {
-      const matches = [...html.matchAll(/href="([^"]+\.png)"/gi)];
-      const files = matches.map(m => m[1]).filter(f => !f.startsWith('/')).map(f => f.replace(/^.*\//, ''));
-
-      if (files.length === 0) {
-        grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;">Adicione logos à pasta <code>/parceiros/</code> para exibir aqui.</p>';
-        return;
-      }
-
-      grid.innerHTML = '';
-      files.forEach((file, i) => {
-        const name = file.replace(/\.png$/i, '');
-        const card = document.createElement('div');
-        card.className = 'partner-card';
-        card.style.transitionDelay = (i * 80) + 'ms';
-        card.innerHTML = `
-          <img src="parceiros/${file}" alt="${name}" class="partner-logo" onerror="this.style.display='none'">
-          <span class="partner-name">${name}</span>
-        `;
-        grid.appendChild(card);
-        cardObserver.observe(card);
-      });
+  // Try to load a manifest file first (parceiros/index.json)
+  fetch('./parceiros/index.json')
+    .then(res => {
+      if (!res.ok) throw new Error('no manifest');
+      return res.json();
+    })
+    .then(files => {
+      renderPartners(grid, files);
     })
     .catch(() => {
-      // Folder not yet created — show placeholder message
-      grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;padding:20px 0;">Crie a pasta <code>/parceiros/</code> e adicione logos <code>EMPRESA.png</code>.</p>';
+      // Fallback: try fetching directory listing (works on some servers)
+      fetch('./parceiros/')
+        .then(res => res.text())
+        .then(html => {
+          const matches = [...html.matchAll(/href="([^"?#/][^"]*\.png)"/gi)];
+          const files = [...new Set(matches.map(m => m[1]))];
+          if (files.length > 0) {
+            renderPartners(grid, files);
+          } else {
+            showPartnersPlaceholder(grid);
+          }
+        })
+        .catch(() => showPartnersPlaceholder(grid));
     });
+}
+
+function renderPartners(grid, files) {
+  if (!files || files.length === 0) {
+    showPartnersPlaceholder(grid);
+    return;
+  }
+  grid.innerHTML = '';
+  files.forEach((file, i) => {
+    const name = file.replace(/\.png$/i, '').replace(/\.jpg$/i, '').replace(/\.jpeg$/i, '').replace(/\.webp$/i, '');
+    const card = document.createElement('div');
+    card.className = 'partner-card';
+    card.style.transitionDelay = (i * 80) + 'ms';
+    card.innerHTML = `
+      <img src="parceiros/${file}" alt="${name}" class="partner-logo" onerror="this.style.display='none'">
+      <span class="partner-name">${name}</span>
+    `;
+    grid.appendChild(card);
+    cardObserver.observe(card);
+  });
+}
+
+function showPartnersPlaceholder(grid) {
+  grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;padding:20px 0;">Crie o arquivo <code>parceiros/index.json</code> com a lista de logos. Ex: <code>["EMPRESA.png"]</code></p>';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
