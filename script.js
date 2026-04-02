@@ -50,36 +50,36 @@ const translations = {
     nav_clients: "Clientes",
     nav_contact: "Contato",
     hero_eyebrow: "Petróleo & Gás · Tecnologia & Inovação",
-    hero_sub: "Consultoria Especializada para a Indústria de Petróleo e Gás",
+    hero_sub: "Consultoria especializada para a indústria de petróleo e gás",
     hero_cta1: "Nossos Serviços",
     hero_cta2: "Fale Conosco",
     scroll_hint: "scroll",
     about_tag: "Quem Somos",
     about_title: "Nossa Missão",
-    about_desc: "Criar soluções inovadoras que resolvam desafios complexos, melhorando a experiência dos nossos clientes e gerando valor na indústria de petróleo e gás.",
-    value1_title: "Criatividade & Pensamento Disruptivo",
-    value1_desc: "Estimulamos soluções não convencionais e a coragem para romper com o status quo.",
+    about_desc: "Desenvolver soluções inovadoras para os desafios mais complexos do setor, aprimorando continuamente a experiência de nossos clientes e gerando valor sustentável na indústria de petróleo e gás.",
+    value1_title: "Criatividade e pensamento disruptivo",
+    value1_desc: "Incentivamos abordagens não convencionais e a disposição para desafiar o status quo em busca de resultados superiores.",
     value2_title: "Excelência",
-    value2_desc: "Comprometemo-nos a entregar soluções de alta qualidade com dedicação constante.",
-    value3_title: "Agilidade & Adaptabilidade",
-    value3_desc: "Aprendemos rapidamente e respondemos com eficiência a um ambiente em constante mudança.",
+    value2_desc: "Comprometemo-nos a entregar soluções de alta qualidade, com rigor técnico e dedicação em cada etapa dos nossos projetos.",
+    value3_title: "Agilidade e adaptabilidade",
+    value3_desc: "Aprendemos com rapidez e respondemos com eficiência às demandas de um ambiente em constante transformação.",
     stat1: "Anos de Experiência",
     stat2: "Clientes Ativos",
-    stat3: "Áreas de Serviço",
+    stat3: "Áreas de atuação",
     stat4: "Comprometimento",
     diff_tag: "Por que a EZO",
     diff_title: "Nossos Diferenciais",
-    diff_sub: "A única consultoria que integra Engenharia, Geologia, Trading e Comex sob um mesmo teto.",
+    diff_sub: "A única consultoria que integra Engenharia, Geologia, Trading e Comex sob uma única estrutura.",
     diff1_title: "35+ Anos de Mercado",
     diff1_desc: "Décadas de experiência prática na indústria brasileira e internacional de óleo e gás.",
     diff2_title: "Equipe Multidisciplinar",
-    diff2_desc: "Engenheiros, geólogos, especialistas em comércio exterior e desenvolvimento de negócios em uma só parceria.",
+    diff2_desc: "Engenheiros, geólogos, especialistas em comércio exterior e profissionais de desenvolvimento de negócios reunidos em uma única parceria estratégica.",
     diff3_title: "Atuação Global",
-    diff3_desc: "Rede de agentes e parceiros estratégicos em mercados internacionais para operações de trading e comex.",
+    diff3_desc: "Rede de agentes e parceiros estratégicos em mercados internacionais para operações de trading e comércio exterior.",
     diff4_title: "Soluções Integradas",
-    diff4_desc: "Do subsolo ao mercado: cobrimos toda a cadeia de valor do setor de petróleo e gás com uma abordagem única.",
+    diff4_desc: "Do subsolo ao mercado: cobrimos toda a cadeia de valor do setor de petróleo e gás com uma abordagem única e integrada.",
     services_tag: "O que fazemos",
-    services_title: "Serviços Especializados",
+    services_title: "Serviços especializados",
     services_sub: "Soluções completas para os desafios mais complexos da indústria.",
     tab_eng: "Engenharia & Consultoria",
     tab_geo: "Geologia & Geofísica",
@@ -87,7 +87,7 @@ const translations = {
     tab_trade: "Trading Services",
     tab_comex: "Comex Services",
     eng_title: "Engenharia & Consultoria",
-    eng_intro: "Em parceria estratégica com a Catu Consultoria, oferecemos experiência nacional e internacional com mais de 35 anos na indústria.",
+    eng_intro: "Em parceria estratégica com a Catu Consultoria, reunimos expertise nacional e internacional acumulada ao longo de mais de 35 anos de atuação na indústria.",
     eng_1: "Curvas de produção e estimativas de recursos contingentes",
     eng_2: "Estimativa determinística e probabilística de volumes de hidrocarbonetos",
     eng_3: "Planos de desenvolvimento de reservatórios e campos",
@@ -99,11 +99,11 @@ const translations = {
     eng_9: "Avaliação completa de ativos de petróleo",
     eng_10: "Projetos de perfuração, completação, reentrada e abandono de poços",
     eng_11: "Projetos de elevação e escoamento",
-    eng_12: "Procurement Técnico",
+    eng_12: "Procurement técnico",
     eng_extra: "Otimização de operações · Análise de risco · Procurement especializado",
     geo_title: "Geologia & Geofísica",
-    geo_intro: "Expertise completa em interpretação sísmica, modelagem geológica e avaliação petrofísica para maximizar o potencial dos seus ativos.",
-    geo_1: "Planejamento de levantamento sísmico",
+    geo_intro: "Expertise abrangente em interpretação sísmica, modelagem geológica e avaliação petrofísica para maximizar o potencial dos seus ativos exploratórios e de produção.",
+    geo_1: "Planejamento de levantamentos sísmicos",
     geo_2: "Suporte ao processamento sísmico",
     geo_3: "Interpretação sísmica",
     geo_4: "Análise de atributos sísmicos",
@@ -113,37 +113,37 @@ const translations = {
     geo_8: "Análises determinísticas e probabilísticas de parâmetros petrofísicos",
     geo_9: "Modelos geológicos 2D e 3D de reservatórios de óleo e gás",
     biz_title: "Desenvolvimento de Negócios",
-    biz_intro: "Estratégias para expandir sua presença no mercado, construir parcerias sólidas e identificar novas oportunidades de crescimento.",
-    biz_1: "Prospecção de clientes e novos leads",
-    biz_2: "Parcerias estratégicas para benefício mútuo",
-    biz_3: "Análise de mercado: tendências, concorrência e oportunidades",
-    biz_4: "Modelagem de negócios: novos produtos, canais e fontes de receita",
+    biz_intro: "Estratégias estruturadas para ampliar sua presença no mercado, consolidar parcerias estratégicas e identificar novas oportunidades de crescimento sustentável.",
+    biz_1: "Prospecção de clientes e identificação de novos leads",
+    biz_2: "Estruturação de parcerias estratégicas para benefício mútuo",
+    biz_3: "Análise de mercado: tendências, cenário competitivo e oportunidades",
+    biz_4: "Modelagem de negócios: novos produtos, canais de distribuição e fontes de receita",
     trade_title: "Trading Services",
-    trade_intro: "Soluções completas de comércio internacional, desde o sourcing até a distribuição final dos produtos.",
+    trade_intro: "Soluções completas de comércio internacional, desde o sourcing de produtos e fornecedores até a distribuição final das mercadorias.",
     trade_1: "Sourcing de produtos e fornecedores",
-    trade_2: "Inspeções de qualidade nas origens dos exportadores",
+    trade_2: "Inspeções de qualidade na origem dos exportadores",
     trade_3: "Importação por encomenda",
     trade_4: "Importação por conta e ordem",
-    trade_5: "Representações de produtos e marcas",
+    trade_5: "Representação de produtos e marcas",
     trade_6: "Comercialização de produtos",
     trade_7: "Assessoria aduaneira",
     trade_8: "Armazenagem e distribuição",
     comex_title: "Comex Services",
-    comex_intro: "Logística internacional completa — aéreo, marítimo e rodoviário — com desembaraço aduaneiro eficiente.",
+    comex_intro: "Logística internacional completa — aérea, marítima e rodoviária — com desembaraço aduaneiro eficiente e suporte especializado em todo o processo.",
     comex_air_title: "Aéreo",
-    comex_air_desc: "Agentes ao redor do globo consolidando e embarcando suas cargas com agilidade e segurança.",
+    comex_air_desc: "Agentes distribuídos ao redor do mundo consolidando e embarcando suas cargas com agilidade e segurança operacional.",
     comex_sea_title: "Marítimo",
-    comex_sea_desc: "Contratos com os principais armadores em todos os portos do mundo, agilizando seu frete marítimo.",
+    comex_sea_desc: "Contratos firmados com os principais armadores nos mais importantes portos do mundo, otimizando seus fretes marítimos.",
     comex_road_title: "Rodoviário",
-    comex_road_desc: "Soluções de transporte doméstico para qualquer tipo de carga: expressa, dedicada, consolidada ou projeto.",
-    comex_customs_title: "Desembaraço Aduaneiro",
-    comex_customs_desc: "Análise completa do processo logístico, NCM, alíquotas e leis aduaneiras para um desembaraço eficiente.",
+    comex_road_desc: "Soluções de transporte doméstico para qualquer tipo de carga: expressa, dedicada, consolidada ou carga-projeto.",
+    comex_customs_title: "Aduaneiro",
+    comex_customs_desc: "Análise completa do processo logístico, classificação NCM, alíquotas e legislação aduaneira para um desembaraço eficiente e seguro.",
     clients_tag: "Quem confia em nós",
-    clients_title: "Nossos Clientes",
-    clients_sub: "Empresas líderes da indústria de energia que confiam na EZO Oilfield Solutions.",
+    clients_title: "Nossos clientes",
+    clients_sub: "Empresas líderes da indústria de energia e serviços que confiam na EZO Oilfield Solutions.",
     partners_tag: "Quem nos apoia",
-    partners_title: "Nossos Parceiros",
-    partners_sub: "Parcerias estratégicas que ampliam nossa capacidade de entrega e abrangência no setor.",
+    partners_title: "Nossos parceiros",
+    partners_sub: "Parcerias estratégicas que ampliam nossa capacidade de entrega e alcance no setor.",
     contact_tag: "Entre em Contato",
     contact_title: "Vamos Trabalhar Juntos",
     contact_sub: "Fale diretamente com nosso CEO para saber como a EZO pode gerar valor para o seu negócio.",
@@ -159,7 +159,7 @@ const translations = {
     form_message: "Mensagem",
     form_send: "Enviar Mensagem",
     form_success: "Abrindo seu cliente de e-mail...",
-    footer_tagline: "Tecnologia e Inovação na Indústria de Petróleo & Gás",
+    footer_tagline: "Tecnologia e inovação na indústria de petróleo & gás",
     footer_services: "Serviços",
     footer_contact: "Contato",
     footer_rights: "Todos os direitos reservados.",
@@ -1039,7 +1039,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(checkVisible, 400);
 });
 // ===== FONT SIZE CONTROLS =====
-const FONT_LEVELS = [1, 2, 3, 4, 5]; // 1=menor, 3=padrão, 5=maior
+const FONT_LEVELS = [1, 2, 3, 4, 5];
+// Level -> percentage label shown to user
+const FONT_PCT_MAP = { 1: '80%', 2: '90%', 3: '100%', 4: '113%', 5: '125%' };
 let currentFontLevel = 3;
 
 function applyFontLevel(level) {
@@ -1048,17 +1050,21 @@ function applyFontLevel(level) {
   body.classList.add('font-size-' + level);
   currentFontLevel = level;
 
-  // Visual feedback nos botões
   const decrease = document.getElementById('font-decrease');
-  const reset = document.getElementById('font-reset');
   const increase = document.getElementById('font-increase');
-  if (decrease) decrease.classList.toggle('active-level', level < 3);
-  if (reset)    reset.classList.toggle('active-level', level === 3);
-  if (increase) increase.classList.toggle('active-level', level > 3);
+  const pctEl    = document.getElementById('font-size-pct');
 
-  // Disabled state
+  // Disabled state at extremes
   if (decrease) decrease.disabled = (level === 1);
   if (increase) increase.disabled = (level === 5);
+
+  // Update percentage display
+  if (pctEl) {
+    pctEl.textContent = FONT_PCT_MAP[level] || '100%';
+    pctEl.classList.toggle('is-default', level === 3);
+    pctEl.classList.toggle('is-changed', level !== 3);
+    pctEl.title = level === 3 ? 'Tamanho padrão' : 'Clique para restaurar o tamanho padrão';
+  }
 
   // Persist
   try { localStorage.setItem('ezo_font_level', level); } catch(e) {}
@@ -1073,12 +1079,17 @@ function resetFontSize() {
   applyFontLevel(3);
 }
 
-// Restore on load
+// Make the pct element clickable to reset (set once after DOM ready)
+document.addEventListener('DOMContentLoaded', () => {
+  const pctEl = document.getElementById('font-size-pct');
+  if (pctEl) pctEl.addEventListener('click', resetFontSize);
+});
+
+// Restore saved preference on load
 (function() {
   try {
     const saved = parseInt(localStorage.getItem('ezo_font_level'));
     if (saved >= 1 && saved <= 5) {
-      // Apply after DOM ready
       document.addEventListener('DOMContentLoaded', () => applyFontLevel(saved));
       return;
     }
