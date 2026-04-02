@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EZO Oilfield Solutions — Consultoria Especializada em Petróleo & Gás</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="lang-bar">
+  <div class="lang-inner">
+    <span data-i18n="lang_label">Idioma:</span>
+    <div class="lang-flags">
+      <button onclick="setLang('pt')" class="lang-btn active" title="Português">🇧🇷 PT</button>
+      <button onclick="setLang('en')" class="lang-btn" title="English">🇺🇸 EN</button>
+      <button onclick="setLang('es')" class="lang-btn" title="Español">🇪🇸 ES</button>
+      <button onclick="setLang('fr')" class="lang-btn" title="Français">🇫🇷 FR</button>
+      <button onclick="setLang('zh')" class="lang-btn" title="中文">🇨🇳 ZH</button>
+      <button onclick="setLang('ar')" class="lang-btn" title="العربية">🇸🇦 AR</button>
+    </div>
+  </div>
+</div>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="#hero" class="logo-link">
+      <img src="logo.png" alt="EZO Oilfield Solutions" class="logo-img" onerror="this.style.display='none'; document.getElementById('logo-text').style.display='flex'">
+      <div class="logo-text" id="logo-text" style="display:none">
+        <span class="logo-eos">EOS</span>
+        <span class="logo-sub">EZO OILFIELD SOLUTIONS</span>
+      </div>
+    </a>
+    <nav id="main-nav">
+      <a href="#about" data-i18n="nav_about">Sobre</a>
+      <a href="#services" data-i18n="nav_services">Serviços</a>
+      <a href="#clients" data-i18n="nav_clients">Clientes</a>
+      <a href="#contact" data-i18n="nav_contact">Contato</a>
+    </nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">Petróleo & Gás · Tecnologia & Inovação</div>
+    <h1 class="hero-title">
+      <span class="hero-line1">EZO</span>
+      <span class="hero-line2">OILFIELD</span>
+      <span class="hero-line3">SOLUTIONS</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">Consultoria Especializada para a Indústria de Petróleo e Gás</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary" data-i18n="hero_cta1">Nossos Serviços</a>
+      <a href="#contact" class="btn-outline" data-i18n="hero_cta2">Fale Conosco</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span data-i18n="scroll_hint">scroll</span>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-tag" data-i18n="about_tag">Quem Somos</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 data-i18n="about_title">Nossa Missão</h2>
+        <p data-i18n="about_desc">Criar soluções inovadoras que resolvam desafios complexos, melhorando a experiência dos nossos clientes e gerando valor na indústria de petróleo e gás.</p>
+        <div class="values-list">
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <div>
+              <strong data-i18n="value1_title">Criatividade & Pensamento Disruptivo</strong>
+              <p data-i18n="value1_desc">Estimulamos soluções não convencionais e a coragem para romper com o status quo.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <strong data-i18n="value2_title">Excelência</strong>
+              <p data-i18n="value2_desc">Comprometemo-nos a entregar soluções de alta qualidade com dedicação constante.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 13 9 20 9"/><path d="M20.94 11A9 9 0 1 1 3 9"/></svg>
+            </div>
+            <div>
+              <strong data-i18n="value3_title">Agilidade & Adaptabilidade</strong>
+              <p data-i18n="value3_desc">Aprendemos rapidamente e respondemos com eficiência a um ambiente em constante mudança.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <span class="stat-num">35+</span>
+          <span class="stat-label" data-i18n="stat1">Anos de Experiência</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">9+</span>
+          <span class="stat-label" data-i18n="stat2">Clientes Ativos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">4</span>
+          <span class="stat-label" data-i18n="stat3">Áreas de Serviço</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">∞</span>
+          <span class="stat-label" data-i18n="stat4">Comprometimento</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-tag" data-i18n="services_tag">O que fazemos</div>
+    <h2 class="section-title" data-i18n="services_title">Serviços Especializados</h2>
+    <p class="section-sub" data-i18n="services_sub">Soluções completas para os desafios mais complexos da indústria.</p>
+
+    <div class="services-tabs">
+      <button class="tab-btn active" onclick="showTab('engineering')" data-i18n="tab_eng">Engenharia & Consultoria</button>
+      <button class="tab-btn" onclick="showTab('geology')" data-i18n="tab_geo">Geologia & Geofísica</button>
+      <button class="tab-btn" onclick="showTab('bizdev')" data-i18n="tab_biz">Desenvolvimento de Negócios</button>
+      <button class="tab-btn" onclick="showTab('trading')" data-i18n="tab_trade">Trading Services</button>
+      <button class="tab-btn" onclick="showTab('comex')" data-i18n="tab_comex">Comex Services</button>
+    </div>
+
+    <div class="tab-content active" id="tab-engineering">
+      <div class="service-panel">
+        <div class="service-panel-header">
+          <div class="service-icon-lg">⚙️</div>
+          <div>
+            <h3 data-i18n="eng_title">Engenharia & Consultoria</h3>
+            <p data-i18n="eng_intro">Em parceria estratégica com a Catu Consultoria, oferecemos experiência nacional e internacional com mais de 35 anos na indústria.</p>
+          </div>
+        </div>
+        <div class="service-items-grid">
+          <div class="sitem" data-i18n="eng_1">Curvas de produção e estimativas de recursos contingentes</div>
+          <div class="sitem" data-i18n="eng_2">Estimativa determinística e probabilística de volumes de hidrocarbonetos</div>
+          <div class="sitem" data-i18n="eng_3">Planos de desenvolvimento de reservatórios e campos</div>
+          <div class="sitem" data-i18n="eng_4">Revitalização de campos maduros de petróleo</div>
+          <div class="sitem" data-i18n="eng_5">Estimativas de reservas (SEC e SPE)</div>
+          <div class="sitem" data-i18n="eng_6">Aquisição e interpretação de dados de reservatórios</div>
+          <div class="sitem" data-i18n="eng_7">Estudos de reservatórios</div>
+          <div class="sitem" data-i18n="eng_8">Avaliação econômica de campos, reservatórios e projetos</div>
+          <div class="sitem" data-i18n="eng_9">Avaliação completa de ativos de petróleo</div>
+          <div class="sitem" data-i18n="eng_10">Projetos de perfuração, completação, reentrada e abandono de poços</div>
+          <div class="sitem" data-i18n="eng_11">Projetos de elevação e escoamento</div>
+          <div class="sitem" data-i18n="eng_12">Procurement Técnico</div>
+        </div>
+        <div class="service-extra" data-i18n="eng_extra">
+          Otimização de operações · Análise de risco · Procurement especializado
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-geology">
+      <div class="service-panel">
+        <div class="service-panel-header">
+          <div class="service-icon-lg">🌍</div>
+          <div>
+            <h3 data-i18n="geo_title">Geologia & Geofísica</h3>
+            <p data-i18n="geo_intro">Expertise completa em interpretação sísmica, modelagem geológica e avaliação petrofísica para maximizar o potencial dos seus ativos.</p>
+          </div>
+        </div>
+        <div class="service-items-grid">
+          <div class="sitem" data-i18n="geo_1">Planejamento de levantamento sísmico</div>
+          <div class="sitem" data-i18n="geo_2">Suporte ao processamento sísmico</div>
+          <div class="sitem" data-i18n="geo_3">Interpretação sísmica</div>
+          <div class="sitem" data-i18n="geo_4">Análise de atributos sísmicos</div>
+          <div class="sitem" data-i18n="geo_5">Análise de bacias sedimentares</div>
+          <div class="sitem" data-i18n="geo_6">Mapeamentos regionais</div>
+          <div class="sitem" data-i18n="geo_7">Identificação e avaliação de plays, leads e prospectos</div>
+          <div class="sitem" data-i18n="geo_8">Análises determinísticas e probabilísticas de parâmetros petrofísicos</div>
+          <div class="sitem" data-i18n="geo_9">Modelos geológicos 2D e 3D de reservatórios de óleo e gás</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-bizdev">
+      <div class="service-panel">
+        <div class="service-panel-header">
+          <div class="service-icon-lg">📈</div>
+          <div>
+            <h3 data-i18n="biz_title">Desenvolvimento de Negócios</h3>
+            <p data-i18n="biz_intro">Estratégias para expandir sua presença no mercado, construir parcerias sólidas e identificar novas oportunidades de crescimento.</p>
+          </div>
+        </div>
+        <div class="service-items-grid">
+          <div class="sitem" data-i18n="biz_1">Prospecção de clientes e novos leads</div>
+          <div class="sitem" data-i18n="biz_2">Parcerias estratégicas para benefício mútuo</div>
+          <div class="sitem" data-i18n="biz_3">Análise de mercado: tendências, concorrência e oportunidades</div>
+          <div class="sitem" data-i18n="biz_4">Modelagem de negócios: novos produtos, canais e fontes de receita</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-trading">
+      <div class="service-panel">
+        <div class="service-panel-header">
+          <div class="service-icon-lg">🚢</div>
+          <div>
+            <h3 data-i18n="trade_title">Trading Services</h3>
+            <p data-i18n="trade_intro">Soluções completas de comércio internacional, desde o sourcing até a distribuição final dos produtos.</p>
+          </div>
+        </div>
+        <div class="service-items-grid">
+          <div class="sitem" data-i18n="trade_1">Sourcing de produtos e fornecedores</div>
+          <div class="sitem" data-i18n="trade_2">Inspeções de qualidade nas origens dos exportadores</div>
+          <div class="sitem" data-i18n="trade_3">Importação por encomenda</div>
+          <div class="sitem" data-i18n="trade_4">Importação por conta e ordem</div>
+          <div class="sitem" data-i18n="trade_5">Representações de produtos e marcas</div>
+          <div class="sitem" data-i18n="trade_6">Comercialização de produtos</div>
+          <div class="sitem" data-i18n="trade_7">Assessoria aduaneira</div>
+          <div class="sitem" data-i18n="trade_8">Armazenagem e distribuição</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-comex">
+      <div class="service-panel">
+        <div class="service-panel-header">
+          <div class="service-icon-lg">✈️</div>
+          <div>
+            <h3 data-i18n="comex_title">Comex Services</h3>
+            <p data-i18n="comex_intro">Logística internacional completa — aéreo, marítimo e rodoviário — com desembaraço aduaneiro eficiente.</p>
+          </div>
+        </div>
+        <div class="service-cards-comex">
+          <div class="comex-card">
+            <div class="comex-icon">✈️</div>
+            <h4 data-i18n="comex_air_title">Aéreo</h4>
+            <p data-i18n="comex_air_desc">Agentes ao redor do globo consolidando e embarcando suas cargas com agilidade e segurança.</p>
+          </div>
+          <div class="comex-card">
+            <div class="comex-icon">🚢</div>
+            <h4 data-i18n="comex_sea_title">Marítimo</h4>
+            <p data-i18n="comex_sea_desc">Contratos com os principais armadores em todos os portos do mundo, agilizando seu frete marítimo.</p>
+          </div>
+          <div class="comex-card">
+            <div class="comex-icon">🚚</div>
+            <h4 data-i18n="comex_road_title">Rodoviário</h4>
+            <p data-i18n="comex_road_desc">Soluções de transporte doméstico para qualquer tipo de carga: expressa, dedicada, consolidada ou projeto.</p>
+          </div>
+          <div class="comex-card">
+            <div class="comex-icon">🏛️</div>
+            <h4 data-i18n="comex_customs_title">Desembaraço Aduaneiro</h4>
+            <p data-i18n="comex_customs_desc">Análise completa do processo logístico, NCM, alíquotas e leis aduaneiras para um desembaraço eficiente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clients">
+  <div class="container">
+    <div class="section-tag" data-i18n="clients_tag">Quem confia em nós</div>
+    <h2 class="section-title" data-i18n="clients_title">Nossos Clientes</h2>
+    <p class="section-sub" data-i18n="clients_sub">Empresas líderes da indústria de energia que confiam na EZO Oilfield Solutions.</p>
+    <div class="clients-grid">
+      <div class="client-card"><span class="client-name">ALVOPETRO</span></div>
+      <div class="client-card"><span class="client-name">SLB</span></div>
+      <div class="client-card"><span class="client-name">PETROSYNERGY</span></div>
+      <div class="client-card"><span class="client-name">GREAT ENERGY</span></div>
+      <div class="client-card highlight"><span class="client-name">PETROBRAS</span></div>
+      <div class="client-card"><span class="client-name">PETROBORN</span></div>
+      <div class="client-card"><span class="client-name">ENAUTA</span></div>
+      <div class="client-card"><span class="client-name">IWS BRASIL</span></div>
+      <div class="client-card"><span class="client-name">BANCO SAFRA</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-bg">
+    <div class="contact-glow"></div>
+  </div>
+  <div class="container">
+    <div class="section-tag light" data-i18n="contact_tag">Entre em Contato</div>
+    <h2 class="section-title light" data-i18n="contact_title">Vamos Trabalhar Juntos</h2>
+    <p class="section-sub light" data-i18n="contact_sub">Fale diretamente com nosso CEO para saber como a EZO pode gerar valor para o seu negócio.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-person">
+          <div class="contact-avatar">SAP</div>
+          <div>
+            <strong>Sérgio André Pessoa</strong>
+            <span>CEO — EZO Oilfield Solutions</span>
+          </div>
+        </div>
+        <div class="contact-methods">
+          <a href="https://wa.me/5521999424216" target="_blank" class="contact-item whatsapp" onclick="copyPhone(event)">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <span class="contact-item-label" data-i18n="contact_whatsapp">WhatsApp / Telefone</span>
+              <span class="contact-item-value">+55 21 99942-4216</span>
+            </div>
+            <span class="contact-item-action" data-i18n="contact_open">Abrir</span>
+          </a>
+
+          <a href="mailto:sabp@ezosolutions.com.br" class="contact-item email">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <span class="contact-item-label" data-i18n="contact_email_ceo">E-mail CEO</span>
+              <span class="contact-item-value">sabp@ezosolutions.com.br</span>
+            </div>
+            <span class="contact-item-action" data-i18n="contact_open">Abrir</span>
+          </a>
+
+          <a href="mailto:vendas@ezosolutions.com.br" class="contact-item email">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <span class="contact-item-label" data-i18n="contact_email_sales">E-mail Comercial</span>
+              <span class="contact-item-value">vendas@ezosolutions.com.br</span>
+            </div>
+            <span class="contact-item-action" data-i18n="contact_open">Abrir</span>
+          </a>
+
+          <a href="https://www.ezosolutions.com.br" target="_blank" class="contact-item website">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <span class="contact-item-label" data-i18n="contact_website">Website</span>
+              <span class="contact-item-value">www.ezosolutions.com.br</span>
+            </div>
+            <span class="contact-item-action" data-i18n="contact_open">Abrir</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3 data-i18n="form_title">Envie uma Mensagem</h3>
+        <form id="contact-form" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="form_name">Nome</label>
+              <input type="text" id="form-name" required placeholder="Seu nome completo">
+            </div>
+            <div class="form-group">
+              <label data-i18n="form_company">Empresa</label>
+              <input type="text" id="form-company" placeholder="Sua empresa">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_email">E-mail</label>
+            <input type="email" id="form-email" required placeholder="seu@email.com">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_subject">Assunto</label>
+            <select id="form-subject">
+              <option value="" data-i18n="form_select">Selecione um serviço...</option>
+              <option value="Engenharia & Consultoria" data-i18n="tab_eng">Engenharia & Consultoria</option>
+              <option value="Geologia & Geofísica" data-i18n="tab_geo">Geologia & Geofísica</option>
+              <option value="Desenvolvimento de Negócios" data-i18n="tab_biz">Desenvolvimento de Negócios</option>
+              <option value="Trading Services" data-i18n="tab_trade">Trading Services</option>
+              <option value="Comex Services" data-i18n="tab_comex">Comex Services</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_message">Mensagem</label>
+            <textarea id="form-message" rows="4" required placeholder="Descreva seu projeto ou necessidade..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            <span data-i18n="form_send">Enviar Mensagem</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+        <div id="form-success" style="display:none">
+          <div class="form-success-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <p data-i18n="form_success">Mensagem enviada! Abrindo seu cliente de e-mail...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo.png" alt="EZO Oilfield Solutions" class="footer-logo" onerror="this.style.display='none'; document.getElementById('footer-logo-text').style.display='block'">
+        <div id="footer-logo-text" style="display:none" class="footer-logo-text">EZO OILFIELD SOLUTIONS</div>
+        <p data-i18n="footer_tagline">Tecnologia e Inovação na Indústria de Petróleo & Gás</p>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="footer_services">Serviços</h4>
+        <a href="#services" onclick="showTab('engineering')" data-i18n="tab_eng">Engenharia & Consultoria</a>
+        <a href="#services" onclick="showTab('geology')" data-i18n="tab_geo">Geologia & Geofísica</a>
+        <a href="#services" onclick="showTab('bizdev')" data-i18n="tab_biz">Desenvolvimento de Negócios</a>
+        <a href="#services" onclick="showTab('trading')" data-i18n="tab_trade">Trading Services</a>
+        <a href="#services" onclick="showTab('comex')" data-i18n="tab_comex">Comex Services</a>
+      </div>
+      <div class="footer-contact">
+        <h4 data-i18n="footer_contact">Contato</h4>
+        <a href="https://wa.me/5521999424216" target="_blank">+55 21 99942-4216</a>
+        <a href="mailto:sabp@ezosolutions.com.br">sabp@ezosolutions.com.br</a>
+        <a href="mailto:vendas@ezosolutions.com.br">vendas@ezosolutions.com.br</a>
+        <a href="https://www.ezosolutions.com.br" target="_blank">www.ezosolutions.com.br</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 EZO Oilfield Solutions. <span data-i18n="footer_rights">Todos os direitos reservados.</span></span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
