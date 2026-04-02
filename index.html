@@ -398,17 +398,72 @@
   <div class="container">
     <div class="section-tag" data-i18n="clients_tag">Quem confia em nós</div>
     <h2 class="section-title" data-i18n="clients_title">Nossos Clientes</h2>
-    <p class="section-sub" data-i18n="clients_sub">Empresas líderes da indústria de energia que confiam na EZO Oilfield Solutions.</p>
+    <p class="section-sub" data-i18n="clients_sub">Empresas líderes da indústria de energia e serviços que confiam na EZO Oilfield Solutions.</p>
     <div class="clients-grid">
-      <div class="client-card"><span class="client-name">ALVOPETRO</span></div>
-      <div class="client-card"><span class="client-name">SLB</span></div>
-      <div class="client-card"><span class="client-name">PETROSYNERGY</span></div>
-      <div class="client-card"><span class="client-name">GREAT ENERGY</span></div>
-      <div class="client-card highlight"><span class="client-name">PETROBRAS</span></div>
-      <div class="client-card"><span class="client-name">PETROBORN</span></div>
-      <div class="client-card"><span class="client-name">ENAUTA</span></div>
-      <div class="client-card"><span class="client-name">IWS BRASIL</span></div>
-      <div class="client-card"><span class="client-name">BANCO SAFRA</span></div>
+
+      <!-- ALVOPETRO -->
+      <div class="client-card">
+        <img src="clientes/ALVOPETRO.png" alt="Alvopetro" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">ALVOPETRO</span>
+      </div>
+
+      <!-- SLB -->
+      <div class="client-card">
+        <img src="clientes/SLB.png" alt="SLB" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">SLB</span>
+      </div>
+
+      <!-- PETROSYNERGY -->
+      <div class="client-card">
+        <img src="clientes/PETROSYNERGY.png" alt="PetroSynergy" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">PETROSYNERGY</span>
+      </div>
+
+      <!-- GREAT ENERGY -->
+      <div class="client-card">
+        <img src="clientes/GREAT ENERGY.png" alt="Great Energy" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">GREAT ENERGY</span>
+      </div>
+
+      <!-- PETROBRAS -->
+      <div class="client-card highlight">
+        <img src="clientes/PETROBRAS.png" alt="Petrobras" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">PETROBRAS</span>
+      </div>
+
+      <!-- PETROBORN -->
+      <div class="client-card">
+        <img src="clientes/PETROBORN.png" alt="Petroborn" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">PETROBORN</span>
+      </div>
+
+      <!-- ENAUTA -->
+      <div class="client-card">
+        <img src="clientes/ENAUTA.png" alt="Enauta" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">ENAUTA</span>
+      </div>
+
+      <!-- IWS BRASIL -->
+      <div class="client-card">
+        <img src="clientes/IWS BRASIL.png" alt="IWS Brasil" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">IWS BRASIL</span>
+      </div>
+
+      <!-- BANCO SAFRA -->
+      <div class="client-card">
+        <img src="clientes/BANCO SAFRA.png" alt="Banco Safra" class="client-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span class="client-name client-name-fallback" style="display:none">BANCO SAFRA</span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -421,7 +476,7 @@
     <h2 class="section-title light" data-i18n="contact_title">Vamos Trabalhar Juntos</h2>
     <p class="section-sub light" data-i18n="contact_sub">Fale diretamente com nosso CEO para saber como a EZO pode gerar valor para o seu negócio.</p>
 
-    <div class="contact-grid">
+    <div class="contact-grid contact-grid-single">
       <div class="contact-info">
         <div class="contact-person">
           <div class="contact-avatar">SAP</div>
@@ -463,51 +518,6 @@
         </div>
       </div>
 
-      <!-- Formulário de contato (implementado) -->
-      <div class="contact-form-wrap">
-        <h3 data-i18n="form_title">Envie uma Mensagem</h3>
-        <div id="contact-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label data-i18n="form_name">Nome</label>
-              <input type="text" id="form-name" data-i18n-ph="form_name" placeholder="Nome" required>
-            </div>
-            <div class="form-group">
-              <label data-i18n="form_company">Empresa</label>
-              <input type="text" id="form-company" data-i18n-ph="form_company" placeholder="Empresa">
-            </div>
-          </div>
-          <div class="form-group">
-            <label data-i18n="form_email">E-mail</label>
-            <input type="email" id="form-email" data-i18n-ph="form_email" placeholder="E-mail" required>
-          </div>
-          <div class="form-group">
-            <label data-i18n="form_subject">Assunto</label>
-            <select id="form-subject">
-              <option value="" data-i18n="form_select">Selecione um serviço...</option>
-              <option value="Engenharia & Consultoria">Engenharia & Consultoria</option>
-              <option value="Geologia & Geofísica">Geologia & Geofísica</option>
-              <option value="Desenvolvimento de Negócios">Desenvolvimento de Negócios</option>
-              <option value="Trading Services">Trading Services</option>
-              <option value="Comex Services">Comex Services</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label data-i18n="form_message">Mensagem</label>
-            <textarea id="form-message" data-i18n-ph="form_message" placeholder="Mensagem" rows="4" required></textarea>
-          </div>
-          <button type="button" class="btn-submit" onclick="submitForm(event)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            <span data-i18n="form_send">Enviar Mensagem</span>
-          </button>
-        </div>
-        <div id="form-success" style="display:none">
-          <div class="form-success-inner">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h4 data-i18n="form_send">Mensagem Enviada!</h4>
-            <p data-i18n="form_success">Abrindo seu cliente de e-mail...</p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
