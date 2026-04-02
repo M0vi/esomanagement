@@ -1038,3 +1038,50 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(checkVisible, 100);
   setTimeout(checkVisible, 400);
 });
+// ===== FONT SIZE CONTROLS =====
+const FONT_LEVELS = [1, 2, 3, 4, 5]; // 1=menor, 3=padrão, 5=maior
+let currentFontLevel = 3;
+
+function applyFontLevel(level) {
+  const body = document.body;
+  FONT_LEVELS.forEach(l => body.classList.remove('font-size-' + l));
+  body.classList.add('font-size-' + level);
+  currentFontLevel = level;
+
+  // Visual feedback nos botões
+  const decrease = document.getElementById('font-decrease');
+  const reset = document.getElementById('font-reset');
+  const increase = document.getElementById('font-increase');
+  if (decrease) decrease.classList.toggle('active-level', level < 3);
+  if (reset)    reset.classList.toggle('active-level', level === 3);
+  if (increase) increase.classList.toggle('active-level', level > 3);
+
+  // Disabled state
+  if (decrease) decrease.disabled = (level === 1);
+  if (increase) increase.disabled = (level === 5);
+
+  // Persist
+  try { localStorage.setItem('ezo_font_level', level); } catch(e) {}
+}
+
+function changeFontSize(delta) {
+  const next = Math.min(5, Math.max(1, currentFontLevel + delta));
+  applyFontLevel(next);
+}
+
+function resetFontSize() {
+  applyFontLevel(3);
+}
+
+// Restore on load
+(function() {
+  try {
+    const saved = parseInt(localStorage.getItem('ezo_font_level'));
+    if (saved >= 1 && saved <= 5) {
+      // Apply after DOM ready
+      document.addEventListener('DOMContentLoaded', () => applyFontLevel(saved));
+      return;
+    }
+  } catch(e) {}
+  document.addEventListener('DOMContentLoaded', () => applyFontLevel(3));
+})();

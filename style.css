@@ -1787,3 +1787,131 @@ img { max-width: 100%; height: auto; }
   .hero-logo-ring { width: 240px; height: 240px; }
   .hero-logo-img { width: 220px; height: 220px; }
 }
+/* ===== FONT SIZE CONTROLS ===== */
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.font-size-icon {
+  width: 15px;
+  height: 15px;
+  color: #5a8f6e;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.font-btn {
+  background: transparent;
+  border: 1px solid rgba(30, 92, 58, 0.4);
+  color: #8cb89e;
+  font-family: var(--font-display);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 5px;
+  height: 22px;
+  min-width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  line-height: 1;
+  user-select: none;
+  position: relative;
+}
+
+.font-btn:hover {
+  background: rgba(30, 92, 58, 0.25);
+  color: #a8e6be;
+  border-color: rgba(30, 92, 58, 0.7);
+}
+
+.font-btn:active {
+  background: rgba(30, 92, 58, 0.45);
+}
+
+.font-btn.active-level {
+  background: rgba(30, 92, 58, 0.3);
+  color: #c0f0d0;
+  border-color: rgba(30, 92, 58, 0.9);
+}
+
+/* Decrease button — smaller A */
+#font-decrease {
+  font-size: 10px;
+}
+
+/* Reset button — medium A */
+.font-btn-reset {
+  font-size: 12px;
+}
+
+/* Increase button — larger A */
+.font-btn-large {
+  font-size: 14px;
+}
+
+.font-btn-sign {
+  font-size: 9px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  margin-left: 1px;
+  line-height: 1;
+  vertical-align: top;
+  margin-top: 1px;
+}
+
+.lang-bar-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(30, 92, 58, 0.35);
+  margin: 0 6px;
+  flex-shrink: 0;
+}
+
+/* Font size levels applied to body */
+body.font-size-1 { font-size: 14px; }
+body.font-size-2 { font-size: 15px; }
+body.font-size-3 { font-size: 16px; }  /* default */
+body.font-size-4 { font-size: 18px; }
+body.font-size-5 { font-size: 20px; }
+
+/* Scale text-heavy elements with em so they follow body */
+body.font-size-1 p,
+body.font-size-1 .sitem,
+body.font-size-1 .service-extra,
+body.font-size-1 .value-item p,
+body.font-size-1 .diff-card p,
+body.font-size-1 .section-sub,
+body.font-size-1 .comex-card p,
+body.font-size-1 .contact-item-value,
+body.font-size-1 .footer-brand p { font-size: 0.875rem; }
+
+body.font-size-4 p,
+body.font-size-4 .sitem,
+body.font-size-4 .service-extra,
+body.font-size-4 .value-item p,
+body.font-size-4 .diff-card p,
+body.font-size-4 .section-sub,
+body.font-size-4 .comex-card p,
+body.font-size-4 .contact-item-value,
+body.font-size-4 .footer-brand p { font-size: 1.05rem; }
+
+body.font-size-5 p,
+body.font-size-5 .sitem,
+body.font-size-5 .service-extra,
+body.font-size-5 .value-item p,
+body.font-size-5 .diff-card p,
+body.font-size-5 .section-sub,
+body.font-size-5 .comex-card p,
+body.font-size-5 .contact-item-value,
+body.font-size-5 .footer-brand p { font-size: 1.15rem; }
+
+@media (max-width: 600px) {
+  .font-size-controls { gap: 1px; }
+  .font-size-icon { display: none; }
+  .font-btn { min-width: 20px; height: 20px; padding: 0 4px; }
+  .lang-bar-divider { margin: 0 4px; }
+}
