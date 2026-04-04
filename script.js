@@ -7,7 +7,6 @@ document.addEventListener('keydown', e => {
 function animateCounter(el, target, suffix = '') {
   const duration = 1800;
   const start = performance.now();
-  const isFloat = target % 1 !== 0;
   const update = (now) => {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
@@ -502,18 +501,18 @@ const translations = {
     comex_sea_title: "Maritime",
     comex_sea_desc: "Contrats avec les principaux armateurs dans tous les ports du monde.",
     comex_road_title: "Routier",
-    comex_road_desc: "Solutions de transport domestique pour tout type de fret : express, dédié, consolidé ou projet.",
+    comex_road_desc: "Solutions de transport domestique pour tout type de marchandise.",
     comex_customs_title: "Dédouanement",
-    comex_customs_desc: "Analyse complète du processus logistique, nomenclature, droits de douane et lois douanières.",
+    comex_customs_desc: "Analyse complète du processus logistique, codes NCM, tarifs et lois douanières.",
     clients_tag: "Qui nous fait confiance",
     clients_title: "Clients",
-    clients_sub: "Des entreprises leaders de l'industrie énergétique qui font confiance à EZO Oilfield Solutions.",
+    clients_sub: "Les entreprises leaders de l'industrie énergétique qui font confiance à EZO Oilfield Solutions.",
     partners_tag: "Qui nous soutient",
     partners_title: "Partenaires",
     partners_sub: "Des partenariats stratégiques qui élargissent notre capacité de livraison et notre portée sectorielle.",
     contact_tag: "Contactez-nous",
-    contact_title: "Parlons-en",
-    contact_sub: "Parlez directement avec notre PDG pour savoir comment EZO peut générer de la valeur pour votre activité.",
+    contact_title: "Contactez-nous",
+    contact_sub: "Parlez directement avec notre PDG et découvrez comment EZO peut générer de la valeur pour votre entreprise.",
     contact_whatsapp: "WhatsApp / Téléphone",
     contact_email_ceo: "Email du PDG",
     contact_email_sales: "Email commercial",
@@ -524,7 +523,7 @@ const translations = {
     form_subject: "Sujet",
     form_select: "Sélectionnez un service...",
     form_message: "Message",
-    form_send: "Envoyer",
+    form_send: "Envoyer le message",
     form_success: "Ouverture de votre client de messagerie...",
     footer_tagline: "Technologie et innovation dans l'industrie pétrolière et gazière",
     footer_services: "Services",
@@ -809,12 +808,10 @@ function setLang(lang) {
     if (t[key]) el.placeholder = t[key];
   });
 
-  
   document.querySelectorAll('.lang-dropdown-item').forEach(btn => btn.classList.remove('active'));
   const activeItem = document.getElementById('lang-item-' + lang);
   if (activeItem) activeItem.classList.add('active');
 
-  
   const flagSvgMap = {
     pt: `<rect width="20" height="14" fill="#009C3B"/><polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/><circle cx="10" cy="7" r="3" fill="#002776"/><path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/>`,
     en: `<rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/>`,
@@ -848,34 +845,50 @@ function showTab(tabId) {
   if (btns[idx]) btns[idx].classList.add('active');
 }
 
+// — menu lateral mobile
 function toggleMenu() {
   const nav = document.getElementById('main-nav');
   const hamburger = document.getElementById('hamburger');
-  nav.classList.toggle('open');
-  hamburger.classList.toggle('open');
+  const overlay = document.getElementById('nav-overlay');
+  const isOpen = nav.classList.contains('open');
+
+  if (isOpen) {
+    nav.classList.remove('open');
+    hamburger.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    nav.classList.add('open');
+    hamburger.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
-document.addEventListener('click', (e) => {
+function closeMenu() {
   const nav = document.getElementById('main-nav');
   const hamburger = document.getElementById('hamburger');
-  if (nav && nav.classList.contains('open')) {
-    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
-      nav.classList.remove('open');
-      hamburger.classList.remove('open');
-    }
-  }
+  const overlay = document.getElementById('nav-overlay');
+  nav.classList.remove('open');
+  hamburger.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', () => closeMenu());
 });
 
 function submitForm(e) {
   e.preventDefault();
-  const name    = document.getElementById('form-name').value.trim();
-  const company = document.getElementById('form-company').value.trim();
-  const email   = document.getElementById('form-email').value.trim();
-  const subject = document.getElementById('form-subject').value;
-  const message = document.getElementById('form-message').value.trim();
+  const name    = document.getElementById('form-name')?.value.trim() || '';
+  const company = document.getElementById('form-company')?.value.trim() || '';
+  const email   = document.getElementById('form-email')?.value.trim() || '';
+  const subject = document.getElementById('form-subject')?.value || '';
+  const message = document.getElementById('form-message')?.value.trim() || '';
 
   if (!name || !email || !message) {
-    showToast('Preencha nome, e-mail e mensagem.');
+    showToast('Preencha os campos obrigatórios.');
     return;
   }
 
@@ -916,13 +929,6 @@ window.addEventListener('scroll', () => {
     } else {
       a.classList.remove('active');
     }
-  });
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('main-nav')?.classList.remove('open');
-    document.getElementById('hamburger')?.classList.remove('open');
   });
 });
 
@@ -1003,7 +1009,7 @@ function renderPartners(grid, files) {
   }
   grid.innerHTML = '';
   files.forEach((file, i) => {
-    const name = file.replace(/\.png$/i, '').replace(/\.jpg$/i, '').replace(/\.jpeg$/i, '').replace(/\.webp$/i, '');
+    const name = file.replace(/\.(png|jpg|jpeg|webp)$/i, '');
     const card = document.createElement('div');
     card.className = 'partner-card';
     card.style.transitionDelay = (i * 80) + 'ms';
