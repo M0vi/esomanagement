@@ -962,10 +962,6 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal-section').forEach(el => {
-  revealObserver.observe(el);
-});
-
 const cardObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -973,11 +969,6 @@ const cardObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-
-document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach((el) => {
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  cardObserver.observe(el);
-});
 
 function toggleLangDropdown() {
   const wrapper = document.getElementById('lang-dropdown-wrapper');
@@ -1051,6 +1042,15 @@ function showPartnersPlaceholder(grid) {
 document.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang);
   loadPartners();
+
+  document.querySelectorAll('.reveal-section').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach((el) => {
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    cardObserver.observe(el);
+  });
 
   const checkVisible = () => {
     document.querySelectorAll('.reveal-section').forEach(el => {
