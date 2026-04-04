@@ -405,9 +405,17 @@ body::-webkit-scrollbar { display: none; }
 .comex-card h4 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--chrome); margin-bottom: 10px; }
 .comex-card p { font-size: 14px; font-weight: 300; color: var(--steel-hi); line-height: 1.75; }
 
-#differentials { background: var(--ink-mid); padding: 112px 0; }
-#differentials .section-title { color: var(--ivory); }
-#differentials .section-sub { color: var(--steel-hi); }
+.diff-merged-block {
+  margin-top: 80px;
+  background: var(--ink-mid);
+  margin-left: -40px;
+  margin-right: -40px;
+  padding: 80px 40px;
+}
+.diff-merged-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
 .diff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 20px; }
 .diff-card {
   background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06);
