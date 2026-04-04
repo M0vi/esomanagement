@@ -140,7 +140,7 @@ body::-webkit-scrollbar { display: none; }
 .hero-photo {
   position: absolute; inset: 0;
   background-image: url('ilustracao.png');
-  background-size: cover; background-position: center 40%; opacity: 0.2; filter: saturate(0.35) contrast(1.1);
+  background-size: cover; background-position: center 40%; opacity: 0.4; filter: saturate(0.35) contrast(1);
 }
 .hero-photo-overlay {
   position: absolute; inset: 0;
