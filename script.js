@@ -1128,9 +1128,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Market Ticker ──────────────────────────────────────────
 async function loadTicker() {
   try {
-    // Use exchangerate-api for USD/BRL (free, no key needed)
-    // For oil prices, use a CORS-friendly proxy with Alpha Vantage / Yahoo
-    // Fallback to realistic static values if APIs unavailable
     const usdRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL');
     if (usdRes.ok) {
       const d = await usdRes.json();
