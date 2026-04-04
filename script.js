@@ -973,14 +973,6 @@ function showToast(msg) {
 
 const sections = ['about','services','differentials','clients','partners','contact'];
 
-function updateScrollProgress() {
-  const progress = document.getElementById('scroll-progress');
-  if (!progress) return;
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  progress.style.width = pct + '%';
-}
 
 function updateBackToTop() {
   const btn = document.getElementById('back-to-top');
@@ -996,7 +988,6 @@ window.addEventListener('scroll', () => {
   const header = document.getElementById('header');
   header.classList.toggle('scrolled', window.scrollY > 60);
 
-  updateScrollProgress();
   updateBackToTop();
 
   const scrollMid = window.scrollY + window.innerHeight / 3;
@@ -1133,8 +1124,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(checkVisible, 400);
 });
 
-const FONT_LEVELS = [1, 2, 3, 4, 5, 6, 7, 8];
-const FONT_PCT_MAP = { 1: '70%', 2: '85%', 3: '100%', 4: '120%', 5: '145%', 6: '175%', 7: '210%', 8: '250%' };
+const FONT_LEVELS = [1, 2, 3, 4, 5, 6];
+const FONT_PCT_MAP = { 1: '70%', 2: '85%', 3: '100%', 4: '120%', 5: '145%', 6: '175%' };
 let currentFontLevel = 3;
 
 function applyFontLevel(level) {
@@ -1148,7 +1139,7 @@ function applyFontLevel(level) {
   const pctEl    = document.getElementById('font-size-pct');
 
   if (decrease) decrease.disabled = (level === 1);
-  if (increase) increase.disabled = (level === 8);
+  if (increase) increase.disabled = (level === 6);
 
   if (pctEl) {
     pctEl.textContent = FONT_PCT_MAP[level] || '100%';
@@ -1161,7 +1152,7 @@ function applyFontLevel(level) {
 }
 
 function changeFontSize(delta) {
-  const next = Math.min(8, Math.max(1, currentFontLevel + delta));
+  const next = Math.min(6, Math.max(1, currentFontLevel + delta));
   applyFontLevel(next);
 }
 
@@ -1177,7 +1168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 (function() {
   try {
     const saved = parseInt(localStorage.getItem('ezo_font_level'));
-    if (saved >= 1 && saved <= 8) {
+    if (saved >= 1 && saved <= 6) {
       document.addEventListener('DOMContentLoaded', () => applyFontLevel(saved));
       return;
     }
