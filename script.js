@@ -1,526 +1,1103 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && ['c','a','u','s','p'].includes(e.key.toLowerCase())) e.preventDefault();
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))) e.preventDefault();
+});
 
-/* — tokens */
-:root {
-  --ink:           #0e0e0e;
-  --ink-mid:       #161616;
-  --ink-light:     #202020;
-  --ink-surface:   #2a2a2a;
-  --chrome:        #b8b8b8;
-  --chrome-hi:     #d4d4d4;
-  --chrome-pale:   #eeeeee;
-  --ivory:         #f0ede8;
-  --ivory-mid:     #dedad4;
-  --gold:          #a97c3f;
-  --gold-hi:       #c49a56;
-  --gold-pale:     rgba(169, 124, 63, 0.12);
-  --gold-glow:     rgba(169, 124, 63, 0.06);
-  --petro:         #1c4a35;
-  --petro-mid:     #256045;
-  --petro-bg:      rgba(28, 74, 53, 0.12);
-  --steel:         #6a6a6a;
-  --steel-hi:      #909090;
-  --section-alt:   #ebebeb;
-  --display:       'Inter', sans-serif;
-  --body:          'Inter', sans-serif;
-  --mono:          'Inter', sans-serif;
-  --r0: 0px; --r1: 2px; --r2: 4px; --r3: 8px;
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --t: all 0.26s var(--ease);
+function animateCounter(el, target, suffix = '') {
+  const duration = 1800;
+  const start = performance.now();
+  const update = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target + suffix;
+  };
+  requestAnimationFrame(update);
 }
 
-/* — reset */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; height: auto; display: block; }
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = '1';
+      const el = entry.target.querySelector('.stat-num');
+      if (!el) return;
+      const text = el.textContent.trim();
+      const match = text.match(/^(\d+)(\+|%)?$/);
+      if (match) {
+        const num = parseInt(match[1]);
+        const suf = match[2] || '';
+        animateCounter(el, num, suf);
+      }
+    }
+  });
+}, { threshold: 0.3 });
 
-body {
-  font-family: var(--body);
-  background: var(--ink);
-  color: var(--ivory);
-  overflow-x: hidden;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  line-height: 1.65;
-  -webkit-user-select: none;
-  user-select: none;
-  font-size: 16px;
-}
-body::-webkit-scrollbar { display: none; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+document.querySelectorAll('.stat-card').forEach(el => statObserver.observe(el));
 
-/* — lang bar */
-#lang-bar {
-  background: #0a0a0a;
-  border-bottom: 1px solid rgba(169,124,63,0.18);
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 40px;
-}
-.lang-inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 40px;
-  display: flex; align-items: center; justify-content: flex-end; height: 40px; gap: 14px;
-}
-.lang-left, .lang-label-text, .lang-divider-line, .lang-btn { display: none !important; }
-.lang-flags { display: flex; gap: 4px; align-items: center; }
-
-.font-size-controls { display: flex; align-items: center; gap: 3px; }
-.font-size-icon { width: 13px; height: 13px; color: var(--petro-mid); margin-right: 4px; flex-shrink: 0; opacity: 0.7; }
-.font-btn {
-  background: transparent;
-  border: 1px solid rgba(28,74,53,0.35);
-  color: rgba(37,96,69,0.8);
-  font-family: var(--display);
-  cursor: pointer; padding: 0 6px; height: 20px; min-width: 24px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: var(--r1); transition: background 0.18s, color 0.18s, border-color 0.18s;
-  line-height: 1; user-select: none; font-size: 13px;
-}
-.font-btn:hover:not(:disabled) { background: rgba(28,74,53,0.22); color: #90c8a0; border-color: rgba(28,74,53,0.6); }
-.font-btn:active:not(:disabled) { background: rgba(28,74,53,0.4); }
-.font-btn:disabled { opacity: 0.28; cursor: not-allowed; }
-#font-decrease { font-size: 10px; }
-.font-btn-sign { font-size: 9px; font-family: var(--body); font-weight: 400; margin-left: 1px; line-height: 1; }
-.font-size-pct {
-  font-family: var(--mono); font-size: 10px; font-weight: 500;
-  color: rgba(37,96,69,0.7); letter-spacing: 0.3px; min-width: 34px; text-align: center;
-  cursor: pointer; padding: 1px 4px; border-radius: var(--r1); border: 1px solid transparent;
-  transition: background 0.18s, color 0.18s, border-color 0.18s; user-select: none; line-height: 18px;
-}
-.font-size-pct:hover { background: rgba(28,74,53,0.18); color: #b0d8c0; border-color: rgba(28,74,53,0.45); }
-.font-size-pct.is-default { color: rgba(37,96,69,0.5); }
-.font-size-pct.is-changed { color: #a0d8b4; border-color: rgba(28,74,53,0.4); background: rgba(28,74,53,0.12); }
-.lang-bar-divider { width: 1px; height: 16px; background: rgba(28,74,53,0.3); margin: 0 4px; flex-shrink: 0; }
-
-.lang-dropdown-wrapper { position: relative; display: flex; align-items: center; }
-.lang-dropdown-toggle {
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(169,124,63,0.22);
-  color: var(--steel-hi); padding: 4px 10px 4px 8px; border-radius: var(--r1);
-  cursor: pointer; font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 7px; transition: var(--t); height: 26px;
-}
-.lang-dropdown-toggle:hover { background: var(--gold-pale); border-color: rgba(169,124,63,0.45); color: var(--ivory-mid); }
-.lang-translate-icon { width: 14px; height: 14px; opacity: 0.55; flex-shrink: 0; }
-.lang-dropdown-toggle .lang-current-flag { width: 18px; height: 12px; border-radius: 1px; box-shadow: 0 0 0 1px rgba(255,255,255,0.1); flex-shrink: 0; }
-.lang-dropdown-toggle .lang-current-code { font-size: 10px; letter-spacing: 1px; }
-.lang-chevron { width: 9px; height: 9px; opacity: 0.4; transition: transform 0.2s ease; flex-shrink: 0; }
-.lang-dropdown-wrapper.open .lang-chevron { transform: rotate(180deg); }
-.lang-dropdown-menu {
-  position: absolute; top: calc(100% + 6px); right: 0;
-  background: var(--ink-mid); border: 1px solid rgba(169,124,63,0.22);
-  border-radius: var(--r3); padding: 6px; display: none; flex-direction: column; gap: 2px;
-  min-width: 130px; box-shadow: 0 16px 48px rgba(0,0,0,0.7); z-index: 9999;
-}
-.lang-dropdown-wrapper.open .lang-dropdown-menu { display: flex; }
-.lang-dropdown-item {
-  background: transparent; border: none; color: var(--steel-hi); padding: 6px 10px;
-  border-radius: var(--r2); cursor: pointer; font-family: var(--mono); font-size: 11px;
-  font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px; transition: var(--t); width: 100%; text-align: left;
-}
-.lang-dropdown-item:hover { background: var(--gold-pale); color: var(--ivory-mid); }
-.lang-dropdown-item.active { background: rgba(169,124,63,0.15); color: var(--gold-hi); }
-.lang-dropdown-item .flag-svg { width: 18px; height: 12px; border-radius: 1px; box-shadow: 0 0 0 1px rgba(255,255,255,0.1); flex-shrink: 0; }
-
-/* — header */
-#header { position: fixed; top: 40px; left: 0; right: 0; z-index: 999; transition: var(--t); }
-#header.scrolled {
-  background: rgba(12,12,12,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(169,124,63,0.15); box-shadow: 0 2px 32px rgba(0,0,0,0.6);
-}
-.header-inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 40px;
-  display: flex; align-items: center; justify-content: space-between; height: 72px; position: relative;
-}
-.logo-link { display: flex; align-items: center; }
-.logo-text { display: flex; flex-direction: column; line-height: 1; border-left: 2px solid var(--gold); padding-left: 14px; }
-.logo-eos { font-family: var(--display); font-size: 26px; letter-spacing: 7px; color: var(--chrome-hi); line-height: 1; }
-.logo-sub { font-family: var(--mono); font-size: 7.5px; letter-spacing: 3.5px; color: var(--gold); text-transform: uppercase; margin-top: 4px; font-weight: 500; }
-
-#main-nav { display: flex; gap: 36px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); }
-#main-nav a {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 2px; text-transform: uppercase; color: var(--steel-hi);
-  transition: var(--t); position: relative; padding-bottom: 4px; white-space: nowrap;
-}
-#main-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
-#main-nav a:hover, #main-nav a.active { color: var(--ivory); }
-#main-nav a:hover::after, #main-nav a.active::after { width: 100%; }
-
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 100000; position: relative; }
-.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ivory); transition: var(--t); }
-.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-/* — hero */
-#hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 112px; }
-.hero-bg { position: absolute; inset: 0; background: #0b0b0b; }
-.hero-photo {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1800&q=80&auto=format&fit=crop');
-  background-size: cover; background-position: center 40%; opacity: 0.2; filter: saturate(0.35) contrast(1.1);
-}
-.hero-photo-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(112deg, rgba(11,11,11,0.96) 0%, rgba(11,11,11,0.78) 55%, rgba(11,11,11,0.48) 100%);
-}
-.hero-grid {
-  position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(169,124,63,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(169,124,63,0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 10%, transparent 100%);
-}
-.hero-glow { position: absolute; top: 15%; right: 5%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(169,124,63,0.05) 0%, transparent 65%); border-radius: 50%; }
-.hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
-.hero-layout { display: flex; align-items: center; justify-content: space-between; gap: 60px; width: 100%; }
-.hero-text-col { flex: 1; min-width: 0; z-index: 2; }
-
-.hero-eyebrow {
-  font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 24px; opacity: 0;
-  animation: fadeUp 0.8s var(--ease) 0.2s forwards;
-  display: flex; align-items: center; gap: 10px;
-}
-.hero-eyebrow::before { content: none; }
-
-.hero-title { display: flex; flex-direction: column; line-height: 0.88; margin-bottom: 32px; }
-.hero-line1, .hero-line2, .hero-line3 { font-family: var(--display); display: block; opacity: 0; }
-.hero-line1 { font-size: clamp(56px,10vw,130px); letter-spacing: 4px; font-weight: 900; color: var(--ivory); line-height: 0.9; animation: fadeUp 0.8s var(--ease) 0.4s forwards; }
-.hero-line2 { font-size: clamp(36px,6.5vw,86px); letter-spacing: 6px; font-weight: 900; color: var(--chrome); line-height: 1.0; animation: fadeUp 0.8s var(--ease) 0.55s forwards; }
-.hero-line3 { font-size: clamp(14px,2.2vw,28px); letter-spacing: 6px; font-weight: 700; color: var(--gold); line-height: 1.55; animation: fadeUp 0.8s var(--ease) 0.7s forwards; }
-.hero-sub { font-size: 16px; font-weight: 300; color: var(--steel-hi); max-width: 420px; margin-bottom: 44px; line-height: 1.8; opacity: 0; animation: fadeUp 0.8s var(--ease) 0.85s forwards; }
-.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s var(--ease) 1s forwards; }
-
-.hero-logo-col { flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; opacity: 0; animation: fadeUp 0.8s var(--ease) 1.1s forwards; width: 340px; }
-.hero-logo-ring { width: 320px; height: 320px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: transparent; position: relative; }
-.hero-logo-img { width: 300px; height: 300px; object-fit: contain; }
-
-.hero-scroll-hint { position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; animation: fadeUp 1s var(--ease) 1.4s forwards; }
-.scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, var(--gold)); animation: scrollPulse 2s ease infinite; }
-.hero-scroll-hint span { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--steel); }
-
-/* — botões */
-.btn-primary { display: inline-flex; align-items: center; gap: 9px; background: var(--gold); color: var(--ink); padding: 13px 30px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-radius: var(--r1); transition: var(--t); border: 1px solid var(--gold); }
-.btn-primary:hover { background: var(--gold-hi); border-color: var(--gold-hi); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(169,124,63,0.28); }
-.btn-outline { display: inline-flex; align-items: center; gap: 9px; background: transparent; color: var(--chrome); padding: 13px 30px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-radius: var(--r1); transition: var(--t); border: 1px solid rgba(184,184,184,0.28); }
-.btn-outline:hover { border-color: var(--chrome); color: var(--ivory); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
-
-/* — seções */
-.reveal-section { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal-section.visible { opacity: 1; transform: translateY(0); }
-
-.section-tag { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--petro-mid); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
-.section-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--petro-mid); }
-.section-tag.light { color: var(--gold); }
-.section-tag.light::before { background: var(--gold); }
-
-.section-title { font-family: var(--display); font-size: clamp(40px,6vw,72px); letter-spacing: 3px; line-height: 0.95; margin-bottom: 20px; color: var(--ink); }
-.section-title.light { color: var(--ivory); }
-.section-sub { font-size: 15px; font-weight: 300; color: var(--steel); max-width: 540px; margin-bottom: 56px; line-height: 1.85; }
-.section-sub.light { color: var(--steel-hi); }
-
-/* — sobre */
-#about { background: var(--section-alt); color: var(--ink); padding: 112px 0; }
-.about-grid { display: grid; grid-template-columns: 1fr 400px; gap: 72px; align-items: start; }
-.about-text h2 { font-family: var(--display); font-size: 56px; letter-spacing: 4px; color: var(--ink); margin-bottom: 22px; line-height: 0.95; }
-.about-text > p { font-size: 15px; font-weight: 300; color: var(--steel); margin-bottom: 44px; max-width: 520px; line-height: 1.85; }
-.values-list { display: flex; flex-direction: column; gap: 30px; }
-.value-item { display: flex; gap: 18px; align-items: flex-start; opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.value-item.visible { opacity: 1; transform: translateY(0); }
-.value-icon { flex-shrink: 0; width: 42px; height: 42px; background: var(--petro-bg); border-radius: var(--r1); display: flex; align-items: center; justify-content: center; color: var(--petro-mid); }
-.value-icon svg { width: 18px; height: 18px; }
-.value-item strong { display: block; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); margin-bottom: 5px; }
-.value-item p { font-size: 14px; font-weight: 300; color: var(--steel); line-height: 1.75; }
-
-.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.stat-card { background: var(--ink); border-radius: var(--r2); padding: 36px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid rgba(169,124,63,0.13); transition: all 0.32s var(--ease); position: relative; overflow: hidden; }
-.stat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.32s ease; transform-origin: left; }
-.stat-card:hover { border-color: rgba(169,124,63,0.38); transform: translateY(-5px); box-shadow: 0 18px 44px rgba(0,0,0,0.5); }
-.stat-card:hover::after { transform: scaleX(1); }
-.stat-num { font-family: var(--display); font-size: 56px; color: var(--chrome-hi); letter-spacing: 4px; line-height: 1; }
-.stat-label { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-hi); margin-top: 10px; text-align: center; line-height: 1.5; }
-
-/* — serviços */
-#services { background: var(--ink); padding: 112px 0; }
-.services-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 48px; overflow-x: auto; scrollbar-width: none; }
-.services-tabs::-webkit-scrollbar { display: none; }
-.tab-btn { background: none; border: none; color: var(--steel); font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 14px 22px; cursor: pointer; border-bottom: 1px solid transparent; margin-bottom: -1px; white-space: nowrap; transition: var(--t); }
-.tab-btn:hover { color: var(--ivory); }
-.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-.tab-content { display: none; }
-.tab-content.active { display: block; animation: fadeIn 0.4s ease; }
-
-.service-panel { background: var(--ink-light); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r2); padding: 52px; }
-.service-panel-header { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 44px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.service-icon-lg { flex-shrink: 0; width: 60px; height: 60px; background: var(--gold-pale); border-radius: var(--r1); display: flex; align-items: center; justify-content: center; color: var(--gold); }
-.service-panel-header h3 { font-family: var(--display); font-size: 40px; letter-spacing: 4px; color: var(--ivory); margin-bottom: 10px; }
-.service-panel-header p { font-size: 15px; font-weight: 300; color: var(--steel-hi); max-width: 520px; line-height: 1.8; }
-
-.catu-badge { margin-left: auto; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 16px; background: rgba(28,74,53,0.08); border: 1px solid rgba(37,96,69,0.22); border-radius: var(--r3); min-width: 110px; }
-.catu-badge-label { font-family: var(--mono); font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--petro-mid); white-space: nowrap; }
-.catu-logo { max-width: 90px; max-height: 60px; width: auto; height: auto; object-fit: contain; }
-.catu-logo-fallback { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 1px; color: var(--chrome); text-align: center; }
-
-.service-items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 10px; margin-bottom: 32px; }
-.sitem { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-left: 2px solid var(--gold); border-radius: 0; padding: 12px 16px; font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0.3px; color: var(--chrome); transition: var(--t); opacity: 0; transform: translateY(8px); }
-.sitem.visible { opacity: 1; transform: translateY(0); }
-.sitem:hover { background: rgba(169,124,63,0.06); color: var(--ivory); transform: translateX(4px); }
-.service-extra { font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--steel); }
-
-.service-cards-comex { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 18px; }
-.comex-card { background: var(--ink-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r2); padding: 32px 24px; transition: var(--t); opacity: 0; transform: translateY(12px); }
-.comex-card.visible { opacity: 1; transform: translateY(0); }
-.comex-card:hover { border-color: rgba(169,124,63,0.38); transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.4); }
-.comex-icon { margin-bottom: 16px; color: var(--gold); display: flex; }
-.comex-card h4 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--chrome); margin-bottom: 10px; }
-.comex-card p { font-size: 14px; font-weight: 300; color: var(--steel-hi); line-height: 1.75; }
-
-/* — diferenciais */
-#differentials { background: var(--ink-mid); padding: 112px 0; }
-#differentials .section-title { color: var(--ivory); }
-#differentials .section-sub { color: var(--steel-hi); }
-.diff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 20px; }
-.diff-card { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r2); padding: 40px 30px; transition: all 0.32s var(--ease); opacity: 0; transform: translateY(16px); position: relative; overflow: hidden; }
-.diff-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-.diff-card::after { content: attr(data-index); position: absolute; bottom: -10px; right: 14px; font-family: var(--display); font-size: 90px; color: rgba(255,255,255,0.02); letter-spacing: -3px; line-height: 1; pointer-events: none; }
-.diff-card.visible { opacity: 1; transform: translateY(0); }
-.diff-card:hover { border-color: rgba(169,124,63,0.28); background: var(--gold-glow); transform: translateY(-5px); box-shadow: 0 22px 52px rgba(0,0,0,0.4); }
-.diff-card:hover::before { transform: scaleX(1); }
-.diff-icon { width: 48px; height: 48px; border-radius: var(--r1); background: var(--petro-bg); display: flex; align-items: center; justify-content: center; color: var(--petro-mid); margin-bottom: 22px; transition: var(--t); }
-.diff-card:hover .diff-icon { background: rgba(169,124,63,0.1); color: var(--gold); }
-.diff-card h3 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--ivory); margin-bottom: 12px; }
-.diff-card p { font-size: 14px; font-weight: 300; color: var(--steel-hi); line-height: 1.8; }
-
-/* — clientes */
-#clients { background: var(--section-alt); color: var(--ink); padding: 112px 0; }
-#clients .section-title { color: var(--ink); }
-#clients .section-sub { color: var(--steel); }
-.clients-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-.client-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: var(--r2); padding: 32px 24px 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: var(--t); cursor: default; min-height: 120px; opacity: 0; transform: translateY(12px); }
-.client-card.visible { opacity: 1; transform: translateY(0); }
-.client-card:hover { border-color: var(--gold); box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); }
-.client-card.highlight { background: #fff; border-color: rgba(0,0,0,0.07); }
-.client-card.highlight:hover { border-color: var(--gold); }
-.client-card.highlight .client-logo-wrap { background: transparent; border-radius: var(--r2); padding: 0; display: flex; align-items: center; justify-content: center; }
-.client-card.highlight .client-name { color: var(--ink); }
-.client-logo-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.client-logo { max-width: 120px; max-height: 44px; width: auto; height: auto; object-fit: contain; }
-.client-name { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--steel); text-align: center; }
-
-/* — parceiros */
-#partners { background: var(--section-alt); color: var(--ink); padding: 40px 0 112px; }
-#partners .section-title { color: var(--ink); }
-#partners .section-sub { color: var(--steel); }
-.partners-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-.partner-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: var(--r2); padding: 32px 24px 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: var(--t); cursor: default; min-height: 120px; opacity: 0; transform: translateY(12px); }
-.partner-card.visible { opacity: 1; transform: translateY(0); }
-.partner-card:hover { border-color: var(--gold); box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); }
-.partner-logo { max-width: 120px; max-height: 44px; width: auto; height: auto; object-fit: contain; }
-.partner-name { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--steel); text-align: center; }
-
-/* — contato */
-#contact { position: relative; background: var(--ink-mid); padding: 112px 0; overflow: hidden; }
-.contact-bg { position: absolute; inset: 0; background: linear-gradient(140deg, #0b0b0b 0%, #181818 100%); }
-.contact-glow { position: absolute; bottom: -80px; left: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(28,74,53,0.06) 0%, transparent 70%); }
-.contact-glow::after { content: ''; position: absolute; top: -180px; right: -180px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(169,124,63,0.05) 0%, transparent 70%); }
-#contact .container { position: relative; z-index: 1; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.contact-grid.contact-grid-single { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
-
-.contact-person { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; padding: 20px; background: rgba(255,255,255,0.025); border: 1px solid rgba(169,124,63,0.15); border-radius: var(--r2); }
-.contact-avatar-wrap { position: relative; flex-shrink: 0; }
-.contact-person-left { display: flex; flex-direction: column; align-items: center; gap: 10px; flex-shrink: 0; }
-.contact-company-logo-wrap { margin-left: auto; flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 8px 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r2); }
-.contact-company-logo { max-width: 90px; max-height: 56px; width: auto; height: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
-.contact-avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, #7a5828 100%); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 28px; letter-spacing: 2px; flex-shrink: 0; overflow: hidden; }
-.contact-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.contact-avatar-badge { display: none; }
-.contact-person-info { display: flex; flex-direction: column; gap: 4px; }
-.contact-person strong { font-family: var(--display); font-size: 22px; letter-spacing: 2px; color: var(--ivory); line-height: 1.1; }
-.contact-person-role { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
-.contact-person span { font-size: 13px; color: var(--steel-hi); }
-
-.contact-methods { display: flex; flex-direction: column; gap: 10px; }
-.contact-item { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r1); padding: 14px 20px; transition: var(--t); cursor: pointer; position: relative; overflow: hidden; }
-.contact-item::after { content: '→'; position: absolute; right: 20px; font-size: 16px; color: rgba(255,255,255,0.18); transition: var(--t); }
-.contact-item:hover::after { right: 14px; color: rgba(255,255,255,0.65); }
-.contact-item:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); transform: translateX(3px); }
-.contact-item.whatsapp { border-color: rgba(37,211,102,0.22); background: rgba(37,211,102,0.04); }
-.contact-item.whatsapp:hover { background: rgba(37,211,102,0.09); border-color: #25D366; box-shadow: 0 4px 20px rgba(37,211,102,0.1); }
-.contact-item.email-ceo { border-color: rgba(169,124,63,0.22); background: rgba(169,124,63,0.04); }
-.contact-item.email-ceo:hover { background: rgba(169,124,63,0.09); border-color: var(--gold); box-shadow: 0 4px 20px rgba(169,124,63,0.1); }
-.contact-item.email-sales { border-color: rgba(91,155,213,0.22); background: rgba(91,155,213,0.04); }
-.contact-item.email-sales:hover { background: rgba(91,155,213,0.09); border-color: #5b9bd5; box-shadow: 0 4px 20px rgba(91,155,213,0.1); }
-.contact-item-icon { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.contact-item-icon svg { width: 22px; height: 22px; }
-.contact-item.whatsapp .contact-item-icon { color: #25D366; }
-.contact-item.email-ceo .contact-item-icon { color: var(--gold); }
-.contact-item.email-sales .contact-item-icon { color: #5b9bd5; }
-.contact-item-text { flex: 1; display: flex; flex-direction: column; }
-.contact-item-label { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-hi); margin-bottom: 2px; }
-.contact-item-value { font-size: 14px; font-weight: 400; color: var(--ivory); }
-
-.contact-form-wrap { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r2); padding: 44px; }
-.contact-form-wrap h3 { font-family: var(--display); font-size: 36px; letter-spacing: 4px; color: var(--ivory); margin-bottom: 28px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 7px; }
-.form-group label { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-hi); }
-.form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r1); padding: 11px 14px; color: var(--ivory); font-family: var(--body); font-size: 14px; transition: var(--t); outline: none; }
-.form-group input::placeholder, .form-group textarea::placeholder { color: var(--steel); }
-.form-group select option { background: var(--ink-mid); color: var(--ivory); }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(169,124,63,0.48); background: rgba(169,124,63,0.04); }
-.form-group textarea { resize: vertical; min-height: 100px; }
-.btn-submit { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: var(--gold); color: var(--ink); border: none; padding: 15px 32px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-radius: var(--r1); cursor: pointer; transition: var(--t); margin-top: 8px; }
-.btn-submit:hover { background: var(--gold-hi); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(169,124,63,0.28); }
-.btn-submit svg { width: 16px; height: 16px; }
-.form-success-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; gap: 16px; color: var(--ivory); }
-.form-success-inner svg { width: 44px; height: 44px; color: #25D366; }
-.form-success-inner h4 { font-family: var(--display); font-size: 32px; letter-spacing: 4px; }
-.form-success-inner p { font-size: 15px; color: var(--steel-hi); }
-
-/* — footer */
-#footer { background: #080808; border-top: 1px solid rgba(169,124,63,0.14); padding: 64px 0 36px; }
-.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 52px; margin-bottom: 52px; padding-bottom: 52px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-.footer-logo { height: 48px; width: auto; object-fit: contain; margin-bottom: 16px; }
-.footer-logo-text { font-family: var(--display); font-size: 22px; letter-spacing: 5px; color: var(--chrome); margin-bottom: 16px; }
-.footer-brand p { font-size: 13px; font-weight: 300; color: var(--steel); max-width: 280px; line-height: 1.8; }
-.footer-links h4, .footer-contact h4 { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--steel-hi); margin-bottom: 20px; }
-.footer-links a, .footer-contact a { display: block; font-size: 13px; font-weight: 300; color: var(--steel); margin-bottom: 10px; transition: color 0.2s; }
-.footer-links a:hover, .footer-contact a:hover { color: var(--gold); }
-.footer-bottom { text-align: center; font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.5px; color: var(--steel); }
-
-/* — toast */
-.toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--ink-light); border: 1px solid var(--gold); color: var(--ivory); padding: 12px 28px; border-radius: var(--r1); font-family: var(--mono); font-size: 12px; letter-spacing: 1px; z-index: 9999; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
-.toast.show { transform: translateX(-50%) translateY(0); }
-
-/* — animações */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn  { from { opacity: 0; transform: translateY(6px); }  to { opacity: 1; transform: translateY(0); } }
-@keyframes scrollPulse { 0%,100% { opacity: 0.3; transform: scaleY(0.8); } 50% { opacity: 1; transform: scaleY(1); } }
-
-/* — escala de fonte */
-body.font-size-1 { font-size: 11.2px; }
-body.font-size-2 { font-size: 13.6px; }
-body.font-size-3 { font-size: 16px; }
-body.font-size-4 { font-size: 19.2px; }
-body.font-size-5 { font-size: 23.2px; }
-body.font-size-6 { font-size: 28px; }
-body.font-size-7 { font-size: 33.6px; }
-body.font-size-8 { font-size: 40px; }
-
-p, .sitem, .service-extra, .value-item p, .diff-card p, .section-sub,
-.comex-card p, .contact-item-value, .footer-brand p, .about-text > p,
-.service-panel-header p, .hero-sub, .contact-person-role, .contact-person span,
-.footer-links a, .footer-contact a, .footer-bottom, .tab-btn,
-.stat-label, .lang-dropdown-item span { font-size: 1em; }
-
-body.font-size-4 h2, body.font-size-5 h2,
-body.font-size-6 h2, body.font-size-7 h2, body.font-size-8 h2 { font-size: clamp(1.8em,4vw,2.8em); }
-body.font-size-4 h3, body.font-size-5 h3,
-body.font-size-6 h3, body.font-size-7 h3, body.font-size-8 h3 { font-size: clamp(1.2em,2.5vw,1.8em); }
-body.font-size-4 .section-title, body.font-size-5 .section-title,
-body.font-size-6 .section-title, body.font-size-7 .section-title,
-body.font-size-8 .section-title { font-size: clamp(1.6em,4vw,2.8em); }
-
-/* — responsivo */
-@media (max-width: 1024px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .about-stats { grid-template-columns: repeat(4,1fr); }
-  .contact-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-  .footer-brand { grid-column: 1 / -1; }
-}
-@media (max-width: 900px) {
-  .hero-layout { flex-direction: column-reverse; gap: 32px; }
-  .hero-logo-col { width: 100%; justify-content: center; }
-  .hero-logo-ring { width: 240px; height: 240px; }
-  .hero-logo-img  { width: 220px; height: 220px; }
-}
-
-/* — menu lateral mobile */
-@media (max-width: 768px) {
-  .container { padding: 0 20px; }
-
-  .hamburger { display: flex; }
-
-  #main-nav {
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(10,10,10,0.99);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 32px;
-    gap: 8px;
-    border: none;
-    z-index: 99999;
-    box-shadow: none;
-    transform: translateX(100%);
-    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    visibility: hidden;
+const translations = {
+  pt: {
+    lang_label: "Idioma:",
+    nav_about: "Sobre",
+    nav_differentials: "Diferenciais",
+    nav_services: "Serviços",
+    nav_clients: "Clientes",
+    nav_contact: "Contato",
+    hero_eyebrow: "Petróleo & Gás · Tecnologia & Inovação",
+    hero_sub: "Consultoria especializada para a indústria de petróleo e gás",
+    hero_cta1: "Nossos serviços",
+    hero_cta2: "Fale conosco",
+    scroll_hint: "rolar",
+    about_tag: "Quem somos",
+    about_title: "Objetivos",
+    about_desc: "Desenvolver soluções inovadoras para os desafios mais complexos do setor, aprimorando continuamente a experiência de nossos clientes e gerando valor sustentável na indústria de petróleo e gás.",
+    value1_title: "Criatividade e pensamento disruptivo",
+    value1_desc: "Incentivamos abordagens não convencionais e a disposição para desafiar o status quo em busca de resultados superiores.",
+    value2_title: "Excelência",
+    value2_desc: "Comprometemo-nos a entregar soluções de alta qualidade, com rigor técnico e dedicação em cada etapa dos nossos projetos.",
+    value3_title: "Agilidade e adaptabilidade",
+    value3_desc: "Aprendemos com rapidez e respondemos com eficiência às demandas de um ambiente em constante transformação.",
+    stat1: "Anos de experiência",
+    stat2: "Clientes ativos",
+    stat3: "Áreas de atuação",
+    stat4: "Comprometimento",
+    diff_tag: "Por que a EZO",
+    diff_title: "Nossos diferenciais",
+    diff_sub: "A única consultoria que integra engenharia, geologia, trading e comex sob uma única estrutura.",
+    diff1_title: "35+ anos de mercado",
+    diff1_desc: "Décadas de experiência prática na indústria brasileira e internacional de óleo e gás.",
+    diff2_title: "Equipe multidisciplinar",
+    diff2_desc: "Engenheiros, geólogos, especialistas em comércio exterior e profissionais de desenvolvimento de negócios reunidos em uma única parceria estratégica.",
+    diff3_title: "Atuação global",
+    diff3_desc: "Rede de agentes e parceiros estratégicos em mercados internacionais para operações de trading e comércio exterior.",
+    diff4_title: "Soluções integradas",
+    diff4_desc: "Do subsolo ao mercado: cobrimos toda a cadeia de valor do setor de petróleo e gás com uma abordagem única e integrada.",
+    services_tag: "O que fazemos",
+    services_title: "Serviços especializados",
+    services_sub: "Soluções completas para os desafios mais complexos da indústria.",
+    tab_eng: "Engenharia & Consultoria",
+    tab_geo: "Geologia & Geofísica",
+    tab_biz: "Desenvolvimento de negócios",
+    tab_trade: "Trading Services",
+    tab_comex: "Comex Services",
+    eng_title: "Engenharia & Consultoria",
+    eng_intro: "Reunimos expertise nacional e internacional acumulada ao longo de mais de 35 anos de atuação na indústria.",
+    eng_1: "Curvas de produção e estimativas de recursos contingentes",
+    eng_2: "Estimativa determinística e probabilística de volumes de hidrocarbonetos",
+    eng_3: "Planos de desenvolvimento de reservatórios e campos",
+    eng_4: "Revitalização de campos maduros de petróleo",
+    eng_5: "Estimativas de reservas (SEC e SPE)",
+    eng_6: "Aquisição e interpretação de dados de reservatórios",
+    eng_7: "Estudos de reservatórios",
+    eng_8: "Avaliação econômica de campos, reservatórios e projetos",
+    eng_9: "Avaliação completa de ativos de petróleo",
+    eng_10: "Projetos de perfuração, completação, reentrada e abandono de poços",
+    eng_11: "Projetos de elevação e escoamento",
+    eng_12: "Procurement técnico",
+    eng_extra: "Otimização de operações · Análise de risco · Procurement especializado",
+    geo_title: "Geologia & Geofísica",
+    geo_intro: "Expertise abrangente em interpretação sísmica, modelagem geológica e avaliação petrofísica para maximizar o potencial dos seus ativos exploratórios e de produção.",
+    geo_1: "Planejamento de levantamentos sísmicos",
+    geo_2: "Suporte ao processamento sísmico",
+    geo_3: "Interpretação sísmica",
+    geo_4: "Análise de atributos sísmicos",
+    geo_5: "Análise de bacias sedimentares",
+    geo_6: "Mapeamentos regionais",
+    geo_7: "Identificação e avaliação de plays, leads e prospectos",
+    geo_8: "Análises determinísticas e probabilísticas de parâmetros petrofísicos",
+    geo_9: "Modelos geológicos 2D e 3D de reservatórios de óleo e gás",
+    biz_title: "Desenvolvimento de negócios",
+    biz_intro: "Estratégias estruturadas para ampliar sua presença no mercado, consolidar parcerias estratégicas e identificar novas oportunidades de crescimento sustentável.",
+    biz_1: "Prospecção de clientes e identificação de novos leads",
+    biz_2: "Estruturação de parcerias estratégicas para benefício mútuo",
+    biz_3: "Análise de mercado: tendências, cenário competitivo e oportunidades",
+    biz_4: "Modelagem de negócios: novos produtos, canais de distribuição e fontes de receita",
+    trade_title: "Trading Services",
+    trade_intro: "Soluções completas de comércio internacional, desde o sourcing de produtos e fornecedores até a distribuição final das mercadorias.",
+    trade_1: "Sourcing de produtos e fornecedores",
+    trade_2: "Inspeções de qualidade na origem dos exportadores",
+    trade_3: "Importação por encomenda",
+    trade_4: "Importação por conta e ordem",
+    trade_5: "Representação de produtos e marcas",
+    trade_6: "Comercialização de produtos",
+    trade_7: "Assessoria aduaneira",
+    trade_8: "Armazenagem e distribuição",
+    comex_title: "Comex Services",
+    comex_intro: "Logística internacional completa — aérea, marítima e rodoviária — com desembaraço aduaneiro eficiente e suporte especializado em todo o processo.",
+    comex_air_title: "Aéreo",
+    comex_air_desc: "Agentes distribuídos ao redor do mundo consolidando e embarcando suas cargas com agilidade e segurança operacional.",
+    comex_sea_title: "Marítimo",
+    comex_sea_desc: "Contratos firmados com os principais armadores nos mais importantes portos do mundo, otimizando seus fretes marítimos.",
+    comex_road_title: "Rodoviário",
+    comex_road_desc: "Soluções de transporte doméstico para qualquer tipo de carga: expressa, dedicada, consolidada ou carga-projeto.",
+    comex_customs_title: "Aduaneiro",
+    comex_customs_desc: "Análise completa do processo logístico, classificação NCM, alíquotas e legislação aduaneira para um desembaraço eficiente e seguro.",
+    clients_tag: "Quem confia em nós",
+    clients_title: "Clientes",
+    clients_sub: "Empresas líderes da indústria de energia e serviços que confiam na EZO Oilfield Solutions.",
+    partners_tag: "Quem nos apoia",
+    partners_title: "Parceiros",
+    partners_sub: "Parcerias estratégicas que ampliam nossa capacidade de entrega e alcance no setor.",
+    contact_tag: "Entre em contato",
+    contact_title: "Contate-nos",
+    contact_sub: "Fale diretamente com nosso CEO",
+    contact_whatsapp: "WhatsApp / Telefone",
+    contact_email_ceo: "E-mail do CEO",
+    contact_email_sales: "E-mail comercial",
+    form_title: "Envie uma mensagem",
+    form_name: "Nome",
+    form_company: "Empresa",
+    form_email: "E-mail",
+    form_subject: "Assunto",
+    form_select: "Selecione um serviço...",
+    form_message: "Mensagem",
+    form_send: "Enviar mensagem",
+    form_success: "Abrindo seu cliente de e-mail...",
+    footer_tagline: "Tecnologia e inovação na indústria de petróleo & gás",
+    footer_services: "Serviços",
+    footer_contact: "Contato",
+    footer_rights: "Todos os direitos reservados.",
+    toast_copied: "Número copiado!",
+  },
+  en: {
+    lang_label: "Language:",
+    nav_about: "About",
+    nav_differentials: "Why EZO",
+    nav_services: "Services",
+    nav_clients: "Clients",
+    nav_contact: "Contact",
+    hero_eyebrow: "Oil & Gas · Technology & Innovation",
+    hero_sub: "Specialized consulting for the oil & gas industry",
+    hero_cta1: "Our services",
+    hero_cta2: "Get in touch",
+    scroll_hint: "scroll",
+    about_tag: "Who we are",
+    about_title: "Objectives",
+    about_desc: "To create innovative solutions that solve complex challenges, improving our clients' experience and generating value in the oil and gas industry.",
+    value1_title: "Creativity & disruptive thinking",
+    value1_desc: "We encourage unconventional solutions and the courage to break with the status quo.",
+    value2_title: "Excellence",
+    value2_desc: "We are committed to delivering high-quality solutions with constant dedication.",
+    value3_title: "Agility & adaptability",
+    value3_desc: "We learn quickly and respond efficiently to a constantly changing environment.",
+    stat1: "Years of experience",
+    stat2: "Active clients",
+    stat3: "Service areas",
+    stat4: "Commitment",
+    diff_tag: "Why EZO",
+    diff_title: "Our differentials",
+    diff_sub: "The only consultancy integrating engineering, geology, trading and comex under one roof.",
+    diff1_title: "35+ years in the market",
+    diff1_desc: "Decades of hands-on experience in the Brazilian and international oil and gas industry.",
+    diff2_title: "Multidisciplinary team",
+    diff2_desc: "Engineers, geologists, foreign trade and business development specialists in a single partnership.",
+    diff3_title: "Global reach",
+    diff3_desc: "Network of agents and strategic partners in international markets for trading and comex operations.",
+    diff4_title: "Integrated solutions",
+    diff4_desc: "From subsurface to market: we cover the entire oil and gas value chain with a unique approach.",
+    services_tag: "What we do",
+    services_title: "Specialized services",
+    services_sub: "Comprehensive solutions for the most complex industry challenges.",
+    tab_eng: "Engineering & Consulting",
+    tab_geo: "Geology & Geophysics",
+    tab_biz: "Business development",
+    tab_trade: "Trading Services",
+    tab_comex: "Comex Services",
+    eng_title: "Engineering & Consulting",
+    eng_intro: "We bring together national and international expertise accumulated over more than 35 years in the industry.",
+    eng_1: "Production curves and contingent resource estimates",
+    eng_2: "Deterministic and probabilistic hydrocarbon volume estimation",
+    eng_3: "Reservoir and field development plans",
+    eng_4: "Revitalization of mature oil fields",
+    eng_5: "Reserve estimates (SEC and SPE)",
+    eng_6: "Acquisition and interpretation of reservoir data",
+    eng_7: "Reservoir studies",
+    eng_8: "Economic evaluation of fields, reservoirs and projects",
+    eng_9: "Complete evaluation of oil assets",
+    eng_10: "Drilling, completion, re-entry and well abandonment projects",
+    eng_11: "Lifting and flow projects",
+    eng_12: "Technical procurement",
+    eng_extra: "Operations optimization · Risk analysis · Specialized procurement",
+    geo_title: "Geology & Geophysics",
+    geo_intro: "Complete expertise in seismic interpretation, geological modeling and petrophysical evaluation to maximize asset potential.",
+    geo_1: "Seismic survey acquisition planning",
+    geo_2: "Seismic processing support",
+    geo_3: "Seismic interpretation",
+    geo_4: "Seismic attribute analysis",
+    geo_5: "Sedimentary basin analysis",
+    geo_6: "Regional mapping",
+    geo_7: "Identification and evaluation of plays, leads and prospects",
+    geo_8: "Deterministic and probabilistic analysis of petrophysical parameters",
+    geo_9: "2D and 3D geological models of oil and gas reservoirs",
+    biz_title: "Business development",
+    biz_intro: "Strategies to expand your market presence, build solid partnerships and identify new growth opportunities.",
+    biz_1: "Client prospecting and new leads",
+    biz_2: "Strategic partnerships for mutual benefit",
+    biz_3: "Market analysis: trends, competition and opportunities",
+    biz_4: "Business modeling: new products, channels and revenue sources",
+    trade_title: "Trading Services",
+    trade_intro: "Complete international trade solutions, from sourcing to final distribution of products.",
+    trade_1: "Product and supplier sourcing",
+    trade_2: "Quality inspections at exporter origins",
+    trade_3: "Import on order",
+    trade_4: "Import on behalf and order",
+    trade_5: "Product and brand representation",
+    trade_6: "Product commercialization",
+    trade_7: "Customs advisory",
+    trade_8: "Storage and distribution",
+    comex_title: "Comex Services",
+    comex_intro: "Complete international logistics — air, sea and road — with efficient customs clearance.",
+    comex_air_title: "Air",
+    comex_air_desc: "Agents around the globe consolidating and shipping your cargo with agility and safety.",
+    comex_sea_title: "Maritime",
+    comex_sea_desc: "Contracts with major shipowners at all ports worldwide, streamlining your maritime freight.",
+    comex_road_title: "Road",
+    comex_road_desc: "Domestic transport solutions for any type of cargo: express, dedicated, consolidated or project.",
+    comex_customs_title: "Customs clearance",
+    comex_customs_desc: "Complete analysis of the logistics process, NCM codes, tariffs and customs laws for efficient clearance.",
+    clients_tag: "Who trusts us",
+    clients_title: "Clients",
+    clients_sub: "Leading energy industry companies that trust EZO Oilfield Solutions.",
+    partners_tag: "Who supports us",
+    partners_title: "Partners",
+    partners_sub: "Strategic partnerships that expand our delivery capacity and sector reach.",
+    contact_tag: "Get in touch",
+    contact_title: "Contact us",
+    contact_sub: "Speak directly with our CEO",
+    contact_whatsapp: "WhatsApp / Phone",
+    contact_email_ceo: "CEO's email",
+    contact_email_sales: "Sales email",
+    form_title: "Send a message",
+    form_name: "Name",
+    form_company: "Company",
+    form_email: "Email",
+    form_subject: "Subject",
+    form_select: "Select a service...",
+    form_message: "Message",
+    form_send: "Send message",
+    form_success: "Opening your email client...",
+    footer_tagline: "Technology and innovation in the oil & gas industry",
+    footer_services: "Services",
+    footer_contact: "Contact",
+    footer_rights: "All rights reserved.",
+    toast_copied: "Number copied!",
+  },
+  es: {
+    lang_label: "Idioma:",
+    nav_about: "Sobre",
+    nav_differentials: "Por qué EZO",
+    nav_services: "Servicios",
+    nav_clients: "Clientes",
+    nav_contact: "Contacto",
+    hero_eyebrow: "Petróleo & Gas · Tecnología & Innovación",
+    hero_sub: "Consultoría especializada para la industria del petróleo y gas",
+    hero_cta1: "Nuestros servicios",
+    hero_cta2: "Contáctenos",
+    scroll_hint: "bajar",
+    about_tag: "Quiénes somos",
+    about_title: "Objetivos",
+    about_desc: "Crear soluciones innovadoras que resuelvan desafíos complejos, mejorando la experiencia de nuestros clientes y generando valor en la industria del petróleo y gas.",
+    value1_title: "Creatividad y pensamiento disruptivo",
+    value1_desc: "Fomentamos soluciones no convencionales y el coraje para romper con el status quo.",
+    value2_title: "Excelencia",
+    value2_desc: "Nos comprometemos a entregar soluciones de alta calidad con dedicación constante.",
+    value3_title: "Agilidad y adaptabilidad",
+    value3_desc: "Aprendemos rápidamente y respondemos con eficiencia en un entorno en constante cambio.",
+    stat1: "Años de experiencia",
+    stat2: "Clientes activos",
+    stat3: "Áreas de servicio",
+    stat4: "Compromiso",
+    diff_tag: "Por qué EZO",
+    diff_title: "Nuestros diferenciales",
+    diff_sub: "La única consultoría que integra ingeniería, geología, trading y comex bajo un mismo techo.",
+    diff1_title: "35+ años en el mercado",
+    diff1_desc: "Décadas de experiencia práctica en la industria de petróleo y gas nacional e internacional.",
+    diff2_title: "Equipo multidisciplinario",
+    diff2_desc: "Ingenieros, geólogos, especialistas en comercio exterior y desarrollo de negocios en una sola alianza.",
+    diff3_title: "Alcance global",
+    diff3_desc: "Red de agentes y socios estratégicos en mercados internacionales para operaciones de trading y comex.",
+    diff4_title: "Soluciones integradas",
+    diff4_desc: "Del subsuelo al mercado: cubrimos toda la cadena de valor del sector de petróleo y gas con un enfoque único.",
+    services_tag: "Lo que hacemos",
+    services_title: "Servicios especializados",
+    services_sub: "Soluciones completas para los desafíos más complejos de la industria.",
+    tab_eng: "Ingeniería & Consultoría",
+    tab_geo: "Geología & Geofísica",
+    tab_biz: "Desarrollo de negocios",
+    tab_trade: "Trading Services",
+    tab_comex: "Comex Services",
+    eng_title: "Ingeniería & Consultoría",
+    eng_intro: "Reunimos experiencia nacional e internacional acumulada a lo largo de más de 35 años en la industria.",
+    eng_1: "Curvas de producción y estimaciones de recursos contingentes",
+    eng_2: "Estimación determinística y probabilística de volúmenes de hidrocarburos",
+    eng_3: "Planes de desarrollo de reservorios y campos",
+    eng_4: "Revitalización de campos petroleros maduros",
+    eng_5: "Estimaciones de reservas (SEC y SPE)",
+    eng_6: "Adquisición e interpretación de datos de reservorios",
+    eng_7: "Estudios de reservorios",
+    eng_8: "Evaluación económica de campos, reservorios y proyectos",
+    eng_9: "Evaluación completa de activos petroleros",
+    eng_10: "Proyectos de perforación, completación, reentrada y abandono de pozos",
+    eng_11: "Proyectos de elevación y flujo",
+    eng_12: "Procurement técnico",
+    eng_extra: "Optimización de operaciones · Análisis de riesgo · Procurement especializado",
+    geo_title: "Geología & Geofísica",
+    geo_intro: "Experiencia completa en interpretación sísmica, modelado geológico y evaluación petrofísica para maximizar el potencial de sus activos.",
+    geo_1: "Planificación de adquisición de levantamiento sísmico",
+    geo_2: "Soporte al procesamiento sísmico",
+    geo_3: "Interpretación sísmica",
+    geo_4: "Análisis de atributos sísmicos",
+    geo_5: "Análisis de cuencas sedimentarias",
+    geo_6: "Cartografías regionales",
+    geo_7: "Identificación y evaluación de plays, leads y prospectos",
+    geo_8: "Análisis determinísticos y probabilísticos de parámetros petrofísicos",
+    geo_9: "Modelos geológicos 2D y 3D de reservorios de petróleo y gas",
+    biz_title: "Desarrollo de negocios",
+    biz_intro: "Estrategias para expandir su presencia en el mercado, construir alianzas sólidas e identificar nuevas oportunidades de crecimiento.",
+    biz_1: "Prospección de clientes y nuevos leads",
+    biz_2: "Alianzas estratégicas para beneficio mutuo",
+    biz_3: "Análisis de mercado: tendencias, competencia y oportunidades",
+    biz_4: "Modelado de negocios: nuevos productos, canales y fuentes de ingresos",
+    trade_title: "Trading Services",
+    trade_intro: "Soluciones completas de comercio internacional, desde el sourcing hasta la distribución final de los productos.",
+    trade_1: "Sourcing de productos y proveedores",
+    trade_2: "Inspecciones de calidad en los orígenes de los exportadores",
+    trade_3: "Importación por encargo",
+    trade_4: "Importación por cuenta y orden",
+    trade_5: "Representaciones de productos y marcas",
+    trade_6: "Comercialización de productos",
+    trade_7: "Asesoría aduanera",
+    trade_8: "Almacenamiento y distribución",
+    comex_title: "Comex Services",
+    comex_intro: "Logística internacional completa — aéreo, marítimo y terrestre — con despacho aduanero eficiente.",
+    comex_air_title: "Aéreo",
+    comex_air_desc: "Agentes en todo el mundo consolidando y enviando su carga con agilidad y seguridad.",
+    comex_sea_title: "Marítimo",
+    comex_sea_desc: "Contratos con los principales armadores en todos los puertos del mundo, agilizando su flete marítimo.",
+    comex_road_title: "Terrestre",
+    comex_road_desc: "Soluciones de transporte doméstico para cualquier tipo de carga: expresa, dedicada, consolidada o proyecto.",
+    comex_customs_title: "Despacho aduanero",
+    comex_customs_desc: "Análisis completo del proceso logístico, NCM, aranceles y leyes aduaneras para un despacho eficiente.",
+    clients_tag: "Quiénes confían en nosotros",
+    clients_title: "Clientes",
+    clients_sub: "Empresas líderes de la industria energética que confían en EZO Oilfield Solutions.",
+    partners_tag: "Quiénes nos apoyan",
+    partners_title: "Socios",
+    partners_sub: "Alianzas estratégicas que amplían nuestra capacidad de entrega y alcance en el sector.",
+    contact_tag: "Contáctenos",
+    contact_title: "Hable con nosotros",
+    contact_sub: "Hable directamente con nuestro CEO",
+    contact_whatsapp: "WhatsApp / Teléfono",
+    contact_email_ceo: "Email del CEO",
+    contact_email_sales: "Email comercial",
+    form_title: "Envíe un mensaje",
+    form_name: "Nombre",
+    form_company: "Empresa",
+    form_email: "Correo electrónico",
+    form_subject: "Asunto",
+    form_select: "Seleccione un servicio...",
+    form_message: "Mensaje",
+    form_send: "Enviar mensaje",
+    form_success: "¡Abriendo su cliente de correo!",
+    footer_tagline: "Tecnología e innovación en la industria del petróleo y gas",
+    footer_services: "Servicios",
+    footer_contact: "Contacto",
+    footer_rights: "Todos los derechos reservados.",
+    toast_copied: "¡Número copiado!",
+  },
+  fr: {
+    lang_label: "Langue :",
+    nav_about: "À propos",
+    nav_differentials: "Pourquoi EZO",
+    nav_services: "Services",
+    nav_clients: "Clients",
+    nav_contact: "Contact",
+    hero_eyebrow: "Pétrole & Gaz · Technologie & Innovation",
+    hero_sub: "Conseil spécialisé pour l'industrie pétrolière et gazière",
+    hero_cta1: "Nos services",
+    hero_cta2: "Contactez-nous",
+    scroll_hint: "défiler",
+    about_tag: "Qui sommes-nous",
+    about_title: "Objectifs",
+    about_desc: "Créer des solutions innovantes qui résolvent des défis complexes, améliorant l'expérience de nos clients et générant de la valeur dans l'industrie pétrolière et gazière.",
+    value1_title: "Créativité et pensée disruptive",
+    value1_desc: "Nous encourageons des solutions non conventionnelles et le courage de rompre avec le statu quo.",
+    value2_title: "Excellence",
+    value2_desc: "Nous nous engageons à fournir des solutions de haute qualité avec un dévouement constant.",
+    value3_title: "Agilité et adaptabilité",
+    value3_desc: "Nous apprenons rapidement et répondons efficacement dans un environnement en constante évolution.",
+    stat1: "Années d'expérience",
+    stat2: "Clients actifs",
+    stat3: "Domaines de service",
+    stat4: "Engagement",
+    diff_tag: "Pourquoi EZO",
+    diff_title: "Nos différentiels",
+    diff_sub: "Le seul cabinet intégrant ingénierie, géologie, trading et comex sous un même toit.",
+    diff1_title: "35+ ans sur le marché",
+    diff1_desc: "Des décennies d'expérience pratique dans l'industrie pétrolière et gazière nationale et internationale.",
+    diff2_title: "Équipe multidisciplinaire",
+    diff2_desc: "Ingénieurs, géologues, spécialistes en commerce international et développement commercial réunis.",
+    diff3_title: "Portée mondiale",
+    diff3_desc: "Réseau d'agents et de partenaires stratégiques sur les marchés internationaux pour le trading et le comex.",
+    diff4_title: "Solutions intégrées",
+    diff4_desc: "Du sous-sol au marché : nous couvrons toute la chaîne de valeur du secteur pétrolier et gazier.",
+    services_tag: "Ce que nous faisons",
+    services_title: "Services spécialisés",
+    services_sub: "Des solutions complètes pour les défis les plus complexes de l'industrie.",
+    tab_eng: "Ingénierie & Conseil",
+    tab_geo: "Géologie & Géophysique",
+    tab_biz: "Développement commercial",
+    tab_trade: "Trading Services",
+    tab_comex: "Comex Services",
+    eng_title: "Ingénierie & Conseil",
+    eng_intro: "Nous réunissons une expertise nationale et internationale accumulée sur plus de 35 ans dans l'industrie.",
+    eng_1: "Courbes de production et estimations de ressources contingentes",
+    eng_2: "Estimation déterministe et probabiliste des volumes d'hydrocarbures",
+    eng_3: "Plans de développement de réservoirs et de champs",
+    eng_4: "Revitalisation de champs pétroliers matures",
+    eng_5: "Estimations de réserves (SEC et SPE)",
+    eng_6: "Acquisition et interprétation de données de réservoir",
+    eng_7: "Études de réservoirs",
+    eng_8: "Évaluation économique de champs, réservoirs et projets",
+    eng_9: "Évaluation complète des actifs pétroliers",
+    eng_10: "Projets de forage, complétion, réentrée et abandon de puits",
+    eng_11: "Projets de levage et d'écoulement",
+    eng_12: "Approvisionnement technique",
+    eng_extra: "Optimisation des opérations · Analyse des risques · Approvisionnement spécialisé",
+    geo_title: "Géologie & Géophysique",
+    geo_intro: "Expertise complète en interprétation sismique, modélisation géologique et évaluation pétrophysique.",
+    geo_1: "Planification de l'acquisition du levé sismique",
+    geo_2: "Soutien au traitement sismique",
+    geo_3: "Interprétation sismique",
+    geo_4: "Analyse des attributs sismiques",
+    geo_5: "Analyse des bassins sédimentaires",
+    geo_6: "Cartographies régionales",
+    geo_7: "Identification et évaluation de plays, leads et prospects",
+    geo_8: "Analyses déterministes et probabilistes des paramètres pétrophysiques",
+    geo_9: "Modèles géologiques 2D et 3D de réservoirs de pétrole et de gaz",
+    biz_title: "Développement commercial",
+    biz_intro: "Stratégies pour élargir votre présence sur le marché, établir des partenariats solides et identifier de nouvelles opportunités.",
+    biz_1: "Prospection de clients et nouveaux leads",
+    biz_2: "Partenariats stratégiques à bénéfice mutuel",
+    biz_3: "Analyse de marché : tendances, concurrence et opportunités",
+    biz_4: "Modélisation commerciale : nouveaux produits, canaux et sources de revenus",
+    trade_title: "Trading Services",
+    trade_intro: "Solutions complètes de commerce international, du sourcing à la distribution finale des produits.",
+    trade_1: "Sourcing de produits et fournisseurs",
+    trade_2: "Inspections qualité aux origines des exportateurs",
+    trade_3: "Importation sur commande",
+    trade_4: "Importation pour compte et ordre",
+    trade_5: "Représentations de produits et marques",
+    trade_6: "Commercialisation de produits",
+    trade_7: "Conseil douanier",
+    trade_8: "Entreposage et distribution",
+    comex_title: "Comex Services",
+    comex_intro: "Logistique internationale complète — aérien, maritime et routier — avec dédouanement efficace.",
+    comex_air_title: "Aérien",
+    comex_air_desc: "Des agents dans le monde entier consolidant et expédiant vos marchandises rapidement.",
+    comex_sea_title: "Maritime",
+    comex_sea_desc: "Contrats avec les principaux armateurs dans tous les ports du monde.",
+    comex_road_title: "Routier",
+    comex_road_desc: "Solutions de transport domestique pour tout type de marchandise.",
+    comex_customs_title: "Dédouanement",
+    comex_customs_desc: "Analyse complète du processus logistique, codes NCM, tarifs et lois douanières.",
+    clients_tag: "Qui nous fait confiance",
+    clients_title: "Clients",
+    clients_sub: "Les entreprises leaders de l'industrie énergétique qui font confiance à EZO Oilfield Solutions.",
+    partners_tag: "Qui nous soutient",
+    partners_title: "Partenaires",
+    partners_sub: "Des partenariats stratégiques qui élargissent notre capacité de livraison et notre portée sectorielle.",
+    contact_tag: "Contactez-nous",
+    contact_title: "Contactez-nous",
+    contact_sub: "Parlez directement avec notre PDG",
+    contact_whatsapp: "WhatsApp / Téléphone",
+    contact_email_ceo: "Email du PDG",
+    contact_email_sales: "Email commercial",
+    form_title: "Envoyez un message",
+    form_name: "Nom",
+    form_company: "Entreprise",
+    form_email: "E-mail",
+    form_subject: "Sujet",
+    form_select: "Sélectionnez un service...",
+    form_message: "Message",
+    form_send: "Envoyer le message",
+    form_success: "Ouverture de votre client de messagerie...",
+    footer_tagline: "Technologie et innovation dans l'industrie pétrolière et gazière",
+    footer_services: "Services",
+    footer_contact: "Contact",
+    footer_rights: "Tous droits réservés.",
+    toast_copied: "Numéro copié !",
+  },
+  zh: {
+    lang_label: "语言：",
+    nav_about: "关于我们",
+    nav_differentials: "为何选择EZO",
+    nav_services: "服务",
+    nav_clients: "客户",
+    nav_contact: "联系我们",
+    hero_eyebrow: "石油与天然气 · 技术与创新",
+    hero_sub: "石油与天然气行业专业咨询",
+    hero_cta1: "我们的服务",
+    hero_cta2: "联系我们",
+    scroll_hint: "滚动",
+    about_tag: "关于我们",
+    about_title: "目标",
+    about_desc: "创造创新解决方案，解决复杂挑战，提升客户体验，在石油和天然气行业创造价值。",
+    value1_title: "创造力与颠覆性思维",
+    value1_desc: "我们鼓励非常规解决方案和打破现状的勇气。",
+    value2_title: "卓越",
+    value2_desc: "我们致力于以持续的奉献精神提供高质量的解决方案。",
+    value3_title: "敏捷性与适应性",
+    value3_desc: "我们快速学习，并在不断变化的环境中高效响应。",
+    stat1: "年经验",
+    stat2: "活跃客户",
+    stat3: "服务领域",
+    stat4: "承诺",
+    diff_tag: "为何选择EZO",
+    diff_title: "我们的优势",
+    diff_sub: "唯一整合工程、地质、贸易和外贸服务的咨询公司。",
+    diff1_title: "35年以上市场经验",
+    diff1_desc: "数十年国内外石油天然气行业实践经验。",
+    diff2_title: "多学科团队",
+    diff2_desc: "工程师、地质学家、外贸及业务发展专家汇聚一堂。",
+    diff3_title: "全球布局",
+    diff3_desc: "遍布国际市场的代理商和战略合作伙伴网络。",
+    diff4_title: "一体化解决方案",
+    diff4_desc: "从地下到市场：以独特方式覆盖油气行业整个价值链。",
+    services_tag: "我们的工作",
+    services_title: "专业服务",
+    services_sub: "为行业最复杂的挑战提供全面解决方案。",
+    tab_eng: "工程与咨询",
+    tab_geo: "地质与地球物理",
+    tab_biz: "业务发展",
+    tab_trade: "贸易服务",
+    tab_comex: "外贸服务",
+    eng_title: "工程与咨询",
+    eng_intro: "我们汇聚了超过35年行业积累的国内外专业知识与经验。",
+    eng_1: "生产曲线和或然资源估算",
+    eng_2: "确定性和概率性油气体积估算",
+    eng_3: "储层和油田开发方案",
+    eng_4: "老油田振兴",
+    eng_5: "储量估算（SEC和SPE）",
+    eng_6: "储层数据采集与解释",
+    eng_7: "储层研究",
+    eng_8: "油田、储层和项目经济评价",
+    eng_9: "石油资产全面评估",
+    eng_10: "钻井、完井、侧钻和废弃项目",
+    eng_11: "举升和流动项目",
+    eng_12: "技术采购",
+    eng_extra: "运营优化 · 风险分析 · 专业采购",
+    geo_title: "地质与地球物理",
+    geo_intro: "地震解释、地质建模和岩石物理评价的完整专业知识。",
+    geo_1: "地震勘探采集规划",
+    geo_2: "地震处理支持",
+    geo_3: "地震解释",
+    geo_4: "地震属性分析",
+    geo_5: "沉积盆地分析",
+    geo_6: "区域填图",
+    geo_7: "成藏、圈闭和远景区识别与评价",
+    geo_8: "岩石物理参数确定性和概率性分析",
+    geo_9: "油气储层2D和3D地质模型",
+    biz_title: "业务发展",
+    biz_intro: "扩大市场存在、建立稳固合作关系、识别新增长机会的战略。",
+    biz_1: "客户开发和新线索",
+    biz_2: "互利战略合作",
+    biz_3: "市场分析：趋势、竞争和机遇",
+    biz_4: "商业建模：新产品、渠道和收入来源",
+    trade_title: "贸易服务",
+    trade_intro: "从采购到产品最终分销的完整国际贸易解决方案。",
+    trade_1: "产品和供应商采购",
+    trade_2: "在出口商原产地进行质量检验",
+    trade_3: "订单进口",
+    trade_4: "代理进口",
+    trade_5: "产品和品牌代理",
+    trade_6: "产品商业化",
+    trade_7: "海关顾问",
+    trade_8: "仓储和配送",
+    comex_title: "外贸服务",
+    comex_intro: "完整的国际物流——航空、海运和公路——高效清关。",
+    comex_air_title: "航空",
+    comex_air_desc: "遍布全球的代理商，以敏捷和安全的方式整合和运输您的货物。",
+    comex_sea_title: "海运",
+    comex_sea_desc: "与全球主要船东签订合同，简化您的海运货运。",
+    comex_road_title: "公路",
+    comex_road_desc: "任何类型货物的国内运输解决方案：快递、专用、整合或项目货物。",
+    comex_customs_title: "清关",
+    comex_customs_desc: "对物流流程、税号、关税和海关法律进行全面分析，实现高效清关。",
+    clients_tag: "信任我们的客户",
+    clients_title: "客户",
+    clients_sub: "信任EZO Oilfield Solutions的能源行业领先企业。",
+    partners_tag: "支持我们的伙伴",
+    partners_title: "合作伙伴",
+    partners_sub: "战略合作伙伴关系，扩大我们的交付能力和行业覆盖范围。",
+    contact_tag: "联系我们",
+    contact_title: "与我们联系",
+    contact_sub: "直接与我们的CEO交流",
+    contact_whatsapp: "WhatsApp / 电话",
+    contact_email_ceo: "CEO邮箱",
+    contact_email_sales: "商务邮箱",
+    form_title: "发送消息",
+    form_name: "姓名",
+    form_company: "公司",
+    form_email: "电子邮件",
+    form_subject: "主题",
+    form_select: "选择服务...",
+    form_message: "消息",
+    form_send: "发送消息",
+    form_success: "正在打开您的邮件客户端...",
+    footer_tagline: "石油与天然气行业的技术与创新",
+    footer_services: "服务",
+    footer_contact: "联系方式",
+    footer_rights: "版权所有。",
+    toast_copied: "号码已复制！",
+  },
+  ar: {
+    lang_label: "اللغة:",
+    nav_about: "حول",
+    nav_differentials: "لماذا EZO",
+    nav_services: "الخدمات",
+    nav_clients: "العملاء",
+    nav_contact: "اتصل بنا",
+    hero_eyebrow: "النفط والغاز · التكنولوجيا والابتكار",
+    hero_sub: "استشارات متخصصة لصناعة النفط والغاز",
+    hero_cta1: "خدماتنا",
+    hero_cta2: "تواصل معنا",
+    scroll_hint: "تمرير",
+    about_tag: "من نحن",
+    about_title: "الأهداف",
+    about_desc: "إنشاء حلول مبتكرة تحل التحديات المعقدة، وتحسين تجربة عملائنا وتوليد القيمة في صناعة النفط والغاز.",
+    value1_title: "الإبداع والتفكير التخريبي",
+    value1_desc: "نشجع الحلول غير التقليدية والشجاعة لكسر الوضع الراهن.",
+    value2_title: "التميز",
+    value2_desc: "نلتزم بتقديم حلول عالية الجودة بتفانٍ مستمر.",
+    value3_title: "الرشاقة والقدرة على التكيف",
+    value3_desc: "نتعلم بسرعة ونستجيب بكفاءة في بيئة متغيرة باستمرار.",
+    stat1: "سنة خبرة",
+    stat2: "عملاء نشطون",
+    stat3: "مجالات الخدمة",
+    stat4: "الالتزام",
+    diff_tag: "لماذا EZO",
+    diff_title: "مميزاتنا",
+    diff_sub: "الشركة الاستشارية الوحيدة التي تدمج الهندسة والجيولوجيا والتجارة والاستيراد تحت سقف واحد.",
+    diff1_title: "35+ عامًا في السوق",
+    diff1_desc: "عقود من الخبرة العملية في صناعة النفط والغاز الوطنية والدولية.",
+    diff2_title: "فريق متعدد التخصصات",
+    diff2_desc: "مهندسون وجيولوجيون ومتخصصون في التجارة الخارجية وتطوير الأعمال.",
+    diff3_title: "انتشار عالمي",
+    diff3_desc: "شبكة من الوكلاء والشركاء الاستراتيجيين في الأسواق الدولية.",
+    diff4_title: "حلول متكاملة",
+    diff4_desc: "من الباطن إلى السوق: نغطي سلسلة القيمة الكاملة لقطاع النفط والغاز.",
+    services_tag: "ما نقوم به",
+    services_title: "خدمات متخصصة",
+    services_sub: "حلول شاملة لأكثر التحديات تعقيدًا في الصناعة.",
+    tab_eng: "الهندسة والاستشارات",
+    tab_geo: "الجيولوجيا والجيوفيزياء",
+    tab_biz: "تطوير الأعمال",
+    tab_trade: "خدمات التداول",
+    tab_comex: "خدمات التجارة الخارجية",
+    eng_title: "الهندسة والاستشارات",
+    eng_intro: "نجمع خبرة وطنية ودولية متراكمة على مدى أكثر من 35 عامًا في الصناعة.",
+    eng_1: "منحنيات الإنتاج وتقديرات الموارد المحتملة",
+    eng_2: "التقدير الحتمي والاحتمالي لأحجام الهيدروكربونات",
+    eng_3: "خطط تطوير الخزانات والحقول",
+    eng_4: "تنشيط حقول النفط الناضجة",
+    eng_5: "تقديرات الاحتياطيات (SEC و SPE)",
+    eng_6: "اقتناء وتفسير بيانات الخزانات",
+    eng_7: "دراسات الخزانات",
+    eng_8: "التقييم الاقتصادي للحقول والخزانات والمشاريع",
+    eng_9: "التقييم الشامل لأصول النفط",
+    eng_10: "مشاريع الحفر والإكمال وإعادة الدخول والتخلي عن الآبار",
+    eng_11: "مشاريع الرفع والتدفق",
+    eng_12: "المشتريات الفنية",
+    eng_extra: "تحسين العمليات · تحليل المخاطر · المشتريات المتخصصة",
+    geo_title: "الجيولوجيا والجيوفيزياء",
+    geo_intro: "خبرة كاملة في التفسير الزلزالي والنمذجة الجيولوجية والتقييم البتروفيزيائي.",
+    geo_1: "تخطيط اقتناء المسح الزلزالي",
+    geo_2: "دعم المعالجة الزلزالية",
+    geo_3: "التفسير الزلزالي",
+    geo_4: "تحليل السمات الزلزالية",
+    geo_5: "تحليل الأحواض الرسوبية",
+    geo_6: "رسم الخرائط الإقليمية",
+    geo_7: "تحديد وتقييم المناطق الواعدة",
+    geo_8: "التحليل الحتمي والاحتمالي للمعاملات البتروفيزيائية",
+    geo_9: "نماذج جيولوجية ثنائية وثلاثية الأبعاد",
+    biz_title: "تطوير الأعمال",
+    biz_intro: "استراتيجيات لتوسيع حضورك في السوق وبناء شراكات متينة وتحديد فرص نمو جديدة.",
+    biz_1: "التنقيب عن العملاء والعملاء المحتملين",
+    biz_2: "شراكات استراتيجية للمنفعة المتبادلة",
+    biz_3: "تحليل السوق: الاتجاهات والمنافسة والفرص",
+    biz_4: "نمذجة الأعمال: منتجات وقنوات ومصادر إيرادات جديدة",
+    trade_title: "خدمات التداول",
+    trade_intro: "حلول تجارة دولية شاملة، من المصادر إلى التوزيع النهائي.",
+    trade_1: "مصادر المنتجات والموردين",
+    trade_2: "فحوصات الجودة في منابع المصدرين",
+    trade_3: "الاستيراد بالطلب",
+    trade_4: "الاستيراد لحساب وأمر الغير",
+    trade_5: "تمثيل المنتجات والعلامات التجارية",
+    trade_6: "تسويق المنتجات",
+    trade_7: "الاستشارات الجمركية",
+    trade_8: "التخزين والتوزيع",
+    comex_title: "خدمات التجارة الخارجية",
+    comex_intro: "لوجستيات دولية كاملة — جوية وبحرية وبرية — مع تخليص جمركي فعّال.",
+    comex_air_title: "جوي",
+    comex_air_desc: "وكلاء في جميع أنحاء العالم يجمعون ويشحنون بضائعك بسرعة وأمان.",
+    comex_sea_title: "بحري",
+    comex_sea_desc: "عقود مع كبار الملاك البحريين في جميع موانئ العالم.",
+    comex_road_title: "بري",
+    comex_road_desc: "حلول نقل محلية لأي نوع من البضائع.",
+    comex_customs_title: "التخليص الجمركي",
+    comex_customs_desc: "تحليل شامل للعملية اللوجستية والتعريفات الجمركية والقوانين.",
+    clients_tag: "من يثق بنا",
+    clients_title: "العملاء",
+    clients_sub: "شركات رائدة في صناعة الطاقة تثق في EZO Oilfield Solutions.",
+    partners_tag: "من يدعمنا",
+    partners_title: "الشركاء",
+    partners_sub: "شراكات استراتيجية تعزز قدرتنا على التسليم ونطاق عملنا في القطاع.",
+    contact_tag: "تواصل معنا",
+    contact_title: "اتصل بنا",
+    contact_sub: "تحدث مباشرة مع الرئيس التنفيذي",
+    contact_whatsapp: "واتساب / هاتف",
+    contact_email_ceo: "بريد الرئيس التنفيذي",
+    contact_email_sales: "البريد التجاري",
+    form_title: "أرسل رسالة",
+    form_name: "الاسم",
+    form_company: "الشركة",
+    form_email: "البريد الإلكتروني",
+    form_subject: "الموضوع",
+    form_select: "اختر خدمة...",
+    form_message: "الرسالة",
+    form_send: "إرسال",
+    form_success: "جارٍ فتح عميل البريد الإلكتروني...",
+    footer_tagline: "التكنولوجيا والابتكار في صناعة النفط والغاز",
+    footer_services: "الخدمات",
+    footer_contact: "التواصل",
+    footer_rights: "جميع الحقوق محفوظة.",
+    toast_copied: "تم نسخ الرقم!",
   }
-  #main-nav.open {
-    transform: translateX(0);
-    visibility: visible;
-  }
-  #main-nav a {
-    font-size: 13px;
-    letter-spacing: 3px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  #main-nav a:last-child { border-bottom: none; }
+};
 
-  .nav-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 996;
-    opacity: 0;
-    transition: opacity 0.32s ease;
-  }
-  .nav-overlay.open {
-    display: block;
-    opacity: 1;
-  }
-
-  .service-panel { padding: 28px 20px; }
-  .service-panel-header { flex-direction: column; gap: 16px; }
-  .service-items-grid { grid-template-columns: 1fr; }
-  .about-stats { grid-template-columns: 1fr 1fr; }
-  .clients-grid { grid-template-columns: repeat(2,1fr); }
-  .partners-grid { grid-template-columns: repeat(2,1fr); }
-  .diff-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr; gap: 32px; }
-  .form-row { grid-template-columns: 1fr; }
-  .tab-btn { padding: 12px 14px; font-size: 10px; }
-  .contact-form-wrap { padding: 24px 20px; }
+function detectLang() {
+  const nav = navigator.language || navigator.userLanguage || 'pt';
+  const code = nav.toLowerCase().split('-')[0];
+  const supported = ['pt', 'en', 'es', 'fr', 'zh', 'ar'];
+  return supported.includes(code) ? code : 'en';
 }
 
-@media (max-width: 480px) {
-  .hero-cta { flex-direction: column; }
-  .btn-primary, .btn-outline { text-align: center; justify-content: center; }
-  .about-stats { grid-template-columns: 1fr 1fr; }
-  .clients-grid { grid-template-columns: 1fr 1fr; }
-  .partners-grid { grid-template-columns: 1fr 1fr; }
-  .hero-layout { flex-direction: column; gap: 24px; }
-  .hero-logo-col { width: 100%; justify-content: center; }
-  .hero-logo-ring { width: 200px; height: 200px; }
-  .hero-logo-img { width: 180px; height: 180px; }
-  .contact-item::after { display: none; }
+let currentLang = detectLang();
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = translations[lang] || translations.pt;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = t[key];
+      } else {
+        el.textContent = t[key];
+      }
+    }
+  });
+
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key]) el.placeholder = t[key];
+  });
+
+  document.querySelectorAll('.lang-dropdown-item').forEach(btn => btn.classList.remove('active'));
+  const activeItem = document.getElementById('lang-item-' + lang);
+  if (activeItem) activeItem.classList.add('active');
+
+  const flagSvgMap = {
+    pt: `<rect width="20" height="14" fill="#009C3B"/><polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/><circle cx="10" cy="7" r="3" fill="#002776"/><path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/>`,
+    en: `<rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/>`,
+    es: `<rect width="20" height="14" fill="#c60b1e"/><rect y="3.5" width="20" height="7" fill="#ffc400"/>`,
+    fr: `<rect width="20" height="14" fill="#ED2939"/><rect width="13.3" height="14" fill="#fff"/><rect width="6.6" height="14" fill="#002395"/>`,
+    zh: `<rect width="20" height="14" fill="#DE2910"/><polygon points="4,1.5 4.7,3.8 2.5,2.3 5.5,2.3 3.3,3.8" fill="#FFDE00"/>`,
+    ar: `<rect width="20" height="14" fill="#006C35"/><rect x="4" y="4" width="12" height="0.7" rx="0.3" fill="#fff"/><rect x="5" y="5.5" width="10" height="0.7" rx="0.3" fill="#fff"/><rect x="6" y="7" width="8" height="0.7" rx="0.3" fill="#fff"/>`,
+  };
+  const codeMap = { pt: 'PT', en: 'EN', es: 'ES', fr: 'FR', zh: '中文', ar: 'AR' };
+  const flagEl = document.getElementById('lang-current-flag-svg');
+  const codeEl = document.getElementById('lang-current-code');
+  if (flagEl && flagSvgMap[lang]) flagEl.innerHTML = flagSvgMap[lang];
+  if (codeEl) codeEl.textContent = codeMap[lang] || lang.toUpperCase();
+
+  document.documentElement.setAttribute('lang', lang);
+
+  if (lang === 'ar') {
+    document.body.setAttribute('dir', 'rtl');
+  } else {
+    document.body.removeAttribute('dir');
+  }
 }
-@media (max-width: 600px) {
-  .font-size-controls { gap: 2px; }
-  .font-size-icon { display: none; }
-  .font-btn { min-width: 20px; height: 18px; padding: 0 3px; }
-  .font-size-pct { min-width: 28px; font-size: 9px; }
-  .lang-bar-divider { margin: 0 4px; }
+
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const target = document.getElementById('tab-' + tabId);
+  if (target) target.classList.add('active');
+  const idx = ['engineering','geology','bizdev','trading','comex'].indexOf(tabId);
+  const btns = document.querySelectorAll('.tab-btn');
+  if (btns[idx]) btns[idx].classList.add('active');
 }
+
+// — menu lateral mobile
+function toggleMenu() {
+  const nav = document.getElementById('main-nav');
+  const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('nav-overlay');
+  const isOpen = nav.classList.contains('open');
+
+  if (isOpen) {
+    nav.classList.remove('open');
+    hamburger.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    nav.classList.add('open');
+    hamburger.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMenu() {
+  const nav = document.getElementById('main-nav');
+  const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('nav-overlay');
+  nav.classList.remove('open');
+  hamburger.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', () => closeMenu());
+});
+
+function submitForm(e) {
+  e.preventDefault();
+  const name    = document.getElementById('form-name')?.value.trim() || '';
+  const company = document.getElementById('form-company')?.value.trim() || '';
+  const email   = document.getElementById('form-email')?.value.trim() || '';
+  const subject = document.getElementById('form-subject')?.value || '';
+  const message = document.getElementById('form-message')?.value.trim() || '';
+
+  if (!name || !email || !message) {
+    showToast('Preencha os campos obrigatórios.');
+    return;
+  }
+
+  const mailSubject = encodeURIComponent((subject || 'Contato') + (company ? ' — ' + company : ''));
+  const mailBody    = encodeURIComponent(
+    `Nome: ${name}\nEmpresa: ${company}\nE-mail: ${email}\n\n${message}`
+  );
+  const mailto = `mailto:vendas@ezosolutions.com.br?subject=${mailSubject}&body=${mailBody}`;
+
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display  = 'block';
+  setTimeout(() => { window.location.href = mailto; }, 500);
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+const sections = ['about','services','differentials','clients','partners','contact'];
+
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  header.classList.toggle('scrolled', window.scrollY > 60);
+
+  const scrollMid = window.scrollY + window.innerHeight / 3;
+  let active = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollMid) active = id;
+  });
+  document.querySelectorAll('#main-nav a').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href === '#' + active) {
+      a.classList.add('active');
+    } else {
+      a.classList.remove('active');
+    }
+  });
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal-section').forEach(el => {
+  revealObserver.observe(el);
+});
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach((el) => {
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  cardObserver.observe(el);
+});
+
+function toggleLangDropdown() {
+  const wrapper = document.getElementById('lang-dropdown-wrapper');
+  wrapper.classList.toggle('open');
+}
+
+function closeLangDropdown() {
+  const wrapper = document.getElementById('lang-dropdown-wrapper');
+  wrapper.classList.remove('open');
+}
+
+document.addEventListener('click', (e) => {
+  const wrapper = document.getElementById('lang-dropdown-wrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    wrapper.classList.remove('open');
+  }
+});
+
+function loadPartners() {
+  const grid = document.getElementById('partners-grid');
+  if (!grid) return;
+
+  fetch('./parceiros/index.json')
+    .then(res => {
+      if (!res.ok) throw new Error('no manifest');
+      return res.json();
+    })
+    .then(files => {
+      renderPartners(grid, files);
+    })
+    .catch(() => {
+      fetch('./parceiros/')
+        .then(res => res.text())
+        .then(html => {
+          const matches = [...html.matchAll(/href="([^"?#/][^"]*\.png)"/gi)];
+          const files = [...new Set(matches.map(m => m[1]))];
+          if (files.length > 0) {
+            renderPartners(grid, files);
+          } else {
+            showPartnersPlaceholder(grid);
+          }
+        })
+        .catch(() => showPartnersPlaceholder(grid));
+    });
+}
+
+function renderPartners(grid, files) {
+  if (!files || files.length === 0) {
+    showPartnersPlaceholder(grid);
+    return;
+  }
+  grid.innerHTML = '';
+  files.forEach((file, i) => {
+    const name = file.replace(/\.(png|jpg|jpeg|webp)$/i, '');
+    const card = document.createElement('div');
+    card.className = 'partner-card';
+    card.style.transitionDelay = (i * 80) + 'ms';
+    card.innerHTML = `
+      <img src="parceiros/${file}" alt="${name}" class="partner-logo" onerror="this.style.display='none'">
+      <span class="partner-name">${name}</span>
+    `;
+    grid.appendChild(card);
+    cardObserver.observe(card);
+  });
+}
+
+function showPartnersPlaceholder(grid) {
+  grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;padding:20px 0;">Crie o arquivo <code>parceiros/index.json</code> com a lista de logos. Ex: <code>["EMPRESA.png"]</code></p>';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setLang(currentLang);
+  loadPartners();
+
+  const checkVisible = () => {
+    document.querySelectorAll('.reveal-section').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      }
+    });
+    document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  checkVisible();
+  setTimeout(checkVisible, 100);
+  setTimeout(checkVisible, 400);
+});
+
+const FONT_LEVELS = [1, 2, 3, 4, 5, 6, 7, 8];
+const FONT_PCT_MAP = { 1: '70%', 2: '85%', 3: '100%', 4: '120%', 5: '145%', 6: '175%', 7: '210%', 8: '250%' };
+let currentFontLevel = 3;
+
+function applyFontLevel(level) {
+  const body = document.body;
+  FONT_LEVELS.forEach(l => body.classList.remove('font-size-' + l));
+  body.classList.add('font-size-' + level);
+  currentFontLevel = level;
+
+  const decrease = document.getElementById('font-decrease');
+  const increase = document.getElementById('font-increase');
+  const pctEl    = document.getElementById('font-size-pct');
+
+  if (decrease) decrease.disabled = (level === 1);
+  if (increase) increase.disabled = (level === 8);
+
+  if (pctEl) {
+    pctEl.textContent = FONT_PCT_MAP[level] || '100%';
+    pctEl.classList.toggle('is-default', level === 3);
+    pctEl.classList.toggle('is-changed', level !== 3);
+    pctEl.title = level === 3 ? 'Tamanho padrão' : 'Clique para restaurar o tamanho padrão';
+  }
+
+  try { localStorage.setItem('ezo_font_level', level); } catch(e) {}
+}
+
+function changeFontSize(delta) {
+  const next = Math.min(8, Math.max(1, currentFontLevel + delta));
+  applyFontLevel(next);
+}
+
+function resetFontSize() {
+  applyFontLevel(3);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const pctEl = document.getElementById('font-size-pct');
+  if (pctEl) pctEl.addEventListener('click', resetFontSize);
+});
+
+(function() {
+  try {
+    const saved = parseInt(localStorage.getItem('ezo_font_level'));
+    if (saved >= 1 && saved <= 8) {
+      document.addEventListener('DOMContentLoaded', () => applyFontLevel(saved));
+      return;
+    }
+  } catch(e) {}
+  document.addEventListener('DOMContentLoaded', () => applyFontLevel(3));
+})();
