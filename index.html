@@ -251,11 +251,67 @@
     <p class="section-sub light" data-i18n="services_sub">Soluções completas para os desafios mais complexos da indústria.</p>
 
     <div class="services-tabs">
-      <button class="tab-btn active" onclick="showTab('engineering')" data-i18n="tab_eng">Engenharia & Consultoria</button>
-      <button class="tab-btn" onclick="showTab('geology')" data-i18n="tab_geo">Geologia & Geofísica</button>
-      <button class="tab-btn" onclick="showTab('bizdev')" data-i18n="tab_biz">Desenvolvimento de Negócios</button>
-      <button class="tab-btn" onclick="showTab('trading')" data-i18n="tab_trade">Trading Services</button>
-      <button class="tab-btn" onclick="showTab('comex')" data-i18n="tab_comex">Comex Services</button>
+      <button class="tab-btn active" onclick="showTab('engineering')" data-tab="engineering">
+        <span class="tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+            <line x1="12" y1="2" x2="5" y2="10"/><line x1="12" y1="2" x2="19" y2="10"/>
+            <line x1="5" y1="10" x2="19" y2="10"/>
+            <line x1="8" y1="10" x2="10" y2="22"/><line x1="16" y1="10" x2="14" y2="22"/>
+            <line x1="10" y1="22" x2="14" y2="22"/>
+            <line x1="12" y1="2" x2="12" y2="10"/>
+            <line x1="8.5" y1="6" x2="15.5" y2="6"/>
+          </svg>
+        </span>
+        <span class="tab-label" data-i18n="tab_eng">Engenharia & Consultoria</span>
+      </button>
+      <button class="tab-btn" onclick="showTab('geology')" data-tab="geology">
+        <span class="tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+            <path d="M3 7 Q7 5 12 7 Q17 9 21 7"/>
+            <path d="M3 11 Q7 9 12 11 Q17 13 21 11"/>
+            <path d="M3 15 Q7 13 12 15 Q17 17 21 15"/>
+            <path d="M3 19 Q7 17 12 19 Q17 21 21 19"/>
+            <path d="M8 3 Q9 7 8 11 Q7 15 8 19" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <span class="tab-label" data-i18n="tab_geo">Geologia & Geofísica</span>
+      </button>
+      <button class="tab-btn" onclick="showTab('bizdev')" data-tab="bizdev">
+        <span class="tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+            <path d="M2 12 L7 7 L10 10 L14 6 L17 9"/>
+            <path d="M17 9 L22 9 L22 14"/>
+            <circle cx="5" cy="19" r="2"/>
+            <circle cx="19" cy="19" r="2"/>
+            <path d="M7 19 L17 19"/>
+            <path d="M5 17 L5 13 Q5 12 6 11.5 L9.5 10 L14.5 10 L18 11.5 Q19 12 19 13 L19 17"/>
+          </svg>
+        </span>
+        <span class="tab-label" data-i18n="tab_biz">Desenvolvimento de Negócios</span>
+      </button>
+      <button class="tab-btn" onclick="showTab('trading')" data-tab="trading">
+        <span class="tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+            <rect x="2" y="7" width="6" height="6" rx="1"/>
+            <rect x="16" y="11" width="6" height="6" rx="1"/>
+            <path d="M8 10 L13 10 L13 8 L17 11 L13 14 L13 12 L8 12"/>
+            <path d="M16 14 L11 14 L11 16 L7 13 L11 10 L11 12 L16 12"/>
+          </svg>
+        </span>
+        <span class="tab-label" data-i18n="tab_trade">Trading Services</span>
+      </button>
+      <button class="tab-btn" onclick="showTab('comex')" data-tab="comex">
+        <span class="tab-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+            <circle cx="12" cy="12" r="9"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <path d="M12 3a15.3 15.3 0 0 1 4 9 15.3 15.3 0 0 1-4 9 15.3 15.3 0 0 1-4-9 15.3 15.3 0 0 1 4-9z"/>
+            <path d="M6 8 Q9 7 12 8 Q15 9 18 8" stroke-width="1"/>
+            <path d="M6 16 Q9 15 12 16 Q15 17 18 16" stroke-width="1"/>
+          </svg>
+        </span>
+        <span class="tab-label" data-i18n="tab_comex">Comex Services</span>
+      </button>
     </div>
 
     <div class="tab-content active" id="tab-engineering">
@@ -622,7 +678,7 @@
             </div>
           </a>
 
-          <a href="mailto:sabp@ezosolutions.com.br" class="contact-item email-ceo">
+          <a href="/cdn-cgi/l/email-protection#cab9aba8ba8aafb0a5b9a5a6bfbea3a5a4b9e4a9a5a7e4a8b8" class="contact-item email-ceo">
             <div class="contact-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -632,11 +688,11 @@
             </div>
             <div class="contact-item-text">
               <span class="contact-item-label" data-i18n="contact_email_ceo">E-mail CEO</span>
-              <span class="contact-item-value">sabp@ezosolutions.com.br</span>
+              <span class="contact-item-value"><span class="__cf_email__" data-cfemail="6c1f0d0e1c2c0916031f030019180503021f420f0301420e1e">[email&#160;protected]</span></span>
             </div>
           </a>
 
-          <a href="mailto:vendas@ezosolutions.com.br" class="contact-item email-sales">
+          <a href="/cdn-cgi/l/email-protection#88feede6ece9fbc8edf2e7fbe7e4fdfce1e7e6fba6ebe7e5a6eafa" class="contact-item email-sales">
             <div class="contact-item-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -646,7 +702,7 @@
             </div>
             <div class="contact-item-text">
               <span class="contact-item-label" data-i18n="contact_email_sales">E-mail Comercial</span>
-              <span class="contact-item-value">vendas@ezosolutions.com.br</span>
+              <span class="contact-item-value"><span class="__cf_email__" data-cfemail="a9dfccc7cdc8dae9ccd3c6dac6c5dcddc0c6c7da87cac6c487cbdb">[email&#160;protected]</span></span>
             </div>
           </a>
         </div>
@@ -676,23 +732,5 @@
       <div class="footer-contact">
         <h4 data-i18n="footer_contact">Contato</h4>
         <a href="https://wa.me/5521999424216" target="_blank" rel="noopener noreferrer">+55 21 99942-4216</a>
-        <a href="mailto:sabp@ezosolutions.com.br">sabp@ezosolutions.com.br</a>
-        <a href="mailto:vendas@ezosolutions.com.br">vendas@ezosolutions.com.br</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 EZO Oilfield Solutions. <span data-i18n="footer_rights">Todos os direitos reservados.</span></span>
-    </div>
-  </div>
-</footer>
-
-<div class="toast" id="toast"></div>
-
-
-<button id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
-
-<script src="script.js"></script>
-</body>
-</html>
+        <a href="/cdn-cgi/l/email-protection#c2b1a3a0b282a7b8adb1adaeb7b6abadacb1eca1adafeca0b0"><span class="__cf_email__" data-cfemail="72011310023217081d011d1e07061b1d1c015c111d1f5c1000">[email&#160;protected]</span></a>
+        <a href="/cdn-cgi/l/email-protection#c3b5a6ada7a2b083a6b9acb0acafb6b7aaacadb0eda0acaeeda1b1"><span class="__cf_email__" data-cfemail="2b5d4e454f4a586b4e51445844475e5f4244455805484446054959">[em
