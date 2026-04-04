@@ -971,7 +971,7 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-const sections = ['about','services','differentials','clients','partners','contact'];
+const sections = ['sobre','serviços','diferenciais','clientes','parceiros','contato'];
 
 
 function updateBackToTop() {
