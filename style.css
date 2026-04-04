@@ -243,7 +243,7 @@ body::-webkit-scrollbar { display: none; }
 .section-sub { font-size: 15px; font-weight: 300; color: var(--steel); max-width: 540px; margin-bottom: 56px; line-height: 1.85; }
 .section-sub.light { color: var(--steel-hi); }
 
-#about { background: var(--section-alt); color: var(--ink); padding: 112px 0; }
+#about, #sobre { background: var(--section-alt); color: var(--ink); padding: 120px 0; }
 .about-grid { display: grid; grid-template-columns: 1fr 400px; gap: 72px; align-items: start; }
 .about-text h2 { font-family: var(--display); font-size: 56px; letter-spacing: 4px; color: var(--ink); margin-bottom: 22px; line-height: 0.95; font-weight: 800; }
 .about-text > p { font-size: 15px; font-weight: 300; color: var(--steel); margin-bottom: 44px; max-width: 520px; line-height: 1.85; }
@@ -277,7 +277,7 @@ body::-webkit-scrollbar { display: none; }
 .stat-num { font-family: var(--display); font-size: clamp(32px, 4.5vw, 48px); color: var(--chrome-hi); letter-spacing: 2px; line-height: 1; font-weight: 800; }
 .stat-label { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-hi); margin-top: 10px; text-align: center; line-height: 1.5; word-break: break-word; overflow-wrap: break-word; hyphens: auto; width: 100%; padding: 0 4px; }
 
-#services { background: var(--ink); padding: 112px 0; }
+#services, #servicos { background: var(--ink); padding: 120px 0; }
 
 .services-tabs {
   display: grid;
@@ -445,9 +445,9 @@ body::-webkit-scrollbar { display: none; }
 .diff-card h3 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--ivory); margin-bottom: 12px; }
 .diff-card p { font-size: 14px; font-weight: 300; color: var(--steel-hi); line-height: 1.8; }
 
-#clients { background: var(--section-alt); color: var(--ink); padding: 112px 0; }
-#clients .section-title { color: var(--ink); }
-#clients .section-sub { color: var(--steel); }
+#clients, #clientes { background: var(--section-alt); color: var(--ink); padding: 120px 0; }
+#clients .section-title, #clientes .section-title { color: var(--ink); }
+#clients .section-sub, #clientes .section-sub { color: var(--steel); }
 .clients-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
 .client-card {
   background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: var(--r2);
@@ -466,9 +466,9 @@ body::-webkit-scrollbar { display: none; }
 .client-card:hover .client-logo { transform: scale(1.05); }
 .client-name { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--steel); text-align: center; }
 
-#partners { background: var(--section-alt); color: var(--ink); padding: 40px 0 112px; }
-#partners .section-title { color: var(--ink); }
-#partners .section-sub { color: var(--steel); }
+#partners, #parceiros { background: var(--section-alt); color: var(--ink); padding: 0 0 120px; }
+#partners .section-title, #parceiros .section-title { color: var(--ink); }
+#partners .section-sub, #parceiros .section-sub { color: var(--steel); }
 .partners-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
 .partner-card {
   background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: var(--r2);
@@ -482,7 +482,7 @@ body::-webkit-scrollbar { display: none; }
 .partner-card:hover .partner-logo { transform: scale(1.05); }
 .partner-name { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--steel); text-align: center; }
 
-#contact { position: relative; background: var(--ink); padding: 100px 0 100px; overflow: hidden; }
+#contact, #contato { position: relative; background: var(--ink); padding: 120px 0; overflow: hidden; }
 .contact-bg { position: absolute; inset: 0; }
 .contact-glow {
   position: absolute; top: 0; right: -10%; width: 60vw; height: 100%;
