@@ -98,6 +98,10 @@ const translations = {
     eng_11: "Projetos de elevação e escoamento",
     eng_12: "Procurement técnico",
     eng_extra: "Otimização de operações · Análise de risco · Procurement especializado",
+    chart_eng_label: "Curva de Declínio de Produção — Modelo Exponencial",
+    chart_eng_revit: "Revitalização",
+    chart_eng_decline: "Declínio natural",
+    chart_eng_post: "Pós-revitalização",
     geo_title: "Geologia & Geofísica",
     geo_intro: "Expertise abrangente em interpretação sísmica, modelagem geológica e avaliação petrofísica para maximizar o potencial dos seus ativos exploratórios e de produção.",
     geo_1: "Planejamento de levantamentos sísmicos",
@@ -109,6 +113,9 @@ const translations = {
     geo_7: "Identificação e avaliação de plays, leads e prospectos",
     geo_8: "Análises determinísticas e probabilísticas de parâmetros petrofísicos",
     geo_9: "Modelos geológicos 2D e 3D de reservatórios de óleo e gás",
+    chart_geo_label: "Perfil Sísmico Esquemático — Seção 2D com Refletores",
+    chart_geo_reservoir: "RESERVATÓRIO",
+    chart_geo_fault: "falha",
     biz_title: "Desenvolvimento de negócios",
     biz_intro: "Estratégias estruturadas para ampliar sua presença no mercado, consolidar parcerias estratégicas e identificar novas oportunidades de crescimento sustentável.",
     biz_1: "Prospecção de clientes e identificação de novos leads",
@@ -221,6 +228,10 @@ const translations = {
     eng_11: "Lifting and flow projects",
     eng_12: "Technical procurement",
     eng_extra: "Operations optimization · Risk analysis · Specialized procurement",
+    chart_eng_label: "Production Decline Curve — Exponential Model",
+    chart_eng_revit: "Revitalization",
+    chart_eng_decline: "Natural decline",
+    chart_eng_post: "Post-revitalization",
     geo_title: "Geology & Geophysics",
     geo_intro: "Complete expertise in seismic interpretation, geological modeling and petrophysical evaluation to maximize asset potential.",
     geo_1: "Seismic survey acquisition planning",
@@ -232,6 +243,9 @@ const translations = {
     geo_7: "Identification and evaluation of plays, leads and prospects",
     geo_8: "Deterministic and probabilistic analysis of petrophysical parameters",
     geo_9: "2D and 3D geological models of oil and gas reservoirs",
+    chart_geo_label: "Schematic Seismic Profile — 2D Section with Reflectors",
+    chart_geo_reservoir: "RESERVOIR",
+    chart_geo_fault: "fault",
     biz_title: "Business development",
     biz_intro: "Strategies to expand your market presence, build solid partnerships and identify new growth opportunities.",
     biz_1: "Client prospecting and new leads",
@@ -344,6 +358,10 @@ const translations = {
     eng_11: "Proyectos de elevación y flujo",
     eng_12: "Procurement técnico",
     eng_extra: "Optimización de operaciones · Análisis de riesgo · Procurement especializado",
+    chart_eng_label: "Curva de Declive de Producción — Modelo Exponencial",
+    chart_eng_revit: "Revitalización",
+    chart_eng_decline: "Declive natural",
+    chart_eng_post: "Post-revitalización",
     geo_title: "Geología & Geofísica",
     geo_intro: "Experiencia completa en interpretación sísmica, modelado geológico y evaluación petrofísica para maximizar el potencial de sus activos.",
     geo_1: "Planificación de adquisición de levantamiento sísmico",
@@ -355,6 +373,9 @@ const translations = {
     geo_7: "Identificación y evaluación de plays, leads y prospectos",
     geo_8: "Análisis determinísticos y probabilísticos de parámetros petrofísicos",
     geo_9: "Modelos geológicos 2D y 3D de reservorios de petróleo y gas",
+    chart_geo_label: "Perfil Sísmico Esquemático — Sección 2D con Reflectores",
+    chart_geo_reservoir: "YACIMIENTO",
+    chart_geo_fault: "falla",
     biz_title: "Desarrollo de negocios",
     biz_intro: "Estrategias para expandir su presencia en el mercado, construir alianzas sólidas e identificar nuevas oportunidades de crecimiento.",
     biz_1: "Prospección de clientes y nuevos leads",
@@ -467,6 +488,10 @@ const translations = {
     eng_11: "Projets de levage et d'écoulement",
     eng_12: "Approvisionnement technique",
     eng_extra: "Optimisation des opérations · Analyse des risques · Approvisionnement spécialisé",
+    chart_eng_label: "Courbe de Déclin de Production — Modèle Exponentiel",
+    chart_eng_revit: "Revitalisation",
+    chart_eng_decline: "Déclin naturel",
+    chart_eng_post: "Post-revitalisation",
     geo_title: "Géologie & Géophysique",
     geo_intro: "Expertise complète en interprétation sismique, modélisation géologique et évaluation pétrophysique.",
     geo_1: "Planification de l'acquisition du levé sismique",
@@ -478,6 +503,9 @@ const translations = {
     geo_7: "Identification et évaluation de plays, leads et prospects",
     geo_8: "Analyses déterministes et probabilistes des paramètres pétrophysiques",
     geo_9: "Modèles géologiques 2D et 3D de réservoirs de pétrole et de gaz",
+    chart_geo_label: "Profil Sismique Schématique — Section 2D avec Réflecteurs",
+    chart_geo_reservoir: "RÉSERVOIR",
+    chart_geo_fault: "faille",
     biz_title: "Développement commercial",
     biz_intro: "Stratégies pour élargir votre présence sur le marché, établir des partenariats solides et identifier de nouvelles opportunités.",
     biz_1: "Prospection de clients et nouveaux leads",
@@ -590,6 +618,10 @@ const translations = {
     eng_11: "举升和流动项目",
     eng_12: "技术采购",
     eng_extra: "运营优化 · 风险分析 · 专业采购",
+    chart_eng_label: "产量递减曲线 — 指数模型",
+    chart_eng_revit: "振兴",
+    chart_eng_decline: "自然递减",
+    chart_eng_post: "振兴后",
     geo_title: "地质与地球物理",
     geo_intro: "地震解释、地质建模和岩石物理评价的完整专业知识。",
     geo_1: "地震勘探采集规划",
@@ -601,6 +633,9 @@ const translations = {
     geo_7: "成藏、圈闭和远景区识别与评价",
     geo_8: "岩石物理参数确定性和概率性分析",
     geo_9: "油气储层2D和3D地质模型",
+    chart_geo_label: "地震剖面示意图 — 带反射层的2D剖面",
+    chart_geo_reservoir: "储层",
+    chart_geo_fault: "断层",
     biz_title: "业务发展",
     biz_intro: "扩大市场存在、建立稳固合作关系、识别新增长机会的战略。",
     biz_1: "客户开发和新线索",
@@ -713,6 +748,10 @@ const translations = {
     eng_11: "مشاريع الرفع والتدفق",
     eng_12: "المشتريات الفنية",
     eng_extra: "تحسين العمليات · تحليل المخاطر · المشتريات المتخصصة",
+    chart_eng_label: "منحنى تراجع الإنتاج — النموذج الأسي",
+    chart_eng_revit: "تنشيط",
+    chart_eng_decline: "التراجع الطبيعي",
+    chart_eng_post: "ما بعد التنشيط",
     geo_title: "الجيولوجيا والجيوفيزياء",
     geo_intro: "خبرة كاملة في التفسير الزلزالي والنمذجة الجيولوجية والتقييم البتروفيزيائي.",
     geo_1: "تخطيط اقتناء المسح الزلزالي",
@@ -724,6 +763,9 @@ const translations = {
     geo_7: "تحديد وتقييم المناطق الواعدة",
     geo_8: "التحليل الحتمي والاحتمالي للمعاملات البتروفيزيائية",
     geo_9: "نماذج جيولوجية ثنائية وثلاثية الأبعاد",
+    chart_geo_label: "مقطع زلزالي تخطيطي — قطاع 2D مع عاكسات",
+    chart_geo_reservoir: "الخزان",
+    chart_geo_fault: "صدع",
     biz_title: "تطوير الأعمال",
     biz_intro: "استراتيجيات لتوسيع حضورك في السوق وبناء شراكات متينة وتحديد فرص نمو جديدة.",
     biz_1: "التنقيب عن العملاء والعملاء المحتملين",
@@ -788,6 +830,24 @@ function detectLang() {
 
 let currentLang = detectLang();
 
+function applyChartTranslations(t) {
+  const engLabel = document.getElementById('chart-eng-label');
+  if (engLabel) engLabel.textContent = t.chart_eng_label || '';
+  const engRevit = document.getElementById('chart-eng-revit');
+  if (engRevit) engRevit.textContent = t.chart_eng_revit || '';
+  const engDecline = document.getElementById('chart-eng-decline');
+  if (engDecline) engDecline.textContent = t.chart_eng_decline || '';
+  const engPost = document.getElementById('chart-eng-post');
+  if (engPost) engPost.textContent = t.chart_eng_post || '';
+
+  const geoLabel = document.getElementById('chart-geo-label');
+  if (geoLabel) geoLabel.textContent = t.chart_geo_label || '';
+  const geoReservoir = document.getElementById('chart-geo-reservoir');
+  if (geoReservoir) geoReservoir.textContent = t.chart_geo_reservoir || '';
+  const geoFault = document.getElementById('chart-geo-fault');
+  if (geoFault) geoFault.textContent = t.chart_geo_fault || '';
+}
+
 function setLang(lang) {
   currentLang = lang;
   const t = translations[lang] || translations.pt;
@@ -807,6 +867,8 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n-ph');
     if (t[key]) el.placeholder = t[key];
   });
+
+  applyChartTranslations(t);
 
   document.querySelectorAll('.lang-dropdown-item').forEach(btn => btn.classList.remove('active'));
   const activeItem = document.getElementById('lang-item-' + lang);
@@ -845,7 +907,6 @@ function showTab(tabId) {
   if (btns[idx]) btns[idx].classList.add('active');
 }
 
-// — menu lateral mobile
 function toggleMenu() {
   const nav = document.getElementById('main-nav');
   const hamburger = document.getElementById('hamburger');
@@ -1123,59 +1184,3 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch(e) {}
   document.addEventListener('DOMContentLoaded', () => applyFontLevel(3));
 })();
-
-
-// ── Market Ticker ──────────────────────────────────────────
-async function loadTicker() {
-  try {
-    const usdRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL');
-    if (usdRes.ok) {
-      const d = await usdRes.json();
-      setTickerPrice('t-usd', d.rates.BRL.toFixed(2));
-    }
-  } catch(e) {}
-
-  try {
-    // Brent & WTI via open proxy (no key)
-    const oilRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?interval=1d&range=1d');
-    if (oilRes.ok) {
-      const d = await oilRes.json();
-      const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
-      if (price) setTickerPrice('t-brent', price.toFixed(2));
-    }
-  } catch(e) {}
-
-  try {
-    const wtiRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?interval=1d&range=1d');
-    if (wtiRes.ok) {
-      const d = await wtiRes.json();
-      const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
-      if (price) setTickerPrice('t-wti', price.toFixed(2));
-    }
-  } catch(e) {}
-
-  try {
-    const gasRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/NG%3DF?interval=1d&range=1d');
-    if (gasRes.ok) {
-      const d = await gasRes.json();
-      const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
-      if (price) setTickerPrice('t-gas', price.toFixed(2));
-    }
-  } catch(e) {}
-}
-
-function setTickerPrice(id, val) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const prev = parseFloat(el.dataset.prev || val);
-  el.textContent = val;
-  el.dataset.prev = val;
-  el.classList.remove('up','down');
-  if (parseFloat(val) > prev) el.classList.add('up');
-  else if (parseFloat(val) < prev) el.classList.add('down');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  loadTicker();
-  setInterval(loadTicker, 60000); // refresh every 60s
-});
