@@ -23,6 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <div id="lang-bar">
   <div class="lang-inner">
@@ -653,6 +654,11 @@
 </footer>
 
 <div class="toast" id="toast"></div>
+
+
+<button id="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <script src="script.js"></script>
 </body>

@@ -912,9 +912,31 @@ function showToast(msg) {
 
 const sections = ['about','services','differentials','clients','partners','contact'];
 
+function updateScrollProgress() {
+  const progress = document.getElementById('scroll-progress');
+  if (!progress) return;
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progress.style.width = pct + '%';
+}
+
+function updateBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  if (window.scrollY > 400) {
+    btn.classList.add('visible');
+  } else {
+    btn.classList.remove('visible');
+  }
+}
+
 window.addEventListener('scroll', () => {
   const header = document.getElementById('header');
   header.classList.toggle('scrolled', window.scrollY > 60);
+
+  updateScrollProgress();
+  updateBackToTop();
 
   const scrollMid = window.scrollY + window.innerHeight / 3;
   let active = '';
@@ -953,7 +975,7 @@ const cardObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
 document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card, .comex-card, .sitem, .diff-card').forEach((el) => {
-  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   cardObserver.observe(el);
 });
 
