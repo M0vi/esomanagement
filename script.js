@@ -1,11 +1,9 @@
-// Copy protection
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && ['c','a','u','s','p'].includes(e.key.toLowerCase())) e.preventDefault();
   if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))) e.preventDefault();
 });
 
-// Animated number counter
 function animateCounter(el, target, suffix = '') {
   const duration = 1800;
   const start = performance.now();
@@ -811,12 +809,12 @@ function setLang(lang) {
     if (t[key]) el.placeholder = t[key];
   });
 
-  // Update dropdown active state
+  
   document.querySelectorAll('.lang-dropdown-item').forEach(btn => btn.classList.remove('active'));
   const activeItem = document.getElementById('lang-item-' + lang);
   if (activeItem) activeItem.classList.add('active');
 
-  // Update dropdown toggle to show current language flag and code
+  
   const flagSvgMap = {
     pt: `<rect width="20" height="14" fill="#009C3B"/><polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/><circle cx="10" cy="7" r="3" fill="#002776"/><path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/>`,
     en: `<rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/>`,
@@ -851,8 +849,22 @@ function showTab(tabId) {
 }
 
 function toggleMenu() {
-  document.getElementById('main-nav').classList.toggle('open');
+  const nav = document.getElementById('main-nav');
+  const hamburger = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  hamburger.classList.toggle('open');
 }
+
+document.addEventListener('click', (e) => {
+  const nav = document.getElementById('main-nav');
+  const hamburger = document.getElementById('hamburger');
+  if (nav && nav.classList.contains('open')) {
+    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+      nav.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  }
+});
 
 function submitForm(e) {
   e.preventDefault();
@@ -910,6 +922,7 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
     document.getElementById('main-nav')?.classList.remove('open');
+    document.getElementById('hamburger')?.classList.remove('open');
   });
 });
 
@@ -938,7 +951,6 @@ document.querySelectorAll('.stat-card, .value-item, .client-card, .partner-card,
   cardObserver.observe(el);
 });
 
-// Language dropdown functions
 function toggleLangDropdown() {
   const wrapper = document.getElementById('lang-dropdown-wrapper');
   wrapper.classList.toggle('open');
@@ -949,7 +961,6 @@ function closeLangDropdown() {
   wrapper.classList.remove('open');
 }
 
-// Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
   const wrapper = document.getElementById('lang-dropdown-wrapper');
   if (wrapper && !wrapper.contains(e.target)) {
@@ -957,7 +968,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Load partners from /parceiros/ folder
 function loadPartners() {
   const grid = document.getElementById('partners-grid');
   if (!grid) return;
@@ -1033,7 +1043,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(checkVisible, 100);
   setTimeout(checkVisible, 400);
 });
-// ===== FONT SIZE CONTROLS =====
+
 const FONT_LEVELS = [1, 2, 3, 4, 5, 6, 7, 8];
 const FONT_PCT_MAP = { 1: '70%', 2: '85%', 3: '100%', 4: '120%', 5: '145%', 6: '175%', 7: '210%', 8: '250%' };
 let currentFontLevel = 3;

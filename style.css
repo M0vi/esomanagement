@@ -92,7 +92,6 @@ img { max-width: 100%; height: auto; }
 
 .lang-flags { display: flex; gap: 4px; align-items: center; }
 
-/* Language dropdown styles */
 .lang-dropdown-wrapper {
   position: relative;
   display: flex;
@@ -214,7 +213,6 @@ img { max-width: 100%; height: auto; }
   flex-shrink: 0;
 }
 
-/* Hide old lang-btn styles */
 .lang-btn {
   display: none !important;
 }
@@ -321,6 +319,7 @@ img { max-width: 100%; height: auto; }
   border: none;
   cursor: pointer;
   padding: 4px;
+  z-index: 1000;
 }
 
 .hamburger span {
@@ -329,6 +328,17 @@ img { max-width: 100%; height: auto; }
   height: 2px;
   background: var(--white);
   transition: var(--transition);
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 #hero {
@@ -513,7 +523,6 @@ img { max-width: 100%; height: auto; }
   height: 300px;
   object-fit: contain;
 }
-
 
 .btn-primary {
   display: inline-flex;
@@ -1163,7 +1172,6 @@ img { max-width: 100%; height: auto; }
   display: block;
 }
 
-/* Partners Section */
 #partners {
   background: var(--section-bg);
   color: #111111;
@@ -1737,15 +1745,19 @@ img { max-width: 100%; height: auto; }
   .container { padding: 0 20px; }
   #main-nav {
     display: none;
-    position: absolute;
-    top: 72px;
+    position: fixed;
+    top: 112px;
     left: 0;
     right: 0;
-    background: rgba(10,15,30,0.98);
+    background: rgba(10, 10, 10, 0.99);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     flex-direction: column;
-    padding: 20px 32px;
+    padding: 20px 32px 28px;
     gap: 20px;
     border-bottom: 1px solid rgba(176,141,87,0.2);
+    z-index: 998;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
   }
   #main-nav.open { display: flex; }
   .hamburger { display: flex; }
@@ -1787,7 +1799,7 @@ img { max-width: 100%; height: auto; }
   .hero-logo-ring { width: 240px; height: 240px; }
   .hero-logo-img { width: 220px; height: 220px; }
 }
-/* ===== FONT SIZE CONTROLS ===== */
+
 .font-size-controls {
   display: flex;
   align-items: center;
@@ -1836,12 +1848,10 @@ img { max-width: 100%; height: auto; }
   cursor: not-allowed;
 }
 
-/* Decrease button — smaller A */
 #font-decrease {
   font-size: 10px;
 }
 
-/* Increase button — larger A */
 .font-btn-large {
   font-size: 14px;
 }
@@ -1856,7 +1866,6 @@ img { max-width: 100%; height: auto; }
   margin-top: 1px;
 }
 
-/* Percentage indicator — clickable to reset */
 .font-size-pct {
   font-family: var(--font-cond);
   font-size: 11px;
@@ -1898,14 +1907,57 @@ img { max-width: 100%; height: auto; }
   flex-shrink: 0;
 }
 
-/* Font size levels applied to body */
-body.font-size-1 { font-size: 14px; }
-body.font-size-2 { font-size: 15px; }
-body.font-size-3 { font-size: 16px; }  /* default = 100% */
+body.font-size-1 { font-size: 12px; }
+body.font-size-2 { font-size: 14px; }
+body.font-size-3 { font-size: 16px; }
 body.font-size-4 { font-size: 18px; }
 body.font-size-5 { font-size: 20px; }
+body.font-size-6 { font-size: 22px; }
+body.font-size-7 { font-size: 24px; }
+body.font-size-8 { font-size: 27px; }
 
-/* Scale text-heavy elements */
+p,
+.sitem,
+.service-extra,
+.value-item p,
+.diff-card p,
+.section-sub,
+.comex-card p,
+.contact-item-value,
+.footer-brand p,
+.about-text > p,
+.service-panel-header p,
+.hero-sub,
+.contact-person-role,
+.contact-person span,
+.footer-links a,
+.footer-contact a,
+.footer-bottom,
+.tab-btn,
+.stat-label,
+.biz-items li,
+.lang-dropdown-item span {
+  font-size: 1em;
+}
+
+body.font-size-4 h2, body.font-size-5 h2,
+body.font-size-6 h2, body.font-size-7 h2, body.font-size-8 h2 {
+  font-size: clamp(1.8em, 4vw, 2.8em);
+}
+
+body.font-size-4 h3, body.font-size-5 h3,
+body.font-size-6 h3, body.font-size-7 h3, body.font-size-8 h3 {
+  font-size: clamp(1.2em, 2.5vw, 1.8em);
+}
+
+body.font-size-4 .section-title,
+body.font-size-5 .section-title,
+body.font-size-6 .section-title,
+body.font-size-7 .section-title,
+body.font-size-8 .section-title {
+  font-size: clamp(1.6em, 4vw, 2.8em);
+}
+
 body.font-size-1 p, body.font-size-1 .sitem, body.font-size-1 .service-extra,
 body.font-size-1 .value-item p, body.font-size-1 .diff-card p, body.font-size-1 .section-sub,
 body.font-size-1 .comex-card p, body.font-size-1 .contact-item-value,
@@ -1920,6 +1972,21 @@ body.font-size-5 p, body.font-size-5 .sitem, body.font-size-5 .service-extra,
 body.font-size-5 .value-item p, body.font-size-5 .diff-card p, body.font-size-5 .section-sub,
 body.font-size-5 .comex-card p, body.font-size-5 .contact-item-value,
 body.font-size-5 .footer-brand p { font-size: 1.15rem; }
+
+body.font-size-6 p, body.font-size-6 .sitem, body.font-size-6 .service-extra,
+body.font-size-6 .value-item p, body.font-size-6 .diff-card p, body.font-size-6 .section-sub,
+body.font-size-6 .comex-card p, body.font-size-6 .contact-item-value,
+body.font-size-6 .footer-brand p { font-size: 1.3rem; }
+
+body.font-size-7 p, body.font-size-7 .sitem, body.font-size-7 .service-extra,
+body.font-size-7 .value-item p, body.font-size-7 .diff-card p, body.font-size-7 .section-sub,
+body.font-size-7 .comex-card p, body.font-size-7 .contact-item-value,
+body.font-size-7 .footer-brand p { font-size: 1.5rem; }
+
+body.font-size-8 p, body.font-size-8 .sitem, body.font-size-8 .service-extra,
+body.font-size-8 .value-item p, body.font-size-8 .diff-card p, body.font-size-8 .section-sub,
+body.font-size-8 .comex-card p, body.font-size-8 .contact-item-value,
+body.font-size-8 .footer-brand p { font-size: 1.7rem; }
 
 @media (max-width: 600px) {
   .font-size-controls { gap: 2px; }
