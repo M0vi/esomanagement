@@ -1123,3 +1123,62 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch(e) {}
   document.addEventListener('DOMContentLoaded', () => applyFontLevel(3));
 })();
+
+
+// ── Market Ticker ──────────────────────────────────────────
+async function loadTicker() {
+  try {
+    // Use exchangerate-api for USD/BRL (free, no key needed)
+    // For oil prices, use a CORS-friendly proxy with Alpha Vantage / Yahoo
+    // Fallback to realistic static values if APIs unavailable
+    const usdRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL');
+    if (usdRes.ok) {
+      const d = await usdRes.json();
+      setTickerPrice('t-usd', d.rates.BRL.toFixed(2));
+    }
+  } catch(e) {}
+
+  try {
+    // Brent & WTI via open proxy (no key)
+    const oilRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?interval=1d&range=1d');
+    if (oilRes.ok) {
+      const d = await oilRes.json();
+      const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
+      if (price) setTickerPrice('t-brent', price.toFixed(2));
+    }
+  } catch(e) {}
+
+  try {
+    const wtiRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?interval=1d&range=1d');
+    if (wtiRes.ok) {
+      const d = await wtiRes.json();
+      const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
+      if (price) setTickerPrice('t-wti', price.toFixed(2));
+    }
+  } catch(e) {}
+
+  try {
+    const gasRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/NG%3DF?interval=1d&range=1d');
+    if (gasRes.ok) {
+      const d = await gasRes.json();
+      const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
+      if (price) setTickerPrice('t-gas', price.toFixed(2));
+    }
+  } catch(e) {}
+}
+
+function setTickerPrice(id, val) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const prev = parseFloat(el.dataset.prev || val);
+  el.textContent = val;
+  el.dataset.prev = val;
+  el.classList.remove('up','down');
+  if (parseFloat(val) > prev) el.classList.add('up');
+  else if (parseFloat(val) < prev) el.classList.add('down');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadTicker();
+  setInterval(loadTicker, 60000); // refresh every 60s
+});

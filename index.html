@@ -131,6 +131,22 @@
     </div>
   </div>
 </div>
+
+<div id="market-ticker" aria-label="Cotações de mercado">
+  <div class="ticker-inner">
+    <span class="ticker-label">MERCADO</span>
+    <div class="ticker-items" id="ticker-items">
+      <span class="ticker-item"><span class="ticker-name">BRENT</span><span class="ticker-price" id="t-brent">—</span><span class="ticker-unit">USD/bbl</span></span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ticker-name">WTI</span><span class="ticker-price" id="t-wti">—</span><span class="ticker-unit">USD/bbl</span></span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ticker-name">GÁS NAT.</span><span class="ticker-price" id="t-gas">—</span><span class="ticker-unit">USD/MMBtu</span></span>
+      <span class="ticker-sep">·</span>
+      <span class="ticker-item"><span class="ticker-name">USD/BRL</span><span class="ticker-price" id="t-usd">—</span></span>
+    </div>
+    <span class="ticker-source">Reuters · tempo real</span>
+  </div>
+</div>
 <header id="header">
   <div class="header-inner">
     <a href="#hero" class="logo-link">
@@ -349,6 +365,65 @@
           <div class="sitem" data-i18n="eng_12">Procurement técnico</div>
         </div>
         <div class="service-extra" data-i18n="eng_extra">Otimização de operações · Análise de risco · Procurement especializado</div>
+
+        <div class="prod-chart-wrap">
+          <div class="prod-chart-label">Curva de Declínio de Produção — Modelo Exponencial</div>
+          <svg class="prod-chart-svg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" aria-label="Curva de produção">
+            <!-- Grid lines -->
+            <line x1="60" y1="20" x2="60" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="60" y1="170" x2="530" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="60" y1="130" x2="530" y2="130" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="60" y1="90" x2="530" y2="90" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="60" y1="50" x2="530" y2="50" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4"/>
+            <!-- Y axis labels -->
+            <text x="52" y="174" fill="#555" font-size="9" text-anchor="end" font-family="monospace">0</text>
+            <text x="52" y="134" fill="#555" font-size="9" text-anchor="end" font-family="monospace">25</text>
+            <text x="52" y="94" fill="#555" font-size="9" text-anchor="end" font-family="monospace">50</text>
+            <text x="52" y="54" fill="#555" font-size="9" text-anchor="end" font-family="monospace">75</text>
+            <text x="30" y="110" fill="#666" font-size="9" text-anchor="middle" font-family="monospace" transform="rotate(-90,30,110)">Mbbl/d</text>
+            <!-- X axis labels -->
+            <text x="60" y="184" fill="#555" font-size="9" text-anchor="middle" font-family="monospace">T0</text>
+            <text x="155" y="184" fill="#555" font-size="9" text-anchor="middle" font-family="monospace">+2a</text>
+            <text x="250" y="184" fill="#555" font-size="9" text-anchor="middle" font-family="monospace">+4a</text>
+            <text x="345" y="184" fill="#555" font-size="9" text-anchor="middle" font-family="monospace">+6a</text>
+            <text x="440" y="184" fill="#555" font-size="9" text-anchor="middle" font-family="monospace">+8a</text>
+            <text x="530" y="184" fill="#555" font-size="9" text-anchor="middle" font-family="monospace">+10a</text>
+            <!-- Area fill under primary curve -->
+            <defs>
+              <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#a97c3f" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#a97c3f" stop-opacity="0.02"/>
+              </linearGradient>
+              <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#256045" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#256045" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <!-- Primary decline (original) -->
+            <path d="M60,32 C100,36 130,55 170,80 C210,105 240,125 290,138 C340,150 390,158 440,163 C480,166 510,168 530,169 L530,170 L60,170 Z"
+                  fill="url(#curveGrad)" opacity="0.9"/>
+            <path d="M60,32 C100,36 130,55 170,80 C210,105 240,125 290,138 C340,150 390,158 440,163 C480,166 510,168 530,169"
+                  fill="none" stroke="#a97c3f" stroke-width="2" stroke-linecap="round"
+                  class="chart-line-primary"/>
+            <!-- Revitalized curve (after intervention at +4a) -->
+            <path d="M250,125 C260,112 280,95 310,88 C340,82 370,88 410,98 C440,106 480,118 530,128 L530,170 L250,170 Z"
+                  fill="url(#revGrad)" opacity="0.8"/>
+            <path d="M250,125 C260,112 280,95 310,88 C340,82 370,88 410,98 C440,106 480,118 530,128"
+                  fill="none" stroke="#256045" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 3"
+                  class="chart-line-rev"/>
+            <!-- Intervention arrow at +4a -->
+            <line x1="250" y1="125" x2="250" y2="145" stroke="#a97c3f" stroke-width="1" stroke-dasharray="3 2"/>
+            <text x="254" y="144" fill="#a97c3f" font-size="8" font-family="monospace">Revitalização</text>
+            <!-- Dots -->
+            <circle cx="60" cy="32" r="3" fill="#a97c3f"/>
+            <circle cx="250" cy="125" r="3" fill="#a97c3f"/>
+            <!-- Legend -->
+            <line x1="340" y1="28" x2="360" y2="28" stroke="#a97c3f" stroke-width="2"/>
+            <text x="364" y="32" fill="#888" font-size="9" font-family="monospace">Declínio natural</text>
+            <line x1="340" y1="42" x2="360" y2="42" stroke="#256045" stroke-width="2" stroke-dasharray="5 3"/>
+            <text x="364" y="46" fill="#888" font-size="9" font-family="monospace">Pós-revitalização</text>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -381,7 +456,41 @@
           <div class="sitem" data-i18n="geo_8">Análises determinísticas e probabilísticas de parâmetros petrofísicos</div>
           <div class="sitem" data-i18n="geo_9">Modelos geológicos 2D e 3D de reservatórios de óleo e gás</div>
         </div>
-      </div>
+      
+        <div class="prod-chart-wrap">
+          <div class="prod-chart-label">Perfil Sísmico Esquemático — Seção 2D com Refletores</div>
+          <svg class="prod-chart-svg" viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="seisGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0e0e0e"/>
+                <stop offset="100%" stop-color="#1a1a1a"/>
+              </linearGradient>
+            </defs>
+            <rect x="60" y="10" width="470" height="155" fill="url(#seisGrad)" rx="2"/>
+            <!-- Seismic reflectors - horizontal wavy lines representing geological layers -->
+            <path d="M65,30 Q120,28 175,32 Q230,36 285,30 Q340,24 395,31 Q450,38 525,30" fill="none" stroke="rgba(169,124,63,0.5)" stroke-width="1"/>
+            <path d="M65,45 Q125,43 180,47 Q235,51 290,45 Q345,39 400,46 Q455,53 525,45" fill="none" stroke="rgba(169,124,63,0.35)" stroke-width="1"/>
+            <path d="M65,62 Q130,60 185,65 Q240,70 295,62 Q350,54 405,63 Q460,72 525,62" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <path d="M65,78 Q135,76 190,81 Q245,86 300,78 Q355,70 410,80 Q465,90 525,78" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <path d="M65,95 Q140,93 195,99 Q250,105 305,95 Q360,85 415,96 Q470,107 525,96" fill="none" stroke="rgba(37,96,69,0.6)" stroke-width="1.5"/>
+            <path d="M65,112 Q145,110 200,117 Q255,124 310,113 Q365,102 420,114 Q475,126 525,113" fill="none" stroke="rgba(37,96,69,0.8)" stroke-width="2"/>
+            <path d="M65,130 Q148,128 203,135 Q258,142 313,130 Q368,118 423,131 Q478,144 525,130" fill="none" stroke="rgba(37,96,69,0.5)" stroke-width="1.5"/>
+            <path d="M65,148 Q150,146 205,153 Q260,160 315,148 Q370,136 425,149 Q480,162 525,149" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <!-- Reservoir zone highlight -->
+            <rect x="200" y="100" width="160" height="38" fill="rgba(169,124,63,0.08)" rx="1"/>
+            <rect x="200" y="100" width="160" height="38" fill="none" stroke="rgba(169,124,63,0.3)" stroke-width="1" rx="1" stroke-dasharray="4 3"/>
+            <text x="280" y="124" fill="rgba(169,124,63,0.9)" font-size="9" text-anchor="middle" font-family="monospace">RESERVATÓRIO</text>
+            <!-- Fault line -->
+            <line x1="370" y1="10" x2="355" y2="165" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="5 4"/>
+            <text x="372" y="22" fill="rgba(255,255,255,0.35)" font-size="8" font-family="monospace">falha</text>
+            <!-- Depth labels -->
+            <text x="56" y="33" fill="#444" font-size="8" text-anchor="end" font-family="monospace">500m</text>
+            <text x="56" y="98" fill="#444" font-size="8" text-anchor="end" font-family="monospace">2km</text>
+            <text x="56" y="133" fill="#444" font-size="8" text-anchor="end" font-family="monospace">3km</text>
+            <text x="56" y="163" fill="#444" font-size="8" text-anchor="end" font-family="monospace">4km</text>
+          </svg>
+        </div>
+</div>
     </div>
 
     <div class="tab-content" id="tab-bizdev">
@@ -669,7 +778,7 @@
           </div>
           <div class="exec-meta">
             <span class="exec-meta-name">Sérgio André Pessoa</span>
-            <span class="exec-meta-role">CEO &amp; Fundador · EZO Oilfield Solutions</span>
+            <span class="exec-meta-role">CEO &amp; Fundador, M.Sc. · EZO Oilfield Solutions</span>
           </div>
         </div>
       </div>
@@ -685,9 +794,17 @@
 
           <div class="cch-sep"></div>
 
-          <a href="mailto:sergio@ezosolutions.com.br" class="cch">
+          <a href="mailto:sabp@ezosolutions.com.br" class="cch">
             <span class="cch-label" data-i18n="contact_email_ceo">CEO</span>
-            <span class="cch-value">sergio@ezosolutions.com.br</span>
+            <span class="cch-value">sabp@ezosolutions.com.br</span>
+            <span class="cch-arrow">↗</span>
+          </a>
+
+          <div class="cch-sep"></div>
+
+          <a href="https://www.linkedin.com/in/sergio-andre-pessoa-m-sc-239a3547/" target="_blank" rel="noopener noreferrer" class="cch">
+            <span class="cch-label">LinkedIn</span>
+            <span class="cch-value">Sérgio André Pessoa, M.Sc.</span>
             <span class="cch-arrow">↗</span>
           </a>
 
@@ -725,7 +842,7 @@
       <div class="footer-contact">
         <h4 data-i18n="footer_contact">Contato</h4>
         <a href="https://wa.me/5521999424216" target="_blank" rel="noopener noreferrer">+55 21 99942-4216</a>
-        <a href="/cdn-cgi/l/email-protection#c2b1a3a0b282a7b8adb1adaeb7b6abadacb1eca1adafeca0b0"><span class="__cf_email__" data-cfemail="72011310023217081d011d1e07061b1d1c015c111d1f5c1000">[email&#160;protected]</span></a>
+        <a href="mailto:sabp@ezosolutions.com.br">sabp@ezosolutions.com.br</a>
                 <a href="mailto:vendas@ezosolutions.com.br">vendas@ezosolutions.com.br</a>
       </div>
     </div>
