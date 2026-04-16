@@ -40,7 +40,7 @@
     </nav>
     <div class="header-right">
       <div class="lang-dropdown-wrapper" id="lang-dropdown-wrapper">
-        <button class="lang-dropdown-toggle" id="lang-dropdown-toggle" onclick="toggleLangDropdown()" aria-label="Selecionar idioma">
+        <button class="lang-dropdown-toggle" id="lang-dropdown-toggle" onclick="toggleLangMenu()" aria-label="Selecionar idioma">
           <svg class="lang-translate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="9"/>
             <line x1="3" y1="12" x2="21" y2="12"/>
@@ -48,33 +48,33 @@
           </svg>
         </button>
         <div class="lang-dropdown-menu" id="lang-dropdown-menu">
-          <button onclick="setLang('pt'); closeLangDropdown();" class="lang-dropdown-item active" id="lang-item-pt" title="Português">
+          <button onclick="setLang('pt'); closeLangMenu();" class="lang-dropdown-item active" id="lang-item-pt" title="Português">
             <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#009C3B"/><polygon points="10,1 19,7 10,13 1,7" fill="#FEDF00"/><circle cx="10" cy="7" r="3" fill="#002776"/><path d="M7.2,6.1 Q10,5 12.8,6.1" stroke="#fff" stroke-width="0.7" fill="none"/></svg>
             <span>Português</span>
           </button>
-          <button onclick="setLang('en'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-en" title="English">
+          <button onclick="setLang('en'); closeLangMenu();" class="lang-dropdown-item" id="lang-item-en" title="English">
             <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1" cy="1" r="0.4" fill="#fff"/><circle cx="2.6" cy="1" r="0.4" fill="#fff"/><circle cx="4.2" cy="1" r="0.4" fill="#fff"/><circle cx="5.8" cy="1" r="0.4" fill="#fff"/><circle cx="7.4" cy="1" r="0.4" fill="#fff"/><circle cx="1.8" cy="2.2" r="0.4" fill="#fff"/><circle cx="3.4" cy="2.2" r="0.4" fill="#fff"/><circle cx="5" cy="2.2" r="0.4" fill="#fff"/><circle cx="6.6" cy="2.2" r="0.4" fill="#fff"/></svg>
             <span>English</span>
           </button>
-          <button onclick="setLang('es'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-es" title="Español">
+          <button onclick="setLang('es'); closeLangMenu();" class="lang-dropdown-item" id="lang-item-es" title="Español">
             <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#c60b1e"/><rect y="3.5" width="20" height="7" fill="#ffc400"/></svg>
             <span>Español</span>
           </button>
-          <button onclick="setLang('fr'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-fr" title="Français">
+          <button onclick="setLang('fr'); closeLangMenu();" class="lang-dropdown-item" id="lang-item-fr" title="Français">
             <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#ED2939"/><rect width="13.3" height="14" fill="#fff"/><rect width="6.6" height="14" fill="#002395"/></svg>
             <span>Français</span>
           </button>
-          <button onclick="setLang('zh'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-zh" title="中文">
+          <button onclick="setLang('zh'); closeLangMenu();" class="lang-dropdown-item" id="lang-item-zh" title="中文">
             <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#DE2910"/><polygon points="4,1.5 4.7,3.8 2.5,2.3 5.5,2.3 3.3,3.8" fill="#FFDE00"/></svg>
             <span>中文</span>
           </button>
-          <button onclick="setLang('ar'); closeLangDropdown();" class="lang-dropdown-item" id="lang-item-ar" title="العربية">
+          <button onclick="setLang('ar'); closeLangMenu();" class="lang-dropdown-item" id="lang-item-ar" title="العربية">
             <svg class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" fill="#006C35"/><rect x="4" y="4" width="12" height="0.7" rx="0.3" fill="#fff"/></svg>
             <span>العربية</span>
           </button>
         </div>
       </div>
-      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -179,7 +179,7 @@
     <p class="section-sub light" data-i18n="services_sub">Cinco frentes de atuação, uma única fonte de responsabilidade.</p>
 
     <div class="services-tabs">
-      <button class="tab-btn active" onclick="showTab('engineering')" data-tab="engineering">
+      <button class="tab-btn active" onclick="selectServiceTab('engineering')" data-tab="engineering">
         <span class="tab-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
             <line x1="12" y1="2" x2="5" y2="10"/><line x1="12" y1="2" x2="19" y2="10"/>
@@ -192,7 +192,7 @@
         </span>
         <span class="tab-label" data-i18n="tab_eng">Engenharia & Consultoria</span>
       </button>
-      <button class="tab-btn" onclick="showTab('geology')" data-tab="geology">
+      <button class="tab-btn" onclick="selectServiceTab('geology')" data-tab="geology">
         <span class="tab-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
             <path d="M3 7 Q7 5 12 7 Q17 9 21 7"/>
@@ -204,7 +204,7 @@
         </span>
         <span class="tab-label" data-i18n="tab_geo">Geologia & Geofísica</span>
       </button>
-      <button class="tab-btn" onclick="showTab('bizdev')" data-tab="bizdev">
+      <button class="tab-btn" onclick="selectServiceTab('bizdev')" data-tab="bizdev">
         <span class="tab-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
             <path d="M2 12 L7 7 L10 10 L14 6 L17 9"/>
@@ -217,7 +217,7 @@
         </span>
         <span class="tab-label" data-i18n="tab_biz">Desenvolvimento de Negócios</span>
       </button>
-      <button class="tab-btn" onclick="showTab('trading')" data-tab="trading">
+      <button class="tab-btn" onclick="selectServiceTab('trading')" data-tab="trading">
         <span class="tab-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
             <rect x="2" y="7" width="6" height="6" rx="1"/>
@@ -228,7 +228,7 @@
         </span>
         <span class="tab-label" data-i18n="tab_trade">Trading Services</span>
       </button>
-      <button class="tab-btn" onclick="showTab('comex')" data-tab="comex">
+      <button class="tab-btn" onclick="selectServiceTab('comex')" data-tab="comex">
         <span class="tab-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
             <circle cx="12" cy="12" r="9"/>
@@ -719,10 +719,10 @@
       </div>
       <div class="footer-links">
         <h4 data-i18n="footer_services">Serviços</h4>
-        <a href="#servicos" onclick="showTab('engineering')" data-i18n="tab_eng">Engenharia & Consultoria</a>
-        <a href="#servicos" onclick="showTab('geology')" data-i18n="tab_geo">Geologia & Geofísica</a>
-        <a href="#servicos" onclick="showTab('trading')" data-i18n="tab_trade">Trading Services</a>
-        <a href="#servicos" onclick="showTab('comex')" data-i18n="tab_comex">Comex Services</a>
+        <a href="#servicos" onclick="selectServiceTab('engineering')" data-i18n="tab_eng">Engenharia & Consultoria</a>
+        <a href="#servicos" onclick="selectServiceTab('geology')" data-i18n="tab_geo">Geologia & Geofísica</a>
+        <a href="#servicos" onclick="selectServiceTab('trading')" data-i18n="tab_trade">Trading Services</a>
+        <a href="#servicos" onclick="selectServiceTab('comex')" data-i18n="tab_comex">Comex Services</a>
       </div>
       <div class="footer-contact">
         <h4 data-i18n="footer_contact">Contato</h4>

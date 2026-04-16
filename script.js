@@ -1,10 +1,4 @@
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && ['c','a','u','s','p'].includes(e.key.toLowerCase())) e.preventDefault();
-  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))) e.preventDefault();
-});
-
-function animateCounter(el, target, suffix = '') {
+function animateStatCounter(el, target, suffix = '') {
   const duration = 1800;
   const start = performance.now();
   const update = (now) => {
@@ -30,7 +24,7 @@ const statObserver = new IntersectionObserver((entries) => {
       if (match) {
         const num = parseInt(match[1]);
         const suf = match[2] || '';
-        animateCounter(el, num, suf);
+        animateStatCounter(el, num, suf);
       }
     }
   });
@@ -821,16 +815,16 @@ const translations = {
   }
 };
 
-function detectLang() {
+function getBrowserLang() {
   const nav = navigator.language || navigator.userLanguage || 'pt';
   const code = nav.toLowerCase().split('-')[0];
   const supported = ['pt', 'en', 'es', 'fr', 'zh', 'ar'];
   return supported.includes(code) ? code : 'en';
 }
 
-let currentLang = detectLang();
+let currentLang = getBrowserLang();
 
-function applyChartTranslations(t) {
+function translateChart(langData) {
   const engLabel = document.getElementById('chart-eng-label');
   if (engLabel) engLabel.textContent = t.chart_eng_label || '';
   const engRevit = document.getElementById('chart-eng-revit');
@@ -868,7 +862,7 @@ function setLang(lang) {
     if (t[key]) el.placeholder = t[key];
   });
 
-  applyChartTranslations(t);
+  translateChart(t);
 
   document.querySelectorAll('.lang-dropdown-item').forEach(btn => btn.classList.remove('active'));
   const activeItem = document.getElementById('lang-item-' + lang);
@@ -897,7 +891,7 @@ function setLang(lang) {
   }
 }
 
-function showTab(tabId) {
+function selectServiceTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   const target = document.getElementById('tab-' + tabId);
@@ -907,7 +901,7 @@ function showTab(tabId) {
   if (btns[idx]) btns[idx].classList.add('active');
 }
 
-function toggleMenu() {
+function toggleNav() {
   const nav = document.getElementById('main-nav');
   const hamburger = document.getElementById('hamburger');
   const overlay = document.getElementById('nav-overlay');
@@ -940,7 +934,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => closeMenu());
 });
 
-function submitForm(e) {
+function handleFormSubmit(e) {
   e.preventDefault();
   const name    = document.getElementById('form-name')?.value.trim() || '';
   const company = document.getElementById('form-company')?.value.trim() || '';
@@ -949,7 +943,7 @@ function submitForm(e) {
   const message = document.getElementById('form-message')?.value.trim() || '';
 
   if (!name || !email || !message) {
-    showToast('Preencha os campos obrigatórios.');
+    displayNotification('Preencha os campos obrigatórios.');
     return;
   }
 
@@ -964,7 +958,7 @@ function submitForm(e) {
   setTimeout(() => { window.location.href = mailto; }, 500);
 }
 
-function showToast(msg) {
+function displayNotification(msg) {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
   toast.classList.add('show');
@@ -974,7 +968,7 @@ function showToast(msg) {
 const sections = ['sobre','servicos','clientes','parceiros','contato'];
 
 
-function updateBackToTop() {
+function scrollToTopButton() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
   if (window.scrollY > 400) {
@@ -1022,12 +1016,12 @@ const cardObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-function toggleLangDropdown() {
+function toggleLangMenu() {
   const wrapper = document.getElementById('lang-dropdown-wrapper');
   wrapper.classList.toggle('open');
 }
 
-function closeLangDropdown() {
+function closeLangMenu() {
   const wrapper = document.getElementById('lang-dropdown-wrapper');
   wrapper.classList.remove('open');
 }
@@ -1039,7 +1033,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-function loadPartners() {
+function fetchPartners() {
   const grid = document.getElementById('partners-grid');
   if (!grid) return;
 
@@ -1060,7 +1054,7 @@ function loadPartners() {
           if (files.length > 0) {
             renderPartners(grid, files);
           } else {
-            showPartnersPlaceholder(grid);
+            renderEmptyPartners(grid);
           }
         })
         .catch(() => showPartnersPlaceholder(grid));
@@ -1069,7 +1063,7 @@ function loadPartners() {
 
 function renderPartners(grid, files) {
   if (!files || files.length === 0) {
-    showPartnersPlaceholder(grid);
+    renderEmptyPartners(grid);
     return;
   }
   grid.innerHTML = '';
@@ -1087,13 +1081,13 @@ function renderPartners(grid, files) {
   });
 }
 
-function showPartnersPlaceholder(grid) {
+function renderEmptyPartners(msg) {
   grid.innerHTML = '<p style="color:var(--gray-500);font-size:13px;grid-column:1/-1;text-align:center;padding:20px 0;">Crie o arquivo <code>parceiros/index.json</code> com a lista de logos. Ex: <code>["EMPRESA.png"]</code></p>';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang);
-  loadPartners();
+  fetchPartners();
 
   document.querySelectorAll('.reveal-section').forEach(el => {
     revealObserver.observe(el);
@@ -1128,7 +1122,7 @@ const FONT_LEVELS = [1, 2, 3, 4, 5, 6];
 const FONT_PCT_MAP = { 1: '70%', 2: '85%', 3: '100%', 4: '120%', 5: '145%', 6: '175%' };
 let currentFontLevel = 3;
 
-function applyFontLevel(level) {
+function setFontSize(level) {
   const body = document.body;
   FONT_LEVELS.forEach(l => body.classList.remove('font-size-' + l));
   body.classList.add('font-size-' + level);
@@ -1151,13 +1145,13 @@ function applyFontLevel(level) {
   try { localStorage.setItem('ezo_font_level', level); } catch(e) {}
 }
 
-function changeFontSize(delta) {
+function adjustFontSize(delta) {
   const next = Math.min(6, Math.max(1, currentFontLevel + delta));
-  applyFontLevel(next);
+  setFontSize(next);
 }
 
 function resetFontSize() {
-  applyFontLevel(3);
+  setFontSize(3);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1169,9 +1163,9 @@ document.addEventListener('DOMContentLoaded', () => {
   try {
     const saved = parseInt(localStorage.getItem('ezo_font_level'));
     if (saved >= 1 && saved <= 6) {
-      document.addEventListener('DOMContentLoaded', () => applyFontLevel(saved));
+      document.addEventListener('DOMContentLoaded', () => setFontSize(saved));
       return;
     }
   } catch(e) {}
-  document.addEventListener('DOMContentLoaded', () => applyFontLevel(3));
+  document.addEventListener('DOMContentLoaded', () => setFontSize(3));
 })();
