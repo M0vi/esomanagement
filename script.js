@@ -826,20 +826,20 @@ let currentLang = getBrowserLang();
 
 function translateChart(langData) {
   const engLabel = document.getElementById('chart-eng-label');
-  if (engLabel) engLabel.textContent = t.chart_eng_label || '';
+  if (engLabel) engLabel.textContent = langData.chart_eng_label || '';
   const engRevit = document.getElementById('chart-eng-revit');
-  if (engRevit) engRevit.textContent = t.chart_eng_revit || '';
+  if (engRevit) engRevit.textContent = langData.chart_eng_revit || '';
   const engDecline = document.getElementById('chart-eng-decline');
-  if (engDecline) engDecline.textContent = t.chart_eng_decline || '';
+  if (engDecline) engDecline.textContent = langData.chart_eng_decline || '';
   const engPost = document.getElementById('chart-eng-post');
-  if (engPost) engPost.textContent = t.chart_eng_post || '';
+  if (engPost) engPost.textContent = langData.chart_eng_post || '';
 
   const geoLabel = document.getElementById('chart-geo-label');
-  if (geoLabel) geoLabel.textContent = t.chart_geo_label || '';
+  if (geoLabel) geoLabel.textContent = langData.chart_geo_label || '';
   const geoReservoir = document.getElementById('chart-geo-reservoir');
-  if (geoReservoir) geoReservoir.textContent = t.chart_geo_reservoir || '';
+  if (geoReservoir) geoReservoir.textContent = langData.chart_geo_reservoir || '';
   const geoFault = document.getElementById('chart-geo-fault');
-  if (geoFault) geoFault.textContent = t.chart_geo_fault || '';
+  if (geoFault) geoFault.textContent = langData.chart_geo_fault || '';
 }
 
 function setLang(lang) {
@@ -982,7 +982,7 @@ window.addEventListener('scroll', () => {
   const header = document.getElementById('header');
   header.classList.toggle('scrolled', window.scrollY > 60);
 
-  updateBackToTop();
+  scrollToTopButton();
 
   const scrollMid = window.scrollY + window.innerHeight / 3;
   let active = '';
